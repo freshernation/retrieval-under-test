@@ -109,13 +109,24 @@ def pool(rankings: list[list[str]], depth: int = 10) -> list[str]:
     raise NotImplementedError
 
 
-def smells(judgments_by_query: dict[str, dict[str, int]], corpus_ids: set[str]) -> list[str]:
+def smells(
+    judgments_by_query: dict[str, dict[str, int]],
+    corpus_ids: set[str],
+    unanswerable: set[str] | None = None,
+) -> list[str]:
     """Everything wrong with an eval set that a machine can see.
+
+    `unanswerable` names the queries the corpus genuinely cannot answer, where
+    having no relevant document is the point rather than a defect. Every eval
+    set should contain at least one, and almost none do.
 
     Return one string per problem, sorted, empty when the set is sound. Detect:
 
-    - a query with no document graded >= 2 — unanswerable, and it drags every
-      mean down for reasons that have nothing to do with the retriever
+    - a query with no document graded >= 2 that is **not** declared unanswerable
+      — either judge one, or say out loud that the corpus cannot answer it
+    - a query declared unanswerable that *does* have a relevant document — it is
+      one or the other, and this contradiction is usually a grade you meant to
+      change and did not
     - a query where every judged document is relevant — you labelled only what
       you already believed, so the query cannot punish a bad result. **This is
       the one that ruins eval sets and it is invisible in the metrics**

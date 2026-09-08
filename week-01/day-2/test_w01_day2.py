@@ -146,6 +146,19 @@ def test_a_query_with_nothing_relevant_is_flagged():
     assert len(problems) == 1 and problems[0].startswith("q1")
 
 
+def test_unless_you_declared_it_unanswerable():
+    """The out-of-scope query your milestone requires. Having no relevant
+    document is the point of it, and an eval set that cannot represent
+    "the correct behaviour here is a refusal" cannot detect the failure that
+    reaches users most often."""
+    assert smells({"q1": {"a": 1, "b": 0, "c": 0}}, CORPUS, unanswerable={"q1"}) == []
+
+
+def test_an_unanswerable_query_with_a_relevant_document_is_a_contradiction():
+    problems = smells({"q1": {"a": 3, "b": 0, "c": 0}}, CORPUS, unanswerable={"q1"})
+    assert any("one or the other" in p for p in problems)
+
+
 def test_the_one_that_ruins_eval_sets():
     """Every judged document relevant. The metrics look fine. The query cannot
     punish any retriever for any result, and nothing will ever tell you."""

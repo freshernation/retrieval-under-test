@@ -36,10 +36,13 @@ finished because you are not building it, you are using it.
 
 ```bash
 python3 -c "import raglab; print(raglab.corpus.summary())"
+python3 tools/build_corpus.py --check
 ```
 
-Prints the shipped corpus: how many documents, how many queries, how many judgments, and
-which split each query is in. If that works, everything works.
+The first prints the gold corpus — ten RFCs, sixteen queries, and which split each is in.
+The second re-fetches them and confirms your checked-in copy is byte-for-byte what the
+judgments were written against. An RFC is never edited after publication, so if that check
+ever fails, find out why before you rebuild.
 
 ```bash
 pytest week-01 -q
@@ -61,7 +64,7 @@ All three green.
 This surprises people, so it is worth stating plainly. Weeks 1 to 9 run entirely offline
 on your laptop:
 
-- the corpus is in the repo
+- the corpus is in the repo, and `tools/build_corpus.py --check` proves it has not moved
 - the embeddings for week 5 onwards are **precomputed and frozen** into `.npy` files, so
   you build the index and the search without ever calling a model
 - the language-model responses for weeks 8 and 9 are **recorded cassettes**, so

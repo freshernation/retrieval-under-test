@@ -3,7 +3,7 @@
 **30 documents, 12 queries, 39 judged pairs.** A fictional transit authority — the
 Metro Regional Transit Authority — and its public document register.
 
-## This is a stub, and it is course-authored
+## This is week 1's corpus only, and it is course-authored
 
 Say this plainly, because the whole course is about provenance and it would be absurd to
 be vague here.
@@ -13,9 +13,12 @@ published them, and nothing in them is a fact about the world. They exist so tha
 lab has an exact, offline, reproducible number from day one, and so that the harness's own
 tests have something to run against.
 
-The **real gold corpus** — a few hundred genuine documents with hand-written judgments —
-is build item 2, and the full course runs on it. When it lands, this set stays, because
-30 documents is the right size for a lab you are debugging at 11pm.
+The **gold corpus** is [`../rfc/`](../rfc/README.md) — ten real RFCs with real provenance —
+and the course runs on it from week 2 onward. This set stays, for one reason: week 1's
+exercise is to judge a corpus *exhaustively*, and 23 KB of invented transit policy can be
+read end to end in twenty minutes where 389 KB of RFCs cannot.
+
+That you can no longer read all of the gold corpus is the premise of week 2.
 
 ## What has been put in it on purpose
 

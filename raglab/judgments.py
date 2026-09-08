@@ -36,6 +36,18 @@ class Query:
     split: str
     judgments: dict[str, int] = field(default_factory=dict)
     note: str = ""
+    unanswerable: bool = False
+    """The corpus cannot answer this query, and the correct behaviour is a refusal.
+
+    Such a query has no relevant document *on purpose*, and every metric in this
+    course scores it zero — correctly, because there was nothing to retrieve. It
+    is not scored on retrieval at all; it is scored on what station 6 does with
+    an empty or irrelevant candidate set, which is week 8.
+
+    An eval set with no unanswerable queries cannot detect the single failure
+    mode that reaches users most often: a fluent answer to a question the corpus
+    never contained. Almost nobody includes one.
+    """
 
     @property
     def relevant(self) -> set[str]:
@@ -96,6 +108,7 @@ def load(name: str = DEFAULT_SET, root: Path | None = None) -> QuerySet:
                 split=split,
                 judgments=judgments,
                 note=entry.get("note", ""),
+                unanswerable=bool(entry.get("unanswerable", False)),
             )
         )
     return out
@@ -112,9 +125,17 @@ def check_against(queries: QuerySet, corpus) -> list[str]:
         for doc_id in q.judgments:
             if doc_id not in corpus:
                 problems.append(f"{q.id}: judges {doc_id!r}, which is not in the corpus")
-        if not q.relevant:
-            problems.append(f"{q.id}: no document is graded >= {RELEVANT_AT} — unanswerable")
-        if len(q.judgments) == len(q.relevant) and len(q.judgments) > 0:
+        if q.unanswerable and q.relevant:
+            problems.append(
+                f"{q.id}: marked unanswerable but grades {sorted(q.relevant)} at "
+                f">= {RELEVANT_AT}. It is one or the other"
+            )
+        elif not q.relevant and not q.unanswerable:
+            problems.append(
+                f"{q.id}: no document is graded >= {RELEVANT_AT}. Either judge one, or "
+                f"mark it `unanswerable: true` if the corpus genuinely cannot answer it"
+            )
+        if q.judgments and len(q.judgments) == len(q.relevant):
             problems.append(
                 f"{q.id}: every judged document is relevant — you labelled only "
                 f"what you already believed was relevant, so this query cannot "

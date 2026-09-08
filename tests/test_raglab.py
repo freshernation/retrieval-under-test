@@ -18,15 +18,71 @@ def q(relevant=("a", "b"), grades=None, split="dev"):
 # -- corpus -------------------------------------------------------------------
 
 
-def test_the_sample_corpus_loads():
+def test_the_gold_corpus_loads():
+    """Ten RFCs, fetched from rfc-editor.org and checked in."""
     c = raglab.corpus.load()
+    assert len(c) == 10
+    assert c["rfc-7725"].source == "https://www.rfc-editor.org/rfc/rfc7725.txt"
+    assert "451" in c["rfc-7725"].text
+
+
+def test_the_gold_judgments_are_sound():
+    c, qs = raglab.corpus.load(), raglab.judgments.load()
+    assert raglab.judgments.check_against(qs, c) == []
+    assert len(qs.split("dev")) == 10 and len(qs.split("test")) == 6
+
+
+def test_the_obsolete_json_rfc_does_not_know_it_is_obsolete():
+    """The corpus fact the whole of station 1 rests on. RFC 8259 says it
+    obsoletes 7159. Nothing in 7159 says so, because an RFC is never edited
+    after publication — so the information that makes one of these two answers
+    wrong exists only in the other document."""
+    c = raglab.corpus.load()
+    assert "Obsoletes: 7159" in c["rfc-8259"].text
+    assert "8259" not in c["rfc-7159"].text
+
+
+def test_an_unanswerable_query_is_kept_out_of_the_means():
+    """r10 asks about OAuth, which the corpus does not cover. It still earns a
+    non-zero nDCG for surfacing RFC 6585's bibliography — which is exactly the
+    behaviour it was added to detect, so it must not be averaged in."""
+    from raglab.metrics import evaluate
+
+    qs = raglab.judgments.load().split("dev")
+    ev = evaluate({"r10": ["rfc-6585"]}, qs)
+    assert ev.n_unanswerable == 1
+    assert ev.n == 9
+    assert ev.metrics["ndcg@10"] == 0.0
+    assert ev.per_query["r10"]["ndcg@10"] > 0.0
+
+
+def test_an_unanswerable_query_that_has_a_relevant_document_is_refused():
+    from raglab.judgments import Query, QuerySet
+
+    c = raglab.corpus.load()
+    bad = QuerySet([Query(id="x", text="t", split="dev",
+                          judgments={"rfc-7725": 3, "rfc-3986": 0}, unanswerable=True)])
+    assert any("marked unanswerable" in p for p in raglab.judgments.check_against(bad, c))
+
+
+def test_a_query_with_nothing_relevant_must_say_it_is_unanswerable():
+    from raglab.judgments import Query, QuerySet
+
+    c = raglab.corpus.load()
+    bad = QuerySet([Query(id="x", text="t", split="dev",
+                          judgments={"rfc-7725": 1, "rfc-3986": 0})])
+    assert any("unanswerable: true" in p for p in raglab.judgments.check_against(bad, c))
+
+
+def test_the_sample_corpus_loads():
+    c = raglab.corpus.load("sample")
     assert len(c) == 30
     assert "mrta-001" in c
     assert c["mrta-030"].title.startswith("Glossary")
 
 
 def test_documents_keep_their_provenance():
-    for doc in raglab.corpus.load():
+    for doc in list(raglab.corpus.load()) + list(raglab.corpus.load("sample")):
         assert doc.source and doc.source != "unknown"
         assert doc.retrieved
 
@@ -43,12 +99,12 @@ def test_duplicate_ids_are_rejected():
 
 
 def test_the_sample_judgments_are_sound():
-    c, qs = raglab.corpus.load(), raglab.judgments.load()
+    c, qs = raglab.corpus.load("sample"), raglab.judgments.load("sample")
     assert raglab.judgments.check_against(qs, c) == []
 
 
 def test_splits_are_eight_and_four():
-    qs = raglab.judgments.load()
+    qs = raglab.judgments.load("sample")
     assert len(qs.split("dev")) == 8
     assert len(qs.split("test")) == 4
 
@@ -56,7 +112,7 @@ def test_splits_are_eight_and_four():
 def test_an_all_relevant_query_is_flagged():
     """The mistake that ruins eval sets: labelling only what you already believed
     was relevant, so the query cannot punish a bad result."""
-    c = raglab.corpus.load()
+    c = raglab.corpus.load("sample")
     qs = QuerySet([Query(id="bad", text="t", split="dev", judgments={"mrta-001": 3})])
     problems = raglab.judgments.check_against(qs, c)
     assert any("every judged document is relevant" in p for p in problems)
@@ -111,11 +167,11 @@ def test_recall_high_and_ndcg_low_is_a_ranking_failure():
 
 
 def full_eval(offset=0):
-    qs = raglab.judgments.load().split("dev")
+    qs = raglab.judgments.load("sample").split("dev")
     rankings = {}
     for i, query in enumerate(qs):
         rel = sorted(query.relevant)
-        pad = [d for d in raglab.corpus.load().ids if d not in rel][: 10 - len(rel)]
+        pad = [d for d in raglab.corpus.load("sample").ids if d not in rel][: 10 - len(rel)]
         rankings[query.id] = (pad[:offset] + rel + pad[offset:])[:10]
     return evaluate(rankings, qs)
 
@@ -129,11 +185,11 @@ def test_evaluate_returns_a_mean_and_every_query():
 
 def test_evaluate_refuses_a_mixed_split():
     with pytest.raises(ValueError, match="one split at a time"):
-        evaluate({}, raglab.judgments.load())
+        evaluate({}, raglab.judgments.load("sample"))
 
 
 def test_a_missing_ranking_scores_zero_rather_than_being_skipped():
-    qs = raglab.judgments.load().split("dev")
+    qs = raglab.judgments.load("sample").split("dev")
     ev = evaluate({}, qs)
     assert ev.n == 8
     assert ev.metrics["recall@10"] == 0.0
@@ -174,7 +230,7 @@ def test_the_config_hash_moves_only_when_the_config_does():
 
 
 def test_reading_the_test_split_is_logged(tmp_path: Path):
-    qs = raglab.judgments.load().split("test")
+    qs = raglab.judgments.load("sample").split("test")
     ev = evaluate({q.id: sorted(q.relevant) for q in qs}, qs)
     assert not raglab.runs.test_reads(runs_dir=tmp_path)
     raglab.runs.record(ev, {"retriever": "stub"}, note="confirm", runs_dir=tmp_path)

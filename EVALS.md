@@ -130,9 +130,10 @@ stations are numbered.
 
 ## Judgments
 
-A relevance judgment is a human saying *this document answers this query*. The shipped
-corpus has them; your own corpus needs them, and week 2 is when you find out how long
-that takes.
+A relevance judgment is a human saying *this document answers this query*. The gold corpus
+has them — [ten RFCs, sixteen queries, every grade written by reading the document and
+falsifiable by you in fifteen seconds](data/gold/rfc/README.md). Your own corpus needs its
+own, and week 2 is when you find out how long that takes.
 
 - **Graded, not binary.** 0 irrelevant · 1 related · 2 answers it · 3 answers it
   completely and alone. nDCG needs the grades; recall collapses them to `>= 2`
@@ -141,6 +142,11 @@ that takes.
   supposed to test — the most expensive mistake in this course, and it is unrecoverable
 - **Label a query before you run it.** Write down what you expect to be relevant, then
   search. The gap is the lesson
+- **Mark the unanswerable ones.** A query the corpus genuinely cannot answer has no
+  relevant document *on purpose*. Flag it `unanswerable: true` — it then stays out of every
+  retrieval mean, because such a query still earns a non-zero nDCG for confidently
+  returning something, which is the exact behaviour it was added to detect. What it
+  actually measures is refusal, and that needs a generator: week 8
 - **Measure your own disagreement.** Re-label 20 queries a week later without looking.
   If you disagree with yourself 15% of the time, no measured difference below 15% means
   anything, and now you know the floor
