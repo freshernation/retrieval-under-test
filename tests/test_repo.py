@@ -61,3 +61,25 @@ def test_every_lab_has_a_reference_solution():
         p for p in lab_modules() if not (solutions / p.relative_to(ROOT)).exists()
     ]
     assert not missing, f"no reference solution for: {[str(p) for p in missing]}"
+
+
+def test_every_week_collects_against_the_stubs():
+    """A student must be able to run `pytest week-NN` on day one and see red
+    tests — not a collection error.
+
+    Module-level setup that calls a lab function turns every test in the file
+    into an ERROR during collection, which aborts the whole week's run and reads
+    as "the course is broken" rather than "you have not written this yet".
+    Compute that setup lazily instead.
+    """
+    import subprocess
+    import sys
+
+    weeks = [w.name for w in WEEKS if any(w.rglob("test_*.py"))]
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", *weeks, "--collect-only", "-q"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert "errors during collection" not in result.stdout, result.stdout[-2000:]

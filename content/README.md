@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 8 |
-| **Weeks covered** | 1 |
+| **Articles** | 16 |
+| **Weeks covered** | 1–2 |
 | **Weeks planned** | 12 |
 
 ---
@@ -48,6 +48,18 @@ much.
 
 ---
 
-## Weeks 2–12
+## Week 2 — The corpus is the system
+
+**Day 1** · [Open the file](week-02/day-1/open-the-file.md) · [What extraction destroys](week-02/day-1/what-extraction-destroys.md)
+
+**Day 2** · [Cleaning a corpus](week-02/day-2/cleaning-a-corpus.md) · [The change you cannot prove](week-02/day-2/the-change-you-cannot-prove.md)
+
+**Day 3** · [Finding what is repeated](week-02/day-3/finding-what-is-repeated.md) · [Duplication is not a defect](week-02/day-3/duplication-is-not-a-defect.md)
+
+**Day 4** · [The fact is in a different document](week-02/day-4/the-fact-is-in-a-different-document.md) · [Currency, and what a corpus owes its reader](week-02/day-4/currency.md)
+
+---
+
+## Weeks 3–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

@@ -26,7 +26,37 @@ more than any technique in this course.
 
 ## The four rules
 
-**1. Every claim of improvement names a run.**
+**1. Every claim of improvement names a run — or, for a correctness fix, a measurement
+showing it cost nothing.**
+
+Say which kind of change you are making, in the report, every time.
+
+A **tuning change** adjusts a parameter or heuristic to make the system score better —
+chunk size, `k`, a fusion weight, a threshold. Its only justification is the number, so a
+tuning change with no delta is superstition. Hold it.
+
+A **correctness fix** repairs something wrong independent of any measurement: returning a
+specification withdrawn in 2017 is wrong whether or not your eval set contains a query
+that notices. The defect justifies the change; the measurement's job is to prove it cost
+nothing, which is a question `Evaluation.worse_than` can answer on nine queries where an
+interval cannot.
+
+Three guards, so this is not a loophole: a correctness fix must name the defect **without
+mentioning your metric**; `worse_than` must be empty; and the defect must be one a user
+would recognise. "The obsolete spec outranks the current one" passes. "Chunks are not
+aligned to section boundaries" does not — that is a hypothesis about retrieval quality,
+which is a tuning change wearing a coat.
+
+> *Amended 2026-09-09, while building week 2.* The rule as originally written would have
+> forced the wrong answer twice in five days: it would have shipped a cleaning change on a
+> +0.100 that was one query out of nine, and held a fix that stopped a withdrawn
+> specification outranking its replacement. A rule that cannot be amended when it turns
+> out to be incomplete is being recited rather than applied. See
+> [`content/week-02/day-2/the-change-you-cannot-prove.md`](content/week-02/day-2/the-change-you-cannot-prove.md).
+
+---
+
+**Every claim of improvement names a run.**
 
 In a milestone document, this is not acceptable:
 

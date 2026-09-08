@@ -1,0 +1,324 @@
+# Week 2's reading, recorded properly.
+#
+# Unusually for this course, the primary sources here are the corpus itself.
+# When the subject is "what is actually in these documents", the document is
+# Tier 1 for claims about its own contents, and every such claim below can be
+# checked by opening the file — which is the property the corpus was chosen for.
+
+system: Week 2 reading — the corpus, extraction damage, duplication, provenance
+
+sources:
+  - id: rfc2026
+    title: "The Internet Standards Process -- Revision 3"
+    url: https://www.rfc-editor.org/rfc/rfc2026.txt
+    publisher: IETF
+    author: Scott Bradner
+    kind: standard
+    tier: 1
+    published: 1996
+    retrieved: 2026-09-09
+    note: >-
+      §2.1 — what "obsoletes" formally means, and the rule that a published RFC is
+      never revised. The source of week 2's central asymmetry.
+
+  - id: rfc7322
+    title: RFC Style Guide
+    url: https://www.rfc-editor.org/rfc/rfc7322.txt
+    publisher: IETF
+    author: Heather Flanagan and Sandy Ginoza
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-09
+    note: §4 — the header block, field by field, from the publisher that writes it.
+
+  - id: rfc7994
+    title: Requirements for Plain-Text RFCs
+    url: https://www.rfc-editor.org/rfc/rfc7994.txt
+    publisher: IETF
+    author: Heather Flanagan
+    kind: standard
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+    note: >-
+      Pagination, page furniture and line width are properties of a *rendering*.
+      The evidence that page footers are publishing artefacts rather than content.
+
+  - id: rfc7990
+    title: "RFC Format Framework"
+    url: https://www.rfc-editor.org/rfc/rfc7990.txt
+    publisher: IETF
+    author: Heather Flanagan
+    kind: standard
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+    note: >-
+      The move to a generated plain-text rendering. Why RFC 9309 (2022) has no form
+      feeds and the other nine documents do.
+
+  - id: rfc8259
+    title: "The JavaScript Object Notation (JSON) Data Interchange Format"
+    url: https://www.rfc-editor.org/rfc/rfc8259.txt
+    publisher: IETF
+    author: Tim Bray, Ed.
+    kind: standard
+    tier: 1
+    published: 2017
+    retrieved: 2026-09-09
+    note: >-
+      Header declares `Obsoletes: 7159`. §8.1 requires UTF-8 and notes that previous
+      specifications did not. Both halves of the week's headline example.
+
+  - id: rfc7159
+    title: "The JavaScript Object Notation (JSON) Data Interchange Format"
+    url: https://www.rfc-editor.org/rfc/rfc7159.txt
+    publisher: IETF
+    author: Tim Bray, Ed.
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-09
+    note: >-
+      §8.1 permits UTF-8, UTF-16 or UTF-32. Contains no reference to RFC 8259, which
+      is the point.
+
+  - id: rfc3986
+    title: "Uniform Resource Identifier (URI): Generic Syntax"
+    url: https://www.rfc-editor.org/rfc/rfc3986.txt
+    publisher: IETF
+    author: Berners-Lee, Fielding and Masinter
+    kind: standard
+    tier: 1
+    published: 2005
+    retrieved: 2026-09-09
+    note: >-
+      §3 carries the ASCII syntax diagram — structure that survives extraction as
+      characters and not as meaning. Seventeen of its sentences are cut by a page
+      boundary.
+
+  - id: broder-1997
+    title: On the resemblance and containment of documents
+    url: https://www.cs.princeton.edu/courses/archive/spr05/cos598E/bib/broder97resemblance.pdf
+    publisher: IEEE Compression and Complexity of Sequences
+    author: Andrei Broder
+    kind: paper
+    tier: 1
+    published: 1997
+    retrieved: 2026-09-09
+    note: >-
+      Shingling and MinHash, from the person who invented them, for exactly this
+      problem. Also the resemblance/containment distinction people forget.
+
+  - id: mmds
+    title: "Mining of Massive Datasets, chapter 3"
+    url: http://www.mmds.org/
+    publisher: Cambridge University Press
+    author: Leskovec, Rajaraman and Ullman
+    kind: book
+    tier: 2
+    published: 2020
+    retrieved: 2026-09-09
+    note: The textbook treatment of shingling, MinHash and LSH.
+
+  - id: ccnet-2019
+    title: "CCNet: Extracting High Quality Monolingual Datasets from Web Crawl Data"
+    url: https://arxiv.org/abs/1911.00359
+    publisher: arXiv
+    author: Wenzek et al.
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+    conflict: true
+    conflict_note: >-
+      Published by Facebook AI Research, who use the resulting corpora to train their
+      own models. The pipeline description is not in dispute; the quality claims are
+      evaluated by the people who built it.
+    note: Corpus cleaning and deduplication at web scale, with the heuristics written down.
+
+  - id: docling-2024
+    title: "Docling Technical Report"
+    url: https://arxiv.org/abs/2408.09869
+    publisher: arXiv
+    author: Auer et al.
+    kind: paper
+    tier: 1
+    published: 2024
+    retrieved: 2026-09-09
+    conflict: true
+    conflict_note: >-
+      Published by IBM Research, who release Docling. Its own benchmark of its own
+      extractor. Cited here for what its authors say it preserves, not for a
+      comparison.
+    note: A modern layout-aware extractor, and what it does and does not reconstruct.
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Mark Smucker, James Allan and Ben Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-09
+    manual: true
+    note: Carried over from week 1. The discipline behind the two unprovable changes.
+
+claims:
+  - id: w2-rfcs-are-never-revised
+    text: >-
+      A published RFC is never revised, so a superseded document contains no
+      reference to the document that superseded it
+    kind: known
+    sources: [rfc2026, rfc7322]
+
+  - id: w2-obsoletes-is-formal
+    text: >-
+      "Obsoletes" is a formal relationship in the IETF standards process, declared in
+      the header of the newer document
+    kind: known
+    sources: [rfc2026, rfc7322, rfc8259]
+
+  - id: w2-pagination-is-a-rendering
+    text: >-
+      Page furniture in a plain-text RFC — form feeds, footers, running headers — is a
+      property of the rendering rather than of the content
+    kind: known
+    sources: [rfc7994]
+
+  - id: w2-format-changed
+    text: >-
+      The RFC series moved to a generated plain-text rendering, which is why documents
+      published after that change carry no pagination
+    kind: known
+    sources: [rfc7990]
+
+  - id: w2-json-rule-changed
+    text: >-
+      RFC 7159 permitted UTF-8, UTF-16 or UTF-32; RFC 8259 requires UTF-8 and says so
+      explicitly, noting that previous specifications did not
+    kind: known
+    sources: [rfc7159, rfc8259]
+
+  - id: w2-minhash-estimates-jaccard
+    text: >-
+      The probability that two shingle sets share a minimum hash equals their Jaccard
+      similarity, so agreement across n permutations estimates it with error falling
+      as one over root n
+    kind: known
+    sources: [broder-1997, mmds]
+
+  - id: w2-jaccard-is-not-containment
+    text: >-
+      Jaccard similarity is not containment: a short document quoted verbatim inside a
+      long one scores near zero
+    kind: known
+    sources: [broder-1997]
+
+  - id: w2-cleaning-is-heuristic
+    text: >-
+      Corpus cleaning at scale is done with published heuristics whose effects are
+      measured, not with rules that are simply correct
+    kind: inferred
+    sources: [ccnet-2019]
+    note: >-
+      Caught by tools/check_sources.py while writing this file, and the checker was
+      right. CCNet is FAIR describing a pipeline FAIR built and evaluated, and we
+      found no independent replication of the quality claims. That the *approach* is
+      heuristic is barely disputable; that it is the general practice rests on one
+      conflicted source, so this is inferred.
+
+  - id: w2-extractors-preserve-more-now
+    text: >-
+      Modern layout-aware extractors reconstruct table structure and reading order
+      that earlier tools discarded
+    kind: inferred
+    sources: [docling-2024]
+    note: >-
+      Downgraded from known: the source is the extractor's own technical report, its
+      benchmark is its own, and we have found no independent replication. Marked
+      conflicted. This is exactly the case SOURCES.md added the conflict flag for.
+
+  - id: w2-flattening-is-unrecoverable
+    text: >-
+      Structure carried by two-dimensional layout — diagrams, tables, nested lists —
+      is not recoverable downstream once flattened to characters
+    kind: inferred
+    sources: [rfc3986, docling-2024]
+    note: >-
+      Follows from the relationship being positional rather than lexical. Stated as
+      inferred because "unrecoverable" is a strong claim and a sufficiently determined
+      parser can recover some cases.
+
+  - id: w2-supersession-not-in-text
+    text: >-
+      The fact that makes a retrieved passage out of date is frequently not present in
+      that passage or its document, so no downstream stage can detect it
+    kind: inferred
+    sources: [rfc2026]
+    note: >-
+      Proved for RFCs by the never-revised rule. The generalisation to retracted
+      papers, superseded policies and stale documentation is ours.
+
+  - id: w2-correctness-versus-tuning
+    text: >-
+      A correctness fix may ship without a measured improvement, provided the defect
+      is nameable without reference to a metric and the measurement shows nothing got
+      worse; a tuning change may not
+    kind: inferred
+    sources: [smucker-2007]
+    note: >-
+      Ours. An amendment to rule 1 of EVALS.md, made while building week 2 because the
+      rule as written forced the wrong answer twice in five days. See
+      content/week-02/day-2/the-change-you-cannot-prove.md.
+
+  - id: w2-boilerplate-is-fixed-cost
+    text: >-
+      Boilerplate is a fixed number of lines per document, so its share falls as the
+      document lengthens and a corpus average describes no document in the corpus
+    kind: derived
+
+  - id: w2-stripping-does-not-heal
+    text: >-
+      Removing page furniture cannot rejoin a sentence the pagination split, because
+      the blank lines that padded the page are not furniture and remain
+    kind: derived
+
+  - id: w2-no-threshold-for-supersession
+    text: >-
+      Two supersession pairs in this corpus have Jaccard similarities of 0.547 and
+      0.185, so no single similarity threshold identifies the relationship
+    kind: derived
+
+  - id: w2-order-of-operations
+    text: >-
+      Reflowing before stripping makes page furniture part of a sentence, after which
+      no line-oriented rule can recognise it
+    kind: derived
+
+  - id: w2-unknown-damage-rates
+    text: >-
+      The relative frequency of insertion, fragmentation, flattening and substitution
+      damage in real corpora. Every figure we have found is a vendor benchmarking its
+      own extractor
+    kind: unknown
+
+  - id: w2-unknown-obsolete-fraction
+    text: >-
+      What fraction of a typical production corpus is superseded. Where nobody recorded
+      supersession the number is unmeasurable, which is not the same as zero
+    kind: unknown
+
+  - id: w2-unknown-duplication-cost
+    text: >-
+      How much duplication hurts retrieval, as distinct from training. The
+      training-side evidence is strong and does not transfer automatically
+    kind: unknown
+
+  - id: w2-unknown-refusal-default
+    text: >-
+      What the right default policy is when the best available source is out of date.
+      It depends on the cost of a wrong answer, which is not a property of the system
+    kind: unknown
