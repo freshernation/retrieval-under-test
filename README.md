@@ -105,9 +105,27 @@ you do not build it.
 
 ---
 
+## The corpus
+
+Ten RFCs, fetched from `rfc-editor.org` and checked in. Ten documents is not a small
+corpus by accident — **you can open any of them and check a judgment by hand in fifteen
+seconds**, which is the property that makes an eval set arguable rather than authoritative,
+and it is the first thing lost when a corpus grows past what one person can hold.
+
+They also carry, unforced, most of the failures this course teaches. Two of them are
+obsolete and one of those flatly contradicts its replacement about whether JSON must be
+UTF-8 — and the obsolete document does not know it is obsolete, because an RFC is never
+edited after publication. The fact that makes the answer wrong lives in a different
+document, and nothing in the retrieved passage will ever warn you.
+
+One of them is a joke published on 1 April 1998, and whether it belongs in the corpus at
+all is the best argument this course starts.
+
+See [`data/gold/rfc/README.md`](data/gold/rfc/README.md).
+
 ## dev and test
 
-The shipped corpus has two splits, and the difference between them is most of what
+The corpus has two splits, and the difference between them is most of what
 professional retrieval work is.
 
 **`dev`** is yours. Tune on it, look at it, overfit it into the ground.
@@ -133,7 +151,7 @@ without noticing.
 | `content/sources/` | The claims ledgers — known, inferred, derived, unknown |
 | [`ai/`](ai/README.md) | Your seven AI roles |
 | `raglab/` | The deterministic harness the labs run on |
-| `data/gold/` | The shipped corpus, its judgments, and its splits |
+| [`data/gold/rfc/`](data/gold/rfc/README.md) | **The gold corpus** — ten real RFCs, their judgments, and the two splits |
 | `runs/` | Your run ledger. Every measurement you have ever taken |
 | `tools/` | The three checkers |
 | `logs/` | Your stuck log and your daily five numbers |

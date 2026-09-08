@@ -19,9 +19,9 @@ from overlap import (
     term_set,
 )
 
-CORPUS = raglab.corpus.load()
+CORPUS = raglab.corpus.load("sample")
 DOCS = {d.id: d.title + "\n" + d.text for d in CORPUS}
-QUERIES = raglab.judgments.load()
+QUERIES = raglab.judgments.load("sample")
 
 
 # -- normalise ----------------------------------------------------------------

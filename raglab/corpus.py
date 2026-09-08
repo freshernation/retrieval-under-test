@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 DATA_ROOT = Path(__file__).resolve().parent.parent / "data" / "gold"
-DEFAULT_SET = "sample"
+DEFAULT_SET = "rfc"
 
 
 @dataclass(frozen=True)

@@ -36,6 +36,13 @@ The out-of-scope query is not optional. A query set with no unanswerable queries
 cannot detect the failure mode that will cost you most in week 8, and almost nobody
 includes one.
 
+Mark it `unanswerable: true` in your YAML. That flag does three things: `smells()` stops
+demanding a relevant document for it, `raglab.metrics.evaluate` keeps it **out of every
+mean** — an unanswerable query still earns a non-zero nDCG for confidently returning
+something, which is the exact behaviour it exists to catch — and it is counted separately
+as `n_unanswerable` in the run ledger. See `r10` in `data/gold/rfc/queries.yml` for one
+with a trap in it.
+
 ### 2. Judge them by hand
 
 At least **four documents per query**, and **not all of them relevant** — if every

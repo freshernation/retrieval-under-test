@@ -106,6 +106,20 @@ class Evaluation:
     n: int
     metrics: dict[str, float]
     per_query: dict[str, dict[str, float]]
+    n_unanswerable: int = 0
+    """How many queries in this split the corpus cannot answer.
+
+    These are **excluded from every mean in `metrics`**, and kept in
+    `per_query` so you can look at them. Including them would be wrong in a way
+    that is easy to miss: a query with no relevant document still earns a
+    non-zero nDCG for surfacing a grade-1 document, so an unanswerable query
+    silently rewards a retriever for confidently returning something. That is
+    the exact behaviour the query was added to detect.
+
+    Retrieval metrics cannot score a refusal. What these queries measure is what
+    station 6 does with a candidate set that contains no answer, which needs a
+    generator and is week 8.
+    """
 
     def worse_than(self, other: "Evaluation", metric: str = "recall@10") -> list[str]:
         """Query ids where this run scores lower than `other`.
@@ -130,12 +144,18 @@ def evaluate(
     A query in `queries` with no ranking scores zero rather than being skipped,
     because a retriever that returns nothing for a hard query has not avoided the
     question.
+
+    Queries marked `unanswerable` are scored into `per_query` and **left out of
+    every mean**, and counted in `n_unanswerable`. See `Evaluation`.
     """
     splits = {q.split for q in queries}
     if len(splits) > 1:
         raise ValueError(f"evaluate one split at a time, got {sorted(splits)}")
     per_query: dict[str, dict[str, float]] = {}
+    scored: set[str] = set()
     for q in queries:
+        if not q.unanswerable:
+            scored.add(q.id)
         ranked = rankings.get(q.id, [])
         scores: dict[str, float] = {"mrr": mrr(ranked, q)}
         for k in ks:
@@ -144,17 +164,19 @@ def evaluate(
             scores[f"ndcg@{k}"] = ndcg_at_k(ranked, q, k)
         per_query[q.id] = scores
     names = sorted({name for s in per_query.values() for name in s})
+    answerable = [s for qid, s in per_query.items() if qid in scored]
     means = {
-        name: (sum(s.get(name, 0.0) for s in per_query.values()) / len(per_query))
-        if per_query
+        name: (sum(s.get(name, 0.0) for s in answerable) / len(answerable))
+        if answerable
         else 0.0
         for name in names
     }
     return Evaluation(
         split=next(iter(splits)) if splits else "dev",
-        n=len(queries),
+        n=len(answerable),
         metrics=means,
         per_query=per_query,
+        n_unanswerable=len(per_query) - len(answerable),
     )
 
 

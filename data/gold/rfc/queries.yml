@@ -1,0 +1,221 @@
+# The gold query set: 16 queries, graded judgments, 10 dev / 6 test.
+#
+# Grades: 0 irrelevant · 1 related but does not answer · 2 answers it ·
+#         3 answers it completely, on its own
+#
+# Every grade here was written by reading the document. Where a grade is
+# arguable — and several are — the note says what the argument is, because a
+# judgment whose reasoning is not written down is a judgment you cannot
+# reproduce, including by yourself in three weeks.
+#
+# You can check every one of these by hand. That is the point of a ten-document
+# corpus: open the RFC, search for the term, and disagree with us if you like.
+
+queries:
+
+  # ---------------------------------------------------------------- dev
+
+  - id: r01
+    text: what status code should I return when a client sends too many requests
+    split: dev
+    note: The control. A plain lookup with one obviously correct answer.
+    judgments:
+      rfc-6585: 3
+      rfc-9309: 1
+      rfc-7725: 0
+      rfc-2324: 0
+
+  - id: r02
+    text: how do I tell a client to slow down
+    split: dev
+    note: >-
+      Vocabulary gap. "Slow down" appears nowhere in the corpus. The answer is
+      429 plus Retry-After, and the words for it are "Too Many Requests" and
+      "rate limiting" — the latter only once, in parentheses, in RFC 6585 §4.
+      A lexical retriever cannot do this query and week 5 is where you find out
+      whether embeddings can.
+    judgments:
+      rfc-6585: 3
+      rfc-9309: 1
+      rfc-3986: 0
+      rfc-6265: 0
+
+  - id: r03
+    text: "451"
+    split: dev
+    note: >-
+      A bare identifier, and the query where dense retrieval will embarrass
+      itself in week 5. "451" appears thirteen times in RFC 7725 and nowhere
+      else in the corpus.
+    judgments:
+      rfc-7725: 3
+      rfc-6585: 0
+      rfc-3986: 0
+
+  - id: r04
+    text: what does the 418 status code mean
+    split: dev
+    note: >-
+      Correct answer, dubious authority. RFC 2324 defines 418 and was published
+      on 1 April 1998 as a joke. The retrieval is right; whether the document
+      belongs in the corpus at all is a station 1 question, and it is the most
+      productive argument this corpus starts.
+    judgments:
+      rfc-2324: 3
+      rfc-6585: 0
+      rfc-7725: 0
+
+  - id: r05
+    text: must JSON be encoded in UTF-8
+    split: dev
+    note: >-
+      **The most important query in the set.** Two documents, same title, same
+      author, three years apart, and they disagree:
+        RFC 7159 §8.1 (2014) — "JSON text SHALL be encoded in UTF-8, UTF-16, or UTF-32"
+        RFC 8259 §8.1 (2017) — "MUST be encoded using UTF-8"
+      RFC 8259 says "Obsoletes: 7159" in its header. **RFC 7159 does not say it
+      has been obsoleted, because RFCs are never edited after publication.** The
+      fact that makes one of these answers wrong exists only in the other
+      document. Nothing in 7159 will ever tell your retriever, or your user.
+      Graded 1 rather than 0 deliberately: it is squarely about the question and
+      it is out of date, which is the most dangerous result a corpus can return.
+    judgments:
+      rfc-8259: 3
+      rfc-7159: 1
+      rfc-3986: 0
+      rfc-9309: 0
+
+  - id: r06
+    text: what does ABNF stand for
+    split: dev
+    note: >-
+      Acronym expansion. Three documents spell out "Augmented Backus-Naur Form"
+      exactly once each, in a reference; five use "ABNF" without expanding it.
+      No document is *about* ABNF, so nothing earns a 3 — the corpus answers the
+      question in passing and the honest maximum is 2.
+    judgments:
+      rfc-3986: 2
+      rfc-6265: 2
+      rfc-9309: 2
+      rfc-8259: 1
+      rfc-7725: 0
+
+  - id: r07
+    text: where do well-known URIs live
+    split: dev
+    note: >-
+      The second supersession pair, and it behaves differently from r05. RFC
+      8615 obsoletes RFC 5785, but the answer — the "/.well-known/" path prefix
+      — did not change. So the superseded document is outdated without being
+      wrong, which is grade 2, not 1. Compare with r05 and be able to say why
+      the grades differ.
+    judgments:
+      rfc-8615: 3
+      rfc-5785: 2
+      rfc-3986: 1
+      rfc-9309: 0
+
+  - id: r08
+    text: what must a crawler do if robots.txt returns a 500 error
+    split: dev
+    note: >-
+      Precise, and answered precisely — RFC 9309 §2.3.1.4: "the crawler MUST
+      assume complete disallow". A good query for week 4, because the answer is
+      two sentences buried in a section heading structure that chunking will
+      either preserve or destroy.
+    judgments:
+      rfc-9309: 3
+      rfc-6585: 1
+      rfc-7725: 0
+
+  - id: r09
+    text: how do I make a cookie expire
+    split: dev
+    note: >-
+      Another vocabulary gap, milder than r02. The user says "expire"; RFC 6265
+      says "Expires" and "Max-Age", so the lexical match is partial and lucky.
+    judgments:
+      rfc-6265: 3
+      rfc-3986: 0
+      rfc-8615: 0
+
+  - id: r10
+    text: how do I configure OAuth scopes for my API
+    split: dev
+    unanswerable: true
+    note: >-
+      **Out of scope, on purpose, and there is a trap in it.** Nothing in this
+      corpus is about OAuth. But "OAuth" does appear three times in RFC 6585 —
+      entirely in its bibliography, as a citation to a work in progress. So a
+      lexical retriever returns a confident top result for a question the corpus
+      cannot answer, and the passage it returns is a reference list.
+      This is what every hallucination you will see in week 8 looks like from the
+      retrieval side. Graded 1, because a bibliography entry is genuinely related
+      and genuinely useless.
+    judgments:
+      rfc-6585: 1
+      rfc-3986: 0
+      rfc-8615: 0
+      rfc-6265: 0
+
+  # ---------------------------------------------------------------- test
+
+  - id: r11
+    text: is a URI scheme case sensitive
+    split: test
+    judgments:
+      rfc-3986: 3
+      rfc-6265: 1
+      rfc-8615: 1
+      rfc-2324: 0
+
+  - id: r12
+    text: when may a crawler ignore robots.txt
+    split: test
+    note: >-
+      Negation. Retrieval has no representation for "ignore" — the answer is in
+      RFC 9309 §2.3.1.3, and it is phrased as "MAY access any resources".
+    judgments:
+      rfc-9309: 3
+      rfc-7725: 0
+      rfc-6585: 0
+
+  - id: r13
+    text: which status code indicates the client must authenticate to the network
+    split: test
+    judgments:
+      rfc-6585: 3
+      rfc-7725: 1
+      rfc-2324: 0
+
+  - id: r14
+    text: what did RFC 8259 change about JSON
+    split: test
+    note: >-
+      **Needs both documents.** RFC 8259 states the new rule and that it
+      obsoletes 7159; RFC 7159 states the old rule. Neither is a 3, because
+      neither contains the comparison — the answer exists only across the pair.
+      A system that returns one and stops produces a confident half-answer, and
+      the metric that catches it is recall, not nDCG.
+    judgments:
+      rfc-8259: 2
+      rfc-7159: 2
+      rfc-3986: 0
+      rfc-6265: 0
+
+  - id: r15
+    text: how long may a crawler cache robots.txt
+    split: test
+    note: RFC 9309 §2.4 — "SHOULD NOT use the cached version for more than 24 hours".
+    judgments:
+      rfc-9309: 3
+      rfc-6265: 1
+      rfc-6585: 0
+
+  - id: r16
+    text: brewing coffee over HTTP
+    split: test
+    judgments:
+      rfc-2324: 3
+      rfc-6585: 0
+      rfc-3986: 0

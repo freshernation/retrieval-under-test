@@ -47,6 +47,7 @@ class Run:
     note: str = ""
     compared_to: str = ""
     queries_worse: int | None = None
+    n_unanswerable: int = 0
 
     def metric(self, name: str) -> float:
         if name not in self.metrics:
@@ -97,6 +98,7 @@ def record(
         note=note,
         compared_to=against,
         queries_worse=worse,
+        n_unanswerable=evaluation.n_unanswerable,
     )
     payload = {
         "id": run.id,
@@ -109,6 +111,7 @@ def record(
         "note": run.note,
         "compared_to": run.compared_to,
         "queries_worse": run.queries_worse,
+        "n_unanswerable": run.n_unanswerable,
     }
     (directory / f"{run_id}.yml").write_text(
         yaml.safe_dump(payload, sort_keys=False), encoding="utf-8"
@@ -136,6 +139,7 @@ def load(run_id: str, runs_dir: Path | None = None) -> Run:
         note=raw.get("note", ""),
         compared_to=raw.get("compared_to", ""),
         queries_worse=raw.get("queries_worse"),
+        n_unanswerable=raw.get("n_unanswerable", 0),
     )
 
 

@@ -12,7 +12,7 @@ import raglab
 from baseline import judged_coverage, read_queries, search_all, unjudged_in_top_k
 
 SAMPLE = Path(raglab.corpus.DATA_ROOT) / "sample" / "queries.yml"
-CORPUS = raglab.corpus.load()
+CORPUS = raglab.corpus.load("sample")
 DOCS = {d.id: d.title + "\n" + d.text for d in CORPUS}
 
 
