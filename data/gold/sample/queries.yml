@@ -1,0 +1,127 @@
+# The sample query set: 12 queries, graded judgments, 8 dev / 4 test.
+#
+# Grades: 0 irrelevant · 1 related but does not answer · 2 answers it ·
+#         3 answers it completely, on its own
+#
+# Read the notes. Several of these queries exist to make a specific failure
+# visible, and the note says which one.
+
+queries:
+  - id: q01
+    text: how much is a single adult fare
+    split: dev
+    note: >-
+      The superseded 2023 policy is graded 1, not 0. It is genuinely about the
+      question and genuinely wrong, which is the most dangerous kind of
+      retrieval result and the reason station 1 exists.
+    judgments:
+      mrta-002: 3
+      mrta-028: 2
+      mrta-012: 2
+      mrta-001: 1
+      mrta-003: 0
+
+  - id: q02
+    text: can I get a refund on my monthly pass
+    split: dev
+    note: The corpus says "31-day pass" and never "monthly". A vocabulary gap on purpose.
+    judgments:
+      mrta-003: 3
+      mrta-012: 2
+      mrta-018: 1
+      mrta-002: 0
+
+  - id: q03
+    text: are electric scooters allowed on buses
+    split: dev
+    judgments:
+      mrta-005: 3
+      mrta-020: 2
+      mrta-013: 0
+
+  - id: q04
+    text: bicycle rules on light rail during rush hour
+    split: dev
+    judgments:
+      mrta-005: 3
+      mrta-007: 1
+      mrta-013: 0
+
+  - id: q05
+    text: what is the penalty for fare evasion
+    split: dev
+    judgments:
+      mrta-010: 3
+      mrta-030: 1
+      mrta-002: 0
+
+  - id: q06
+    text: route 42 detour
+    split: dev
+    note: Short, exact, and full of a rare token. Watch what dense retrieval does with it in week 5.
+    judgments:
+      mrta-006: 3
+      mrta-008: 1
+      mrta-024: 1
+      mrta-020: 0
+
+  - id: q07
+    text: what does ROCC stand for
+    split: dev
+    note: >-
+      The glossary answers it in five characters. An acronym query is where
+      lexical retrieval is not merely competitive but correct, and it is one of
+      the queries week 5's dense index will lose.
+    judgments:
+      mrta-030: 3
+      mrta-022: 2
+      mrta-027: 1
+      mrta-009: 0
+
+  - id: q08
+    text: who approves spending over $250,000
+    split: dev
+    note: Two documents each hold half the answer. Neither is sufficient alone.
+    judgments:
+      mrta-026: 3
+      mrta-009: 2
+      mrta-015: 0
+
+  - id: q09
+    text: service animal policy
+    split: test
+    judgments:
+      mrta-004: 3
+      mrta-013: 2
+      mrta-016: 1
+      mrta-005: 0
+
+  - id: q10
+    text: light rail ridership growth 2025
+    split: test
+    note: The answer is inside a table the extractor flattened. Station 1, not station 4.
+    judgments:
+      mrta-014: 3
+      mrta-015: 1
+      mrta-023: 0
+
+  - id: q11
+    text: what happens if I am charged twice
+    split: test
+    judgments:
+      mrta-003: 3
+      mrta-012: 2
+      mrta-018: 1
+      mrta-021: 0
+
+  - id: q12
+    text: stop 4213
+    split: test
+    note: >-
+      A bare identifier. Two documents mention it; one tells you it is closed
+      and one tells you how stop numbers work.
+    judgments:
+      mrta-006: 3
+      mrta-024: 2
+      mrta-029: 1
+      mrta-015: 0
