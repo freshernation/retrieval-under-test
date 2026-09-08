@@ -165,7 +165,7 @@ def test_the_one_thing_that_moves_is_one_query():
     """recall@5 goes 0.852 → 0.963, which looks like a result until you look at
     which queries moved. Exactly one did: r01, from 0.00 to 1.00.
 
-    Nine queries. One moved. The mean shifted by a tenth."""
+    Nine answerable queries. One moved."""
     import sys
     from pathlib import Path
 
@@ -188,7 +188,7 @@ def test_the_one_thing_that_moves_is_one_query():
 
 
 def test_and_the_interval_says_you_measured_nothing():
-    """delta +0.100, 95% CI [+0.000, +0.300]. The interval touches zero.
+    """delta +0.111, 95% CI [+0.000, +0.333]. The interval touches zero.
 
     So: you removed a third of the corpus, threw away every abstract, wrote a
     cleaner with four stages and an order-of-operations trap in it — and by the
@@ -214,5 +214,5 @@ def test_and_the_interval_says_you_measured_nothing():
     after = evaluate({q.id: rank(q.text, cleaned(), 10) for q in qs}, qs, ks=(5,))
     before = evaluate({q.id: rank(q.text, RAW, 10) for q in qs}, qs, ks=(5,))
     delta, low, high = bootstrap(after, before, "recall@5")
-    assert delta == pytest.approx(0.1, abs=0.001)
+    assert delta == pytest.approx(0.111, abs=0.001)
     assert low <= 0 <= high
