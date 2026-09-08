@@ -1,0 +1,285 @@
+# Week 1's reading, recorded properly.
+#
+# Note the shape of this file compared with what week 4's will look like. Week 1
+# rests almost entirely on the information-retrieval literature, which is fifty
+# years old, peer-reviewed and Tier 1. Week 4 rests on chunking, for which no
+# primary source exists at all. Both are honest; they are not the same.
+
+system: Week 1 reading — measurement, judgments, metrics, and the baseline
+
+sources:
+  - id: bm25-foundations
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf
+    publisher: Foundations and Trends in Information Retrieval
+    author: Stephen Robertson and Hugo Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-08
+    note: >-
+      §1 what relevance is being modelled as; §2 the evaluation framing; §3 term
+      weighting, saturation and length normalisation — the three fixes for week 1's
+      baseline.
+
+  - id: trec-overview
+    title: TREC publications and overview papers
+    url: https://trec.nist.gov/pubs.html
+    publisher: NIST
+    tier: 1
+    undated: true
+    retrieved: 2026-09-08
+    note: >-
+      Thirty years of building judgment sets deliberately, including pooling since
+      1992 and the conventions the field reports.
+
+  - id: voorhees-trec8
+    title: Overview of the Eighth Text REtrieval Conference (TREC-8)
+    url: https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf
+    publisher: NIST
+    author: Ellen Voorhees and Donna Harman
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-09-08
+    note: >-
+      Assessors disagree substantially, and system rankings are largely stable
+      under that variation. The result the whole practice of evaluation rests on.
+
+  - id: jarvelin-2002
+    title: Cumulated gain-based evaluation of IR techniques
+    url: https://dl.acm.org/doi/10.1145/582415.582418
+    publisher: ACM TOIS
+    author: Kalervo Järvelin and Jaana Kekäläinen
+    kind: paper
+    tier: 1
+    published: 2002
+    retrieved: 2026-09-08
+    manual: true
+    note: nDCG, including why the discount is logarithmic and why normalisation is needed.
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Mark Smucker, James Allan and Ben Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-08
+    manual: true
+    note: >-
+      Randomisation and bootstrap tests are appropriate for IR comparisons; some
+      standard parametric tests are not.
+
+  - id: efron-bootstrap
+    title: An Introduction to the Bootstrap
+    url: https://www.routledge.com/An-Introduction-to-the-Bootstrap/Efron-Tibshirani/p/book/9780412042317
+    publisher: Chapman and Hall
+    author: Bradley Efron and Robert Tibshirani
+    kind: book
+    tier: 2
+    published: 1993
+    retrieved: 2026-09-08
+    manual: true
+    note: The method itself. Cited for the resampling argument, not for anything IR-specific.
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-08
+    note: >-
+      A substantial share of published neural IR improvements were measured against
+      baselines nobody had tuned. The argument for day 4's whole existence.
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-08
+    note: Eighteen datasets; model rankings differ considerably across them.
+
+  - id: rag-2020
+    title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    url: https://arxiv.org/abs/2005.11401
+    publisher: arXiv
+    author: Lewis et al.
+    kind: paper
+    tier: 1
+    published: 2020
+    retrieved: 2026-09-08
+    note: >-
+      The paper the acronym comes from. Describes retriever and generator trained
+      together — which is not what almost anyone means by RAG in 2026.
+
+claims:
+  - id: w1-rag-original-is-joint-training
+    text: >-
+      The 2020 RAG paper describes a retriever and generator trained jointly, which
+      is a narrower architecture than what the term now denotes
+    kind: known
+    sources: [rag-2020]
+
+  - id: w1-relevance-predates-rag
+    text: >-
+      Relevance judgment, pooled evaluation and the metrics used in this week
+      predate retrieval-augmented generation by decades
+    kind: known
+    sources: [trec-overview, bm25-foundations]
+
+  - id: w1-assessors-disagree
+    text: >-
+      Relevance assessors disagree substantially with one another, and system
+      rankings are nevertheless largely stable under that variation
+    kind: known
+    sources: [voorhees-trec8]
+
+  - id: w1-pooling-bias
+    text: >-
+      Pooling has been TREC's method for building judgment sets since 1992, and it
+      biases permanently against documents no pooled system ranked highly
+    kind: known
+    sources: [trec-overview]
+
+  - id: w1-ndcg-normalisation
+    text: >-
+      nDCG's normalisation by the ideal ranking exists so that scores can be
+      averaged across queries with different numbers of relevant documents
+    kind: known
+    sources: [jarvelin-2002]
+
+  - id: w1-bootstrap-appropriate
+    text: >-
+      The paired bootstrap and randomisation tests are appropriate significance
+      tests for information retrieval comparisons
+    kind: known
+    sources: [smucker-2007, efron-bootstrap]
+
+  - id: w1-weak-baselines
+    text: >-
+      A substantial fraction of published neural IR improvements were measured
+      against untuned baselines and did not survive tuning them
+    kind: known
+    sources: [lin-neural-hype]
+
+  - id: w1-rankings-vary-by-dataset
+    text: >-
+      The relative ranking of retrieval models varies considerably across datasets,
+      so a result on one corpus generalises poorly to another
+    kind: known
+    sources: [beir-2021]
+
+  - id: w1-bm25-three-fixes
+    text: >-
+      Term weighting by rarity, length normalisation and term-frequency saturation
+      are the three components that fix the baseline's scoring defects
+    kind: known
+    sources: [bm25-foundations]
+
+  - id: w1-retrieval-sets-the-ceiling
+    text: >-
+      The ceiling on RAG answer quality is set by retrieval, because the generator
+      cannot retrieve
+    kind: inferred
+    sources: [rag-2020]
+    note: >-
+      Follows from what the generator can and cannot do. We know of no controlled
+      study isolating the contribution of retrieval to end-to-end answer quality,
+      and would like one.
+
+  - id: w1-self-agreement-is-the-floor
+    text: >-
+      A single annotator's self-agreement bounds the smallest improvement they can
+      honestly claim from judgments they wrote
+    kind: inferred
+    sources: [voorhees-trec8]
+    note: >-
+      Extends the inter-assessor variation result to the intra-assessor case. TREC
+      studies inter-assessor agreement far more than intra-assessor, so this is our
+      extension rather than their finding.
+
+  - id: w1-diversity-beats-volume
+    text: >-
+      At small scale, covering more query shapes tells you more than adding more
+      queries of the same shape
+    kind: inferred
+    sources: [beir-2021]
+    note: Consistent with cross-dataset variation; not directly studied.
+
+  - id: w1-stations
+    text: >-
+      Attributing a retrieval failure to exactly one of seven ordered stations, and
+      never fixing downstream of the break, is a productive debugging procedure
+    kind: inferred
+    sources: [bm25-foundations]
+    note: >-
+      Ours. The individual stages are conventional; the ordering rule is a teaching
+      device. Cited only for the conventional pipeline stages it decomposes.
+
+  - id: w1-precision-cap
+    text: >-
+      precision@k is bounded above by min(k, relevant)/k, so averaging it across
+      queries with different numbers of relevant documents describes the judgments
+      as much as the system
+    kind: derived
+
+  - id: w1-topk-fraction
+    text: >-
+      On a 30-document corpus, recall@10 asks for a third of the corpus, so a random
+      ranker scores about 0.33 and any recall figure must be read against that
+    kind: derived
+
+  - id: w1-all-relevant-query
+    text: >-
+      A query whose every judged document is relevant produces the same score for
+      every ranking of those documents, so it cannot discriminate between systems
+    kind: derived
+
+  - id: w1-one-query-swing
+    text: >-
+      With n queries, a single query flipping moves the mean by 1/n, so at n=8 one
+      query is 12.5% of the result
+    kind: derived
+
+  - id: w1-fluency-is-not-a-signal
+    text: >-
+      A wrong RAG answer and a right one are indistinguishable by fluency, because
+      fluency is a property of the generator rather than of the retrieved passage
+    kind: derived
+
+  - id: w1-unknown-failure-origin
+    text: >-
+      What fraction of production RAG failures originate before generation
+    kind: unknown
+
+  - id: w1-unknown-annotation-training
+    text: >-
+      How much annotation training improves a single annotator's self-agreement
+    kind: unknown
+
+  - id: w1-unknown-discount-vs-attention
+    text: >-
+      Whether nDCG's logarithmic position discount corresponds to how a language
+      model attends across its context window. It was not designed to
+    kind: unknown
+
+  - id: w1-unknown-rag-weak-baselines
+    text: >-
+      What fraction of published RAG improvements would survive comparison against a
+      properly tuned lexical baseline. Nobody has run Lin's study for RAG
+    kind: unknown
+
+  - id: w1-unknown-min-eval-size
+    text: >-
+      The minimum viable size for a hand-built eval set. It depends on the effect
+      size you need to detect, which is week 9
+    kind: unknown

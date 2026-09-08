@@ -1,0 +1,8 @@
+instructor/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+runs/*.yml
+!runs/.gitkeep
