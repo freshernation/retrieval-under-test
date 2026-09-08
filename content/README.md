@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 16 |
-| **Weeks covered** | 1–2 |
+| **Articles** | 24 |
+| **Weeks covered** | 1–3 |
 | **Weeks planned** | 12 |
 
 ---
@@ -60,6 +60,18 @@ much.
 
 ---
 
-## Weeks 3–12
+## Week 3 — Lexical retrieval, properly
+
+**Day 1** · [What a term is](week-03/day-1/what-a-term-is.md) · [Throwing information away in advance](week-03/day-1/throwing-information-away.md)
+
+**Day 2** · [Turning the loop inside out](week-03/day-2/turning-the-loop-inside-out.md) · [Boolean search, and why it lost](week-03/day-2/boolean-search.md)
+
+**Day 3** · [Three ideas and one formula](week-03/day-3/three-ideas-and-one-formula.md) · [What BM25 still cannot do](week-03/day-3/what-bm25-cannot-do.md)
+
+**Day 4** · [Two numbers, eighteen points](week-03/day-4/two-numbers-eighteen-points.md) · [How big does an eval set have to be?](week-03/day-4/how-big-does-an-eval-set-have-to-be.md)
+
+---
+
+## Weeks 4–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

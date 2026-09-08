@@ -106,6 +106,16 @@ class Evaluation:
     n: int
     metrics: dict[str, float]
     per_query: dict[str, dict[str, float]]
+    unanswerable: tuple[str, ...] = ()
+    """The ids of the queries the corpus cannot answer.
+
+    Kept so that `bootstrap` can leave them out of the paired resampling. They
+    contribute a constant zero difference between any two systems, which
+    inflates the fraction of unchanged queries and makes an interval *harder* to
+    separate from zero — punishing you, in the statistics, for having included
+    the query that detects the failure that reaches users most often.
+    """
+
     n_unanswerable: int = 0
     """How many queries in this split the corpus cannot answer.
 
@@ -176,6 +186,7 @@ def evaluate(
         n=len(answerable),
         metrics=means,
         per_query=per_query,
+        unanswerable=tuple(sorted(set(per_query) - scored)),
         n_unanswerable=len(per_query) - len(answerable),
     )
 
@@ -196,10 +207,14 @@ def bootstrap(
     Paired, because the same queries are hard for both systems and pairing
     removes that variance. Seeded, because a confidence interval that moves when
     you rerun it teaches the wrong lesson about confidence.
+
+    Queries marked `unanswerable` are excluded, for the reason given on
+    `Evaluation.unanswerable`.
     """
-    shared = sorted(set(a.per_query) & set(b.per_query))
+    skip = set(a.unanswerable) | set(b.unanswerable)
+    shared = sorted((set(a.per_query) & set(b.per_query)) - skip)
     if not shared:
-        raise ValueError("no queries in common")
+        raise ValueError("no answerable queries in common")
     xa = np.array([a.per_query[q].get(metric, 0.0) for q in shared], dtype=float)
     xb = np.array([b.per_query[q].get(metric, 0.0) for q in shared], dtype=float)
     diff = xa - xb

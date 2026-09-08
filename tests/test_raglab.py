@@ -283,3 +283,24 @@ def test_a_cassette_replays_and_refuses_an_unseen_prompt(tmp_path: Path):
     assert tape.complete("  Answer only    from the context. ") == "ok"
     with pytest.raises(KeyError, match="no recording"):
         tape.complete("something else")
+
+
+def test_bootstrap_excludes_unanswerable_queries():
+    """They contribute a constant zero difference between any two systems, so
+    including them would inflate the unchanged fraction and make an interval
+    *harder* to separate from zero — punishing you, in the statistics, for
+    having included the query that detects the failure that reaches users most
+    often."""
+    from raglab.metrics import bootstrap, evaluate
+
+    qs = raglab.judgments.load().split("dev")
+    good = evaluate({q.id: sorted(q.relevant) or ["rfc-6585"] for q in qs}, qs)
+    bad = evaluate({q.id: ["rfc-2324"] for q in qs}, qs)
+    assert good.unanswerable == ("r10",)
+    delta, _, _ = bootstrap(good, bad, "recall@10")
+    per_query = [
+        good.per_query[q]["recall@10"] - bad.per_query[q]["recall@10"]
+        for q in good.per_query
+        if q not in good.unanswerable
+    ]
+    assert delta == pytest.approx(sum(per_query) / len(per_query))

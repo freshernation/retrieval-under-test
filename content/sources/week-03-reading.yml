@@ -1,0 +1,340 @@
+# Week 3's reading, recorded properly.
+#
+# The strongest source list in the course so far, and it is worth noticing why:
+# lexical retrieval has fifty years of peer-reviewed work behind it, an
+# authoritative implementation whose source you can read, and a definitive
+# monograph by the people who derived the model. Week 4 has none of that, about
+# a decision that matters more.
+
+system: Week 3 reading — analysis, the inverted index, BM25, and tuning
+
+sources:
+  - id: bm25-foundations
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf
+    publisher: Foundations and Trends in Information Retrieval
+    author: Stephen Robertson and Hugo Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-09
+    note: >-
+      §1 what the model assumes; §2 what a term is taken to be; §3 the derivation,
+      idf's form, saturation and length normalisation; §3.2 k1 and b and their
+      conventional ranges.
+
+  - id: lucene-analysis
+    title: Lucene analysis package documentation
+    url: https://lucene.apache.org/core/9_9_0/core/org/apache/lucene/analysis/package-summary.html
+    publisher: Apache Lucene
+    kind: documentation
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: The tokenise-then-filter model, from the engine most production search is.
+
+  - id: lucene-formats
+    title: Lucene 9.9 index file formats
+    url: https://lucene.apache.org/core/9_9_0/core/org/apache/lucene/codecs/lucene99/package-summary.html
+    publisher: Apache Lucene
+    kind: documentation
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: >-
+      What a production index writes to disk, file by file — terms, postings,
+      positions, per-document lengths, each in its own structure.
+
+  - id: lucene-bm25
+    title: BM25Similarity
+    url: https://lucene.apache.org/core/9_9_0/core/org/apache/lucene/search/similarities/BM25Similarity.html
+    publisher: Apache Lucene
+    kind: documentation
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: >-
+      The formula as implemented, and the defaults k1=1.2, b=0.75 that most
+      deployed systems are running.
+
+  - id: lucene-query-syntax
+    title: Lucene classic query parser syntax
+    url: https://lucene.apache.org/core/9_9_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html
+    publisher: Apache Lucene
+    kind: documentation
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: Boolean operators surviving inside a ranked engine, as filters.
+
+  - id: mrs-irbook
+    title: Introduction to Information Retrieval
+    url: https://nlp.stanford.edu/IR-book/
+    publisher: Cambridge University Press
+    author: Manning, Raghavan and Schütze
+    kind: book
+    tier: 2
+    published: 2008
+    retrieved: 2026-09-09
+    note: >-
+      Chapters 1–2: boolean retrieval, the inverted index, postings compression
+      and skip pointers. The standard textbook account.
+
+  - id: porter-stemmer
+    title: The Porter stemming algorithm — official definition
+    url: https://tartarus.org/martin/PorterStemmer/def.txt
+    publisher: Martin Porter
+    author: Martin Porter
+    kind: specification
+    tier: 1
+    published: 1980
+    retrieved: 2026-09-09
+    note: >-
+      The algorithm from its author, including his own account of what it
+      conflates that it should not.
+
+  - id: furnas-1987
+    title: The vocabulary problem in human-system communication
+    url: https://dl.acm.org/doi/10.1145/32206.32212
+    publisher: Communications of the ACM
+    author: Furnas, Landauer, Gomez and Dumais
+    kind: paper
+    tier: 1
+    published: 1987
+    retrieved: 2026-09-09
+    manual: true
+    note: >-
+      Two people spontaneously choosing a word for the same thing agree 10–20% of
+      the time. ACM blocks automated retrieval, so this was read by hand.
+
+  - id: uax29
+    title: "Unicode Standard Annex #29: Unicode Text Segmentation"
+    url: https://unicode.org/reports/tr29/
+    publisher: Unicode Consortium
+    kind: standard
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: What a word boundary is, once you leave English.
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+    note: Carried from week 1. The argument for tuning the baseline before comparing to it.
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-09
+    note: Where lexical wins and loses against dense, across eighteen datasets.
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Smucker, Allan and Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-09
+    manual: true
+
+  - id: voorhees-trec8
+    title: Overview of the Eighth Text REtrieval Conference (TREC-8)
+    url: https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf
+    publisher: NIST
+    author: Voorhees and Harman
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-09-09
+    note: Topic sets of 50, and why.
+
+claims:
+  - id: w3-analyzer-architecture
+    text: >-
+      Production retrieval engines analyse text as a tokeniser followed by a chain
+      of filters, and the same chain must run at index time and at query time
+    kind: known
+    sources: [lucene-analysis]
+
+  - id: w3-idf-form
+    text: >-
+      idf derives from a probabilistic argument under a term-independence
+      assumption, and its smoothing constants prevent a zero or negative weight
+      for a term appearing in every document
+    kind: known
+    sources: [bm25-foundations]
+
+  - id: w3-k1-and-b
+    text: >-
+      k1 controls term-frequency saturation and b controls length normalisation,
+      with the normalisation multiplying k1 in the denominator rather than scaling
+      the whole term
+    kind: known
+    sources: [bm25-foundations, lucene-bm25]
+
+  - id: w3-defaults
+    text: >-
+      k1=1.2 and b=0.75 are the defaults in Lucene-based engines, chosen on news
+      collections rather than derived
+    kind: known
+    sources: [lucene-bm25, bm25-foundations]
+
+  - id: w3-index-contents
+    text: >-
+      A production index stores terms, postings, positions and per-document
+      lengths in separate structures, with positions a large share of the total
+    kind: known
+    sources: [lucene-formats, mrs-irbook]
+
+  - id: w3-df-is-free
+    text: >-
+      Document frequency is the length of a postings list, so it costs nothing
+      additional to maintain
+    kind: known
+    sources: [mrs-irbook]
+
+  - id: w3-boolean-survives-as-filter
+    text: >-
+      Boolean operators persist in modern engines as filters over the candidate
+      set rather than as the scoring function
+    kind: known
+    sources: [lucene-query-syntax, mrs-irbook]
+
+  - id: w3-porter-conflates
+    text: >-
+      Suffix-stripping stemmers conflate words that do not share a meaning, and
+      Porter documents this about his own algorithm
+    kind: known
+    sources: [porter-stemmer]
+
+  - id: w3-vocabulary-agreement
+    text: >-
+      Two people spontaneously choosing a word for the same thing agree roughly
+      10 to 20 percent of the time
+    kind: known
+    sources: [furnas-1987]
+
+  - id: w3-lexical-vs-dense-complementary
+    text: >-
+      Lexical and dense retrieval have complementary strengths across datasets,
+      with lexical stronger on exact-match and entity-heavy queries
+    kind: known
+    sources: [beir-2021]
+
+  - id: w3-word-boundaries
+    text: >-
+      Word boundaries are defined by Unicode segmentation rules and are not
+      whitespace; several major languages do not delimit words at all
+    kind: known
+    sources: [uax29]
+
+  - id: w3-untuned-baselines
+    text: >-
+      Comparing against untuned baselines inflated a substantial share of
+      published information-retrieval improvements
+    kind: known
+    sources: [lin-neural-hype]
+
+  - id: w3-topic-set-size
+    text: >-
+      Retrieval collections built for evaluation conventionally use around fifty
+      topics
+    kind: known
+    sources: [voorhees-trec8]
+
+  - id: w3-additive-beats-subtractive
+    text: >-
+      Analyzer changes that add terms are safer than changes that remove them,
+      because a spurious term is measurable noise and a missing term is an
+      unanswerable query with no error
+    kind: inferred
+    sources: [lucene-analysis, bm25-foundations]
+    note: >-
+      Ours. Argued from the asymmetry of the failure modes and measured on this
+      corpus in day 1's lab, where the only additive change was the only one that
+      helped. Not a published result.
+
+  - id: w3-stopwords-approximate-idf
+    text: >-
+      A stopword list is a binary approximation, decided in advance, of the
+      continuous quantity idf computes from the corpus
+    kind: inferred
+    sources: [bm25-foundations]
+
+  - id: w3-independence-explains-vocabulary-gap
+    text: >-
+      BM25's term-independence assumption is why a query sharing no terms with the
+      answering document cannot be rescued by any parameter setting
+    kind: inferred
+    sources: [bm25-foundations, furnas-1987]
+
+  - id: w3-plateau-means-no-saturation
+    text: >-
+      A grid whose optimum sits at the largest k1 searched and then flattens is
+      asking for k1 to be infinite, which is to say for term saturation to be
+      disabled
+    kind: derived
+
+  - id: w3-bootstrap-floor
+    text: >-
+      With a fraction f of queries unchanged, a bootstrap resample of n is
+      all-unchanged with probability f to the power n; when that exceeds 0.025 the
+      2.5th percentile of the paired difference distribution is exactly zero and
+      the lower bound of a 95% interval is pinned there
+    kind: derived
+
+  - id: w3-nine-queries-pinned
+    text: >-
+      Nine answerable queries with six unchanged gives (6/9)^9 = 0.0260, just over
+      0.025, which is why every interval in weeks 2 and 3 touched zero
+    kind: derived
+
+  - id: w3-and-empties
+    text: >-
+      A conjunctive query is empty whenever any single term is absent, so its
+      result size is bounded by its rarest term
+    kind: derived
+
+  - id: w3-forty-five-looks
+    text: >-
+      Forty-five comparisons at a 95% threshold should produce roughly two
+      apparently significant results from noise alone
+    kind: derived
+
+  - id: w3-unknown-tuned-in-production
+    text: >-
+      What fraction of deployed BM25 systems have ever tuned k1 and b against
+      their own corpus
+    kind: unknown
+
+  - id: w3-unknown-divergent-analyzers
+    text: >-
+      How often production systems analyse queries differently from documents.
+      Everyone who has looked has found instances; nobody has counted
+    kind: unknown
+
+  - id: w3-unknown-identifier-query-share
+    text: >-
+      What fraction of real queries are exact-identifier queries. It varies by
+      domain and is almost never measured, which is why the lexical-versus-dense
+      argument is usually conducted without evidence
+    kind: unknown
+
+  - id: w3-unknown-bm25-durability
+    text: >-
+      How much of BM25's durability is the model itself and how much is that it is
+      the tuned baseline everything else is measured against
+    kind: unknown
