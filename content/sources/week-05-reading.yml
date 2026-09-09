@@ -1,0 +1,343 @@
+# Week 5's reading, recorded properly.
+#
+# Note what this file has to be honest about: the technique the labs build is
+# not the technique the field uses. Latent semantic analysis is the direct
+# ancestor of modern embeddings and it is a 1990 method fitted on 266 chunks.
+# The claims below separate what the labs demonstrate from what is asserted
+# about trained models, and day 3's second article does the same for students.
+
+system: Week 5 reading — vector space, dimensionality reduction, comparison, and ANN
+
+sources:
+  - id: salton-1975
+    title: A Vector Space Model for Automatic Indexing
+    url: https://dl.acm.org/doi/10.1145/361219.361220
+    publisher: Communications of the ACM
+    author: Salton, Wong and Yang
+    kind: paper
+    tier: 1
+    published: 1975
+    retrieved: 2026-09-09
+    manual: true
+    note: >-
+      Documents as weighted term vectors, similarity as an angle. ACM blocks
+      automated retrieval, so this was read by hand.
+
+  - id: deerwester-1990
+    title: Indexing by Latent Semantic Analysis
+    url: https://asistdl.onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-4571(199009)41:6%3C391::AID-ASI1%3E3.0.CO;2-9
+    publisher: Journal of the American Society for Information Science
+    author: Deerwester, Dumais, Furnas, Landauer and Harshman
+    kind: paper
+    tier: 1
+    published: 1990
+    retrieved: 2026-09-09
+    manual: true
+    note: >-
+      The technique week 5's labs build, proposed specifically to address
+      vocabulary mismatch. Wiley blocks automated retrieval.
+
+  - id: mrs-irbook
+    title: Introduction to Information Retrieval
+    url: https://nlp.stanford.edu/IR-book/
+    publisher: Cambridge University Press
+    author: Manning, Raghavan and Schütze
+    kind: book
+    tier: 2
+    published: 2008
+    retrieved: 2026-09-09
+    note: Chapter 6 for the vector space model and cosine; chapter 18 for LSI.
+
+  - id: furnas-1987
+    title: The vocabulary problem in human-system communication
+    url: https://dl.acm.org/doi/10.1145/32206.32212
+    publisher: Communications of the ACM
+    author: Furnas, Landauer, Gomez and Dumais
+    kind: paper
+    tier: 1
+    published: 1987
+    retrieved: 2026-09-09
+    manual: true
+
+  - id: mikolov-2013
+    title: Efficient Estimation of Word Representations in Vector Space
+    url: https://arxiv.org/abs/1301.3781
+    publisher: arXiv
+    author: Mikolov, Chen, Corrado and Dean
+    kind: paper
+    tier: 1
+    published: 2013
+    retrieved: 2026-09-09
+    note: >-
+      Where the distributional line of work went. Cited for the shared premise —
+      co-occurrence — rather than for the architecture.
+
+  - id: dpr-2020
+    title: Dense Passage Retrieval for Open-Domain Question Answering
+    url: https://arxiv.org/abs/2004.04906
+    publisher: arXiv
+    author: Karpukhin et al.
+    kind: paper
+    tier: 1
+    published: 2020
+    retrieved: 2026-09-09
+    note: Trained dual encoders for retrieval, and what supervision buys over unsupervised methods.
+
+  - id: mteb-2022
+    title: "MTEB: Massive Text Embedding Benchmark"
+    url: https://arxiv.org/abs/2210.07316
+    publisher: arXiv
+    author: Muennighoff, Tazi, Magne and Reimers
+    kind: paper
+    tier: 1
+    published: 2022
+    retrieved: 2026-09-09
+    note: Modern embedding models compared across tasks, at the dimensionalities they ship at.
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-09
+    note: >-
+      Lexical and dense trade places by dataset, with lexical stronger on
+      exact-match and entity-heavy queries. The evidence for week 6 existing.
+
+  - id: hnsw-2016
+    title: "Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs"
+    url: https://arxiv.org/abs/1603.09320
+    publisher: arXiv
+    author: Malkov and Yashunin
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+    note: The index most vector databases actually use, and the definition of ANN recall.
+
+  - id: pq-2011
+    title: Product Quantization for Nearest Neighbor Search
+    url: https://ieeexplore.ieee.org/document/5432202
+    publisher: IEEE TPAMI
+    author: Jégou, Douze and Schmid
+    kind: paper
+    tier: 1
+    published: 2011
+    retrieved: 2026-09-09
+    manual: true
+    note: Inverted files plus compression — the structure week 5's lab builds, minus the compression.
+
+  - id: faiss-docs
+    title: FAISS documentation
+    url: https://faiss.ai/
+    publisher: Meta AI Research
+    kind: documentation
+    tier: 1
+    undated: true
+    retrieved: 2026-09-09
+    conflict: true
+    conflict_note: >-
+      Published by the team that builds FAISS. Cited for what the implementations
+      do and how they report recall, not for comparative claims.
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Smucker, Allan and Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-09
+    manual: true
+
+claims:
+  - id: w5-vector-space-model
+    text: >-
+      The vector space model represents documents as weighted term vectors and
+      compares them by the cosine of the angle between them
+    kind: known
+    sources: [salton-1975, mrs-irbook]
+
+  - id: w5-lsa-is-truncated-svd
+    text: >-
+      Latent semantic analysis is a truncated singular value decomposition of a
+      term-document matrix, proposed to address vocabulary mismatch
+    kind: known
+    sources: [deerwester-1990, mrs-irbook]
+
+  - id: w5-lsa-dimensions-empirical
+    text: LSA dimension counts are chosen empirically rather than derived
+    kind: known
+    sources: [deerwester-1990]
+
+  - id: w5-distributional-premise
+    text: >-
+      Distributional methods including word2vec rest on co-occurrence statistics,
+      the same premise as LSA
+    kind: known
+    sources: [mikolov-2013, deerwester-1990]
+
+  - id: w5-supervision-helps
+    text: >-
+      Trained dual encoders improve retrieval over unsupervised methods when
+      supervision is available
+    kind: known
+    sources: [dpr-2020]
+
+  - id: w5-dense-loses-on-exact-match
+    text: >-
+      Dense retrievers underperform BM25 on several datasets, particularly
+      entity-heavy and exact-match queries
+    kind: known
+    sources: [beir-2021]
+
+  - id: w5-models-ship-at-fixed-dims
+    text: Deployed embedding models ship at fixed dimensionalities
+    kind: known
+    sources: [mteb-2022]
+
+  - id: w5-ann-recall-definition
+    text: >-
+      ANN recall is defined as agreement with exhaustive search over the same
+      vectors — a property of the index rather than of relevance
+    kind: known
+    sources: [hnsw-2016, faiss-docs]
+
+  - id: w5-graph-beats-partition
+    text: >-
+      Graph-based ANN indexes achieve better recall per comparison than
+      partition-based ones, at higher memory cost
+    kind: known
+    sources: [hnsw-2016, pq-2011]
+
+  - id: w5-vocabulary-agreement
+    text: >-
+      Two people spontaneously choosing a word for the same thing agree 10 to 20
+      percent of the time
+    kind: known
+    sources: [furnas-1987]
+
+  - id: w5-comparison-needs-power
+    text: >-
+      Establishing that one retrieval system beats another requires paired
+      testing at adequate sample size, and careless comparison has inflated
+      published results
+    kind: known
+    sources: [smucker-2007, lin-neural-hype]
+
+  - id: w5-geometry-transfers
+    text: >-
+      The geometry, the dimensionality trade, the comparison machinery and the
+      ANN mechanics transfer unchanged from LSA to a trained embedding model;
+      corpus-bounded vocabulary does not
+    kind: inferred
+    sources: [deerwester-1990, dpr-2020, beir-2021]
+    note: >-
+      Ours. Argued from what each technique depends on rather than measured — this
+      course cannot run a trained model, which is precisely the limitation the
+      claim is about.
+
+  - id: w5-variance-is-not-relevance
+    text: >-
+      Variance kept is the wrong criterion for choosing a dimension count,
+      because the directions explaining most variance describe what the corpus is
+      mostly about rather than what distinguishes its documents
+    kind: inferred
+    sources: [deerwester-1990]
+    note: Ours; the two curves disagree in week 5's day-2 lab.
+
+  - id: w5-headroom-before-fusion
+    text: >-
+      Measuring the oracle headroom between two retrievers should precede any
+      attempt to fuse them, since fusion cannot exceed the oracle
+    kind: inferred
+    sources: [beir-2021]
+    note: Ours. The derivation is trivial; the discipline of doing it first is the contribution.
+
+  - id: w5-strongest-axis-is-document-identity
+    text: >-
+      On a small corpus the strongest latent directions encode document identity
+      rather than topic
+    kind: inferred
+    sources: [deerwester-1990]
+    note: Observed on this corpus in week 5's lab; the generalisation is ours.
+
+  - id: w5-orthogonal-without-shared-terms
+    text: >-
+      Two texts sharing no term have a term-vector cosine of exactly zero,
+      identical to two unrelated texts, so the representation cannot distinguish
+      unrelated from differently-worded
+    kind: derived
+
+  - id: w5-oov-is-zero
+    text: >-
+      A term absent from the corpus has no column in the matrix, so it cannot
+      contribute to a projected query and its dense similarity to anything is
+      exactly zero
+    kind: derived
+
+  - id: w5-unit-vectors-collapse-metrics
+    text: >-
+      For unit-length vectors the squared Euclidean distance is 2 minus twice the
+      dot product, so ranking by distance and by cosine are identical
+    kind: derived
+
+  - id: w5-chunking-changed-idf
+    text: >-
+      Computing idf over chunks rather than documents changes every term weight,
+      so a parameter tuning performed at document granularity is no longer valid
+    kind: derived
+
+  - id: w5-ivf-can-be-slower
+    text: >-
+      An inverted-file search at full nprobe performs N plus n_lists comparisons,
+      which exceeds brute force's N, so an exhaustively probed index is strictly
+      slower than not having one
+    kind: derived
+
+  - id: w5-ann-bounds-system-recall
+    text: >-
+      An index that omits true neighbours can only reduce the answer recall of an
+      otherwise unchanged pipeline, so ANN recall bounds system recall from above
+    kind: derived
+
+  - id: w5-zero-headroom-ambiguous
+    text: >-
+      Whether the zero fusion headroom measured on nine queries reflects genuine
+      redundancy between these two retrievers or merely the sample size. The two
+      cannot be distinguished at n=9
+    kind: unknown
+
+  - id: w5-unknown-ann-crossover
+    text: >-
+      The corpus size at which an approximate index starts paying for itself. It
+      depends on dimensions, hardware and latency budget, and is exactly the
+      number vendor benchmarks do not report
+    kind: unknown
+
+  - id: w5-unknown-ann-cost-in-production
+    text: >-
+      How much answer recall a typical production ANN configuration costs. It is
+      measurable in an afternoon with an answer-span eval set and we have never
+      seen it reported
+    kind: unknown
+
+  - id: w5-unknown-unnormalised-vectors
+    text: >-
+      How often production systems query unnormalised vectors with an
+      inner-product metric, silently ranking by length
+    kind: unknown

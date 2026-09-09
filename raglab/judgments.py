@@ -36,6 +36,17 @@ class Query:
     split: str
     judgments: dict[str, int] = field(default_factory=dict)
     note: str = ""
+    family: str = ""
+    """The query shape this belongs to — `identifier`, `vocabulary-gap`,
+    `paraphrase`, `superseded`, `acronym`, `multi-document`, `negation`,
+    `out-of-scope`, `plain`.
+
+    Added in week 5. A mean over a mixed query set hides that two retrievers can
+    score identically and be good at completely different things, and on a small
+    eval set the family table is more stable than the mean — it aggregates over
+    the thing that actually varies.
+    """
+
     answer_spans: tuple[str, ...] = ()
     """Verbatim strings from the corpus that constitute the answer.
 
@@ -151,6 +162,7 @@ def load(name: str = DEFAULT_SET, root: Path | None = None) -> QuerySet:
                 note=entry.get("note", ""),
                 unanswerable=bool(entry.get("unanswerable", False)),
                 answer_spans=tuple(entry.get("answer_spans", []) or []),
+                family=entry.get("family", ""),
             )
         )
     return out

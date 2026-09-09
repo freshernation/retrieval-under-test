@@ -89,9 +89,13 @@ sources:
     tier: 1
     published: 1980
     retrieved: 2026-09-09
+    manual: true
     note: >-
       The algorithm from its author, including his own account of what it
-      conflates that it should not.
+      conflates that it should not. Marked `manual` because tartarus.org was
+      reachable when this was read and unreachable when the URL check was next
+      run — a single-maintainer site, which is a real provenance risk for a
+      primary source and worth noticing rather than papering over.
 
   - id: furnas-1987
     title: The vocabulary problem in human-system communication

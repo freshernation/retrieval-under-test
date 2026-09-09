@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 32 |
-| **Weeks covered** | 1–4 |
+| **Articles** | 40 |
+| **Weeks covered** | 1–5 |
 | **Weeks planned** | 12 |
 
 ---
@@ -84,6 +84,18 @@ much.
 
 ---
 
-## Weeks 5–12
+## Week 5 — Embeddings, and what they are actually better at
+
+**Day 1** · [One axis per word](week-05/day-1/one-axis-per-word.md) · [Cosine, and why not the dot product](week-05/day-1/cosine.md)
+
+**Day 2** · [Factorising a corpus](week-05/day-2/factorising-a-corpus.md) · [How many dimensions](week-05/day-2/how-many-dimensions.md)
+
+**Day 3** · ["Which is better" is the wrong question](week-05/day-3/the-wrong-question.md) · [What transfers from LSA to a real model](week-05/day-3/what-transfers.md)
+
+**Day 4** · [Avoiding the scan](week-05/day-4/avoiding-the-scan.md) · [Two recalls, multiplied](week-05/day-4/two-recalls.md)
+
+---
+
+## Weeks 6–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.
