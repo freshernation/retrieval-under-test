@@ -15,13 +15,17 @@ DOCS = {d.id: d.title + "\n" + d.text for d in CORPUS}
 QUERIES = raglab.judgments.load()
 DEV = QUERIES.split("dev")
 
-CHUNKERS = {
-    "whole documents": Chunker("whole"),
-    "fixed 400": Chunker("fixed", size=400, overlap=0),
-    "fixed 200/25": Chunker("fixed", size=200, overlap=25),
-    "sections 100-300": Chunker("sections", min_words=100, max_words=300),
-    "sections 60-150": Chunker("sections", min_words=60, max_words=150),
-}
+@cache
+def chunkers():
+    """Lazy, so an unwritten `Chunker` fails these tests individually rather
+    than stopping the week from collecting."""
+    return {
+        "whole documents": Chunker("whole"),
+        "fixed 400": Chunker("fixed", size=400, overlap=0),
+        "fixed 200/25": Chunker("fixed", size=200, overlap=25),
+        "sections 100-300": Chunker("sections", min_words=100, max_words=300),
+        "sections 60-150": Chunker("sections", min_words=60, max_words=150),
+    }
 
 
 def bm25_rank(query: str, chunks: dict[str, str], k: int) -> list[str]:
@@ -53,7 +57,7 @@ def _index(frozen: tuple):
 
 @cache
 def measured():
-    return frontier(CHUNKERS, DOCS, DEV, bm25_rank)
+    return frontier(chunkers(), DOCS, DEV, bm25_rank)
 
 
 # -- the chunker --------------------------------------------------------------
@@ -120,7 +124,7 @@ def test_orphans_are_found_when_documents_are_given():
 
 def test_the_frontier_discards_most_of_the_options():
     points, front = measured()
-    assert len(points) == len(CHUNKERS) * 4
+    assert len(points) == len(chunkers()) * 4
     assert len(front) < len(points) / 3
 
 
