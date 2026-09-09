@@ -44,21 +44,25 @@ def _index(frozen_chunks: tuple):
     return Index(dict(frozen_chunks), stopwords=None)
 
 
-CONFIGS = {
-    "whole documents": DOCS,
-    "fixed 800": chunk_corpus(DOCS, 800),
-    "fixed 400": chunk_corpus(DOCS, 400),
-    "fixed 200/25": chunk_corpus(DOCS, 200, 25),
-    "sections 100-300": section_corpus(DOCS, 100, 300),
-    "sections 60-150": section_corpus(DOCS, 60, 150),
-}
+@cache
+def configs():
+    """Lazy — days 1 and 3 may not be written yet, and that should fail these
+    tests individually rather than stop the week from collecting."""
+    return {
+        "whole documents": DOCS,
+        "fixed 800": chunk_corpus(DOCS, 800),
+        "fixed 400": chunk_corpus(DOCS, 400),
+        "fixed 200/25": chunk_corpus(DOCS, 200, 25),
+        "sections 100-300": section_corpus(DOCS, 100, 300),
+        "sections 60-150": section_corpus(DOCS, 60, 150),
+    }
 
 
 @cache
 def frontier_points():
     return [
         measure(chunks, DEV, bm25_rank, name, k)
-        for name, chunks in CONFIGS.items()
+        for name, chunks in configs().items()
         for k in (1, 3, 5, 10)
     ]
 
