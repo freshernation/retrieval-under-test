@@ -1,0 +1,319 @@
+# Week 6's reading, recorded properly.
+
+system: Week 6 reading — score normalisation, rank fusion, verdicts, and filters
+
+sources:
+  - id: rrf-2009
+    title: "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods"
+    url: https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf
+    publisher: SIGIR
+    author: Cormack, Clarke and Buettcher
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-09
+    note: >-
+      Four pages. The formula, the experiments, and the origin of c=60 — chosen
+      for fusing many TREC submissions of varying quality, which is not the
+      setting most people apply it in.
+
+  - id: bm25-foundations
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf
+    publisher: Foundations and Trends in Information Retrieval
+    author: Robertson and Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-09
+
+  - id: mrs-irbook
+    title: Introduction to Information Retrieval
+    url: https://nlp.stanford.edu/IR-book/
+    publisher: Cambridge University Press
+    author: Manning, Raghavan and Schütze
+    kind: book
+    tier: 2
+    published: 2008
+    retrieved: 2026-09-09
+
+  - id: opensearch-docs
+    title: OpenSearch documentation
+    url: https://opensearch.org/docs/latest/
+    publisher: OpenSearch
+    kind: documentation
+    tier: 1
+    undated: true
+    retrieved: 2026-09-09
+    note: RRF as shipped, with its defaults, and hybrid query construction.
+
+  - id: lucene-query-syntax
+    title: Lucene classic query parser syntax
+    url: https://lucene.apache.org/core/9_9_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html
+    publisher: Apache Lucene
+    kind: documentation
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+
+  - id: hnsw-2016
+    title: "Efficient and robust approximate nearest neighbor search using HNSW graphs"
+    url: https://arxiv.org/abs/1603.09320
+    publisher: arXiv
+    author: Malkov and Yashunin
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+    note: Why restricting a graph search to a metadata subset is hard.
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-09
+
+  - id: furnas-1987
+    title: The vocabulary problem in human-system communication
+    url: https://dl.acm.org/doi/10.1145/32206.32212
+    publisher: Communications of the ACM
+    author: Furnas, Landauer, Gomez and Dumais
+    kind: paper
+    tier: 1
+    published: 1987
+    retrieved: 2026-09-09
+    manual: true
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Smucker, Allan and Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-09
+    manual: true
+
+  - id: trec-overview
+    title: TREC publications and overview papers
+    url: https://trec.nist.gov/pubs.html
+    publisher: NIST
+    tier: 1
+    undated: true
+    retrieved: 2026-09-09
+    note: Topic sets versioned per collection; results never pooled across them.
+
+  - id: voorhees-trec8
+    title: Overview of the Eighth Text REtrieval Conference (TREC-8)
+    url: https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf
+    publisher: NIST
+    author: Voorhees and Harman
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-09-09
+
+  - id: rfc2026
+    title: "The Internet Standards Process -- Revision 3"
+    url: https://www.rfc-editor.org/rfc/rfc2026.txt
+    publisher: IETF
+    author: Scott Bradner
+    kind: standard
+    tier: 1
+    published: 1996
+    retrieved: 2026-09-09
+
+  - id: rfc7322
+    title: RFC Style Guide
+    url: https://www.rfc-editor.org/rfc/rfc7322.txt
+    publisher: IETF
+    author: Flanagan and Ginoza
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-09
+
+claims:
+  - id: w6-rrf-uses-ranks-only
+    text: >-
+      Reciprocal rank fusion combines rankings using only positions, and
+      outperformed the score-combination and learned methods its authors tested
+    kind: known
+    sources: [rrf-2009]
+
+  - id: w6-c60-origin
+    text: >-
+      RRF's c=60 was chosen for fusing many TREC submissions of varying quality,
+      and is the default in deployed implementations
+    kind: known
+    sources: [rrf-2009, opensearch-docs]
+
+  - id: w6-score-scales
+    text: >-
+      BM25 scores are unbounded sums of per-term contributions while cosine is
+      bounded in [-1, 1], so the two are not on a common scale
+    kind: known
+    sources: [bm25-foundations, mrs-irbook]
+
+  - id: w6-filters-alongside-ranking
+    text: >-
+      Production engines expose boolean filters alongside a ranking model rather
+      than as the scoring function
+    kind: known
+    sources: [lucene-query-syntax, mrs-irbook]
+
+  - id: w6-graph-filtering-is-hard
+    text: >-
+      Graph-based approximate indexes cannot straightforwardly restrict search to
+      a metadata subset, because the graph was built over the whole corpus
+    kind: known
+    sources: [hnsw-2016]
+
+  - id: w6-collections-are-versioned
+    text: >-
+      Evaluation collections are versioned and results are reported per
+      collection rather than pooled across them
+    kind: known
+    sources: [trec-overview, voorhees-trec8]
+
+  - id: w6-weak-baseline-inflation
+    text: >-
+      Comparing a new system against a weak or single baseline inflated a
+      substantial share of published information-retrieval improvements
+    kind: known
+    sources: [lin-neural-hype, smucker-2007]
+
+  - id: w6-vocabulary-agreement
+    text: >-
+      Two people spontaneously choosing a word for the same thing agree 10 to 20
+      percent of the time
+    kind: known
+    sources: [furnas-1987]
+
+  - id: w6-dense-closes-gap-sometimes
+    text: >-
+      Dense retrieval closes the vocabulary gap on some datasets and not others
+    kind: known
+    sources: [beir-2021]
+
+  - id: w6-supersession-is-metadata
+    text: >-
+      Supersession is a formal relation declared in document metadata, which is
+      what makes a currency filter possible
+    kind: known
+    sources: [rfc2026, rfc7322]
+
+  - id: w6-new-instrument
+    text: >-
+      An eval set that grows is a new instrument rather than a corrected one, so
+      it should be versioned as a separate file and earlier results declared
+      incomparable
+    kind: inferred
+    sources: [trec-overview]
+    note: >-
+      Ours. Extends TREC's per-collection reporting convention to the case of a
+      practitioner growing their own set mid-project.
+
+  - id: w6-beats-all-must-be-strict
+    text: >-
+      A fusion should ship only when it strictly beats every input at the
+      deployment k, since a tie buys infrastructure and latency for nothing
+    kind: inferred
+    sources: [lin-neural-hype, rrf-2009]
+
+  - id: w6-post-filter-compounds-ann-loss
+    text: >-
+      Post-filtering over approximate candidates compounds two unreported recall
+      losses, and deepening the shortlist cannot fix the first
+    kind: inferred
+    sources: [hnsw-2016]
+
+  - id: w6-filter-after-fusion
+    text: >-
+      A filter should be applied after fusion rather than to each input, because
+      filtering the inputs separately makes each rank a rank within a different
+      population
+    kind: inferred
+    sources: [rrf-2009]
+
+  - id: w6-lsa-cannot-bridge-absent-vocabulary
+    text: >-
+      Latent semantic analysis fails a paraphrase whose connecting vocabulary is
+      absent from the corpus, and a trained embedding model would plausibly
+      succeed
+    kind: inferred
+    sources: [beir-2021, furnas-1987]
+    note: >-
+      The first half follows from the method. The second is a prediction this
+      course cannot test, and it is the strongest argument available here for
+      using a trained model in production.
+
+  - id: w6-summing-incompatible-scales
+    text: >-
+      Summing scores whose scales differ by an order of magnitude produces a
+      ranking determined by the larger-scaled input alone
+    kind: derived
+
+  - id: w6-flattening-ratio
+    text: >-
+      RRF's first-versus-tenth contribution ratio is (c+10)/(c+1), so c=60 makes
+      first place worth 1.15 times tenth and c=1 makes it worth 5.5 times
+    kind: derived
+
+  - id: w6-fusion-ceiling
+    text: >-
+      Fusion cannot retrieve a query none of its inputs retrieved, since such a
+      query lies outside the oracle
+    kind: derived
+
+  - id: w6-post-filter-safety
+    text: >-
+      Post-filtering returns fewer than k results unless the shortlist depth
+      times the survival rate substantially exceeds k
+    kind: derived
+
+  - id: w6-filtered-measurement
+    text: >-
+      A filtered system must be measured against what the filter permits, since
+      answers outside the filter's scope are unreachable by construction
+    kind: derived
+
+  - id: w6-unknown-modern-c
+    text: >-
+      What a good default RRF constant would be for a modern lexical-plus-dense
+      pair. The 2009 value has not, as far as we can find, been re-derived
+    kind: unknown
+
+  - id: w6-unknown-score-aware-fusion
+    text: >-
+      Whether a well-designed score-aware fusion beats RRF on modern retrievers.
+      The comparison is old and the retrievers have changed
+    kind: unknown
+
+  - id: w6-unknown-filtered-ann-cost
+    text: >-
+      How much recall filtered vector search costs across vendors. It is
+      measurable and we have not found it published
+    kind: unknown
+
+  - id: w6-unknown-headroom-attribution
+    text: >-
+      How much of this corpus's measured headroom is a property of the retrievers
+      and how much of the query set's deliberate design. They cannot be separated
+      here
+    kind: unknown

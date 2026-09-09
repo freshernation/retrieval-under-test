@@ -133,9 +133,19 @@ class QuerySet(list):
         raise KeyError(query_id)
 
 
-def load(name: str = DEFAULT_SET, root: Path | None = None) -> QuerySet:
-    """Load `data/gold/<name>/queries.yml`, validating grades and splits."""
-    path = (root or DATA_ROOT) / name / "queries.yml"
+def load(
+    name: str = DEFAULT_SET, root: Path | None = None, file: str = "queries.yml"
+) -> QuerySet:
+    """Load `data/gold/<name>/<file>`, validating grades and splits.
+
+    `file` exists because an eval set that grows is a **new instrument**, not a
+    corrected one, and results taken with the two are not comparable. Week 6
+    adds ten dev queries and loads `queries-extended.yml`; weeks 1 to 5 keep the
+    sixteen-query set they measured against. Editing one file in place would
+    have silently invalidated five weeks of numbers, which is the mistake this
+    parameter exists to make visible.
+    """
+    path = (root or DATA_ROOT) / name / file
     if not path.exists():
         raise FileNotFoundError(f"no queries at {path}")
     raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
