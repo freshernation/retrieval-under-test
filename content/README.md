@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 24 |
-| **Weeks covered** | 1–3 |
+| **Articles** | 32 |
+| **Weeks covered** | 1–4 |
 | **Weeks planned** | 12 |
 
 ---
@@ -72,6 +72,18 @@ much.
 
 ---
 
-## Weeks 4–12
+## Week 4 — Chunking, and what it is actually for
+
+**Day 1** · [Why chunk at all](week-04/day-1/why-chunk-at-all.md) · [The number with no source](week-04/day-1/the-number-with-no-source.md)
+
+**Day 2** · [An eval set is a model of the thing you measure](week-04/day-2/an-eval-set-is-a-model.md) · [Overlap, and how much is enough](week-04/day-2/overlap.md)
+
+**Day 3** · [The document already told you](week-04/day-3/the-document-already-told-you.md) · [Semantically right, dimensionally useless](week-04/day-3/dimensionally-useless.md)
+
+**Day 4** · [Chunking is a cost decision](week-04/day-4/chunking-is-a-cost-decision.md) · [Choosing on a frontier](week-04/day-4/choosing-on-a-frontier.md)
+
+---
+
+## Weeks 5–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

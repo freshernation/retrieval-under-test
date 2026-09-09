@@ -36,6 +36,23 @@ class Query:
     split: str
     judgments: dict[str, int] = field(default_factory=dict)
     note: str = ""
+    answer_spans: tuple[str, ...] = ()
+    """Verbatim strings from the corpus that constitute the answer.
+
+    Document-level judgments cannot see chunking. Once the unit of retrieval is
+    a chunk, "did we retrieve the right document" stops being the question — a
+    chunk can come from exactly the right document and contain none of the
+    answer, and a chunk boundary can cut the answer in half so that **no chunk
+    contains it at any k**. Nothing at document granularity notices either.
+
+    A span is checked after collapsing whitespace, because chunking splits on
+    whitespace and rejoins with single spaces. It is deliberately verbatim and
+    deliberately short: you can find it by hand, and you can disagree with it.
+
+    Written in week 4, when the unit of retrieval changed. An eval set has to be
+    at the granularity of the thing you are measuring, and yours was not.
+    """
+
     unanswerable: bool = False
     """The corpus cannot answer this query, and the correct behaviour is a refusal.
 
@@ -53,6 +70,30 @@ class Query:
     def relevant(self) -> set[str]:
         """Document ids at grade >= 2."""
         return {d for d, g in self.judgments.items() if g >= RELEVANT_AT}
+
+    def spans_in(self, text: str) -> set[str]:
+        """Which of this query's answer spans appear in `text`.
+
+        Whitespace is collapsed on both sides first. Nothing else is normalised:
+        a span is a quotation, and a quotation that needed adjusting to match is
+        not evidence.
+        """
+        haystack = " ".join(text.split())
+        return {s for s in self.answer_spans if " ".join(s.split()) in haystack}
+
+    def is_answered_by(self, texts) -> bool:
+        """Whether these texts together contain **every** answer span.
+
+        Every, not any: r14 needs both halves of a superseded pair and neither
+        document contains the comparison. A system that returns one and stops
+        has produced a confident half-answer.
+        """
+        if not self.answer_spans:
+            return False
+        found: set[str] = set()
+        for text in texts:
+            found |= self.spans_in(text)
+        return found == set(self.answer_spans)
 
     def grade(self, doc_id: str) -> int:
         """The grade for a document, 0 for anything unjudged.
@@ -109,6 +150,7 @@ def load(name: str = DEFAULT_SET, root: Path | None = None) -> QuerySet:
                 judgments=judgments,
                 note=entry.get("note", ""),
                 unanswerable=bool(entry.get("unanswerable", False)),
+                answer_spans=tuple(entry.get("answer_spans", []) or []),
             )
         )
     return out
@@ -125,6 +167,12 @@ def check_against(queries: QuerySet, corpus) -> list[str]:
         for doc_id in q.judgments:
             if doc_id not in corpus:
                 problems.append(f"{q.id}: judges {doc_id!r}, which is not in the corpus")
+        if q.unanswerable and q.answer_spans:
+            problems.append(f"{q.id}: marked unanswerable but carries answer spans")
+        if q.answer_spans and not q.relevant:
+            problems.append(
+                f"{q.id}: has answer spans but no document graded >= {RELEVANT_AT}"
+            )
         if q.unanswerable and q.relevant:
             problems.append(
                 f"{q.id}: marked unanswerable but grades {sorted(q.relevant)} at "
