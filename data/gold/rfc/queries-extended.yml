@@ -1,15 +1,18 @@
-# The gold query set: 16 queries, graded judgments, 10 dev / 6 test.
+# The extended query set: 26 queries, 20 dev / 6 test.
 #
-# Grades: 0 irrelevant · 1 related but does not answer · 2 answers it ·
-#         3 answers it completely, on its own
+# The sixteen from `queries.yml`, plus ten more dev queries added in week 6.
 #
-# Every grade here was written by reading the document. Where a grade is
-# arguable — and several are — the note says what the argument is, because a
-# judgment whose reasoning is not written down is a judgment you cannot
-# reproduce, including by yourself in three weeks.
+# Why a second file rather than an edit: weeks 1 to 5 measured a great many
+# things against the sixteen-query set, and changing it underneath them would
+# silently invalidate every number in those weeks. An eval set is an instrument;
+# growing one is a new instrument, not a corrected one, and results taken with
+# the two are not comparable. Keeping both files is what makes that visible.
 #
-# You can check every one of these by hand. That is the point of a ten-document
-# corpus: open the RFC, search for the term, and disagree with us if you like.
+# Load it explicitly:
+#
+#     queries = raglab.judgments.load(file="queries-extended.yml")
+#
+# From week 6 onward this is the set the labs use.
 
 queries:
 
@@ -186,6 +189,136 @@ queries:
       rfc-8615: 0
       rfc-6265: 0
 
+
+  # ------------------------------------------------- dev, added in week 6
+  #
+  # Ten more dev queries, written because week 5 could not measure what week 6
+  # is about. On nine answerable queries the fusion headroom between lexical and
+  # dense retrieval was zero at every k — not because the two are redundant, but
+  # because complementarity involving one or two queries in each direction is
+  # invisible at that sample size.
+  #
+  # This is the course taking its own advice, on schedule, having hit exactly the
+  # wall week 3's milestone warned about. They are chosen to stress the two
+  # retrievers in opposite directions: bare identifiers, which lexical retrieval
+  # is not merely competitive on but correct, and paraphrases sharing almost no
+  # vocabulary with the corpus.
+
+  - id: r17
+    family: identifier
+    text: "428"
+    split: dev
+    answer_spans:
+      - "The 428 status code indicates that the origin server requires the request to be conditional"
+    judgments:
+      rfc-6585: 3
+      rfc-7725: 0
+      rfc-2324: 0
+
+  - id: r18
+    family: identifier
+    text: 431 request header fields too large
+    split: dev
+    answer_spans:
+      - "The 431 status code indicates that the server is unwilling to process the request because its header fields are too large"
+    judgments:
+      rfc-6585: 3
+      rfc-6265: 1
+      rfc-3986: 0
+
+  - id: r19
+    family: paraphrase
+    text: how do I stop search engines indexing my site
+    split: dev
+    note: >-
+      "Search engines" and "indexing" appear nowhere in the answering document,
+      which says "crawlers" and "access". A paraphrase with almost no lexical
+      overlap.
+    answer_spans:
+      - "These lines indicate whether accessing a URI that matches the corresponding path is allowed or disallowed"
+    judgments:
+      rfc-9309: 3
+      rfc-7725: 1
+      rfc-3986: 0
+
+  - id: r20
+    family: paraphrase
+    text: what part of a web address comes after the hash
+    split: dev
+    note: '"Web address" for URI, "hash" for the # character and the fragment component.'
+    answer_spans:
+      - "The fragment identifier component of a URI allows indirect identification of a secondary resource"
+    judgments:
+      rfc-3986: 3
+      rfc-8615: 1
+      rfc-6265: 0
+
+  - id: r21
+    family: vocabulary-gap
+    text: how does a server remember a visitor between page loads
+    split: dev
+    answer_spans:
+      - "To store state, the origin server includes a Set-Cookie header in an HTTP response"
+    judgments:
+      rfc-6265: 3
+      rfc-3986: 0
+      rfc-9309: 0
+
+  - id: r22
+    family: vocabulary-gap
+    text: keeping a cookie from being sent over plain http
+    split: dev
+    answer_spans:
+      - 'The Secure attribute limits the scope of the cookie to "secure" channels'
+    judgments:
+      rfc-6265: 3
+      rfc-7725: 0
+      rfc-3986: 0
+
+  - id: r23
+    family: plain
+    text: what is a name value pair in JSON called
+    split: dev
+    answer_spans:
+      - "An object is an unordered collection of zero or more name/value pairs"
+    judgments:
+      rfc-8259: 3
+      rfc-7159: 2
+      rfc-3986: 0
+
+  - id: r24
+    family: plain
+    text: which specification defines the scheme part of a URI
+    split: dev
+    answer_spans:
+      - "Each URI begins with a scheme name, as defined in Section 3.1"
+    judgments:
+      rfc-3986: 3
+      rfc-8615: 1
+      rfc-6585: 0
+
+  - id: r25
+    family: plain
+    text: user agent line in robots.txt
+    split: dev
+    answer_spans:
+      - 'product token MUST contain only uppercase and lowercase letters'
+    judgments:
+      rfc-9309: 3
+      rfc-6265: 0
+      rfc-3986: 0
+
+  - id: r26
+    family: paraphrase
+    text: conditional request required status code
+    split: dev
+    note: The paraphrase pair to r17. Same answer, no identifier in the query.
+    answer_spans:
+      - 'Its typical use is to avoid the "lost update" problem'
+    judgments:
+      rfc-6585: 3
+      rfc-7725: 1
+      rfc-9309: 0
 
   # ---------------------------------------------------------------- test
 

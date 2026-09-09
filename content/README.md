@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 40 |
-| **Weeks covered** | 1–5 |
+| **Articles** | 48 |
+| **Weeks covered** | 1–6 |
 | **Weeks planned** | 12 |
 
 ---
@@ -96,6 +96,18 @@ much.
 
 ---
 
-## Weeks 6–12
+## Week 6 — Hybrid, and what fusion can and cannot do
+
+**Day 1** · [Growing an eval set is a new instrument](week-06/day-1/a-new-instrument.md) · [Two kinds of number](week-06/day-1/two-kinds-of-number.md)
+
+**Day 2** · [Reciprocal rank fusion](week-06/day-2/reciprocal-rank-fusion.md) · [Another default from somebody else's corpus](week-06/day-2/another-default.md)
+
+**Day 3** · [Compared to what](week-06/day-3/compared-to-what.md) · [What fusion cannot conjure](week-06/day-3/what-fusion-cannot-conjure.md)
+
+**Day 4** · [Before or after](week-06/day-4/before-or-after.md) · [A filter is a requirement, not a defect](week-06/day-4/a-filter-is-a-requirement.md)
+
+---
+
+## Weeks 7–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.
