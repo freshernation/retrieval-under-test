@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 48 |
-| **Weeks covered** | 1–6 |
+| **Articles** | 56 |
+| **Weeks covered** | 1–7 |
 | **Weeks planned** | 12 |
 
 ---
@@ -108,6 +108,18 @@ much.
 
 ---
 
-## Weeks 7–12
+## Week 7 — Ranking and the context budget
+
+**Day 1** · [What a reranker is](week-07/day-1/what-a-reranker-is.md) · [Better, not merely different](week-07/day-1/better-not-different.md)
+
+**Day 2** · [Five results, two documents](week-07/day-2/five-results-two-documents.md) · [A metric that cannot see it](week-07/day-2/a-metric-that-cannot-see-it.md)
+
+**Day 3** · [k was never a budget](week-07/day-3/k-was-never-a-budget.md) · [Answer density](week-07/day-3/answer-density.md)
+
+**Day 4** · [Lost in the middle](week-07/day-4/lost-in-the-middle.md) · [Stipulated models](week-07/day-4/stipulated-models.md)
+
+---
+
+## Weeks 8–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

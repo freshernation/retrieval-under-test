@@ -1,0 +1,300 @@
+# Week 7's reading, recorded properly.
+#
+# One source in this week is used as a *stipulated model* rather than as
+# evidence: Liu et al.'s positional finding supplies the shape of day 4's
+# weighting, and the numbers are ours and are not measured. The claims below
+# separate the two, and the week's fence forbids quoting a value.
+
+system: Week 7 reading — reranking, diversity, budgets, and position
+
+sources:
+  - id: nogueira-2019
+    title: Passage Re-ranking with BERT
+    url: https://arxiv.org/abs/1901.04085
+    publisher: arXiv
+    author: Nogueira and Cho
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+    note: >-
+      The cross-encoder reranker: query and passage scored jointly, trained on
+      large collections of human relevance judgments.
+
+  - id: liu-ltr
+    title: Learning to Rank for Information Retrieval
+    url: https://link.springer.com/book/10.1007/978-3-642-14267-3
+    publisher: Springer
+    author: Tie-Yan Liu
+    kind: book
+    tier: 2
+    published: 2011
+    retrieved: 2026-09-09
+    note: The feature-based tradition cross-encoders replaced, and what its features were.
+
+  - id: carbonell-1998
+    title: "The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries"
+    url: https://dl.acm.org/doi/10.1145/290941.291025
+    publisher: SIGIR
+    author: Carbonell and Goldstein
+    kind: paper
+    tier: 1
+    published: 1998
+    retrieved: 2026-09-09
+    manual: true
+    note: >-
+      MMR, with a single parameter trading relevance against novelty. ACM blocks
+      automated retrieval.
+
+  - id: clarke-2008
+    title: Novelty and Diversity in Information Retrieval Evaluation
+    url: https://dl.acm.org/doi/10.1145/1390334.1390446
+    publisher: SIGIR
+    author: Clarke et al.
+    kind: paper
+    tier: 1
+    published: 2008
+    retrieved: 2026-09-09
+    manual: true
+    note: >-
+      Why standard relevance metrics cannot reward novelty, and what a
+      diversity-aware metric requires. The source for week 7 day 2's central claim.
+
+  - id: lost-in-the-middle
+    title: "Lost in the Middle: How Language Models Use Long Contexts"
+    url: https://arxiv.org/abs/2307.03172
+    publisher: arXiv
+    author: Liu et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: >-
+      §4 is the multi-document QA setup — one answer-bearing document among
+      distractors, at controlled positions. Close to a RAG window and not
+      identical, which is why day 4 stipulates rather than measures.
+
+  - id: squad-2016
+    title: "SQuAD: 100,000+ Questions for Machine Comprehension of Text"
+    url: https://arxiv.org/abs/1606.05250
+    publisher: arXiv
+    author: Rajpurkar, Zhang, Lopyrev and Liang
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+
+  - id: broder-1997
+    title: On the resemblance and containment of documents
+    url: https://www.cs.princeton.edu/courses/archive/spr05/cos598E/bib/broder97resemblance.pdf
+    publisher: IEEE Compression and Complexity of Sequences
+    author: Andrei Broder
+    kind: paper
+    tier: 1
+    published: 1997
+    retrieved: 2026-09-09
+
+  - id: bm25-foundations
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf
+    publisher: Foundations and Trends in Information Retrieval
+    author: Robertson and Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-09
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-09
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-09
+
+claims:
+  - id: w7-cross-encoders-score-jointly
+    text: >-
+      Cross-encoder rerankers score query and passage jointly and are trained on
+      large collections of human relevance judgments
+    kind: known
+    sources: [nogueira-2019]
+
+  - id: w7-ltr-preceded-them
+    text: >-
+      Feature-based learning-to-rank preceded cross-encoders and used features of
+      the query-document pair
+    kind: known
+    sources: [liu-ltr]
+
+  - id: w7-reranking-helps-on-benchmarks
+    text: >-
+      Reranked pipelines improve over single-stage retrieval on several benchmark
+      datasets
+    kind: known
+    sources: [beir-2021, nogueira-2019]
+
+  - id: w7-mmr-parameter
+    text: >-
+      Maximal marginal relevance trades relevance against novelty with a single
+      parameter
+    kind: known
+    sources: [carbonell-1998]
+
+  - id: w7-standard-metrics-cannot-see-novelty
+    text: >-
+      Standard relevance metrics do not reward novelty; measuring diversity
+      requires metrics designed for it, which need aspect-level judgments
+    kind: known
+    sources: [clarke-2008]
+
+  - id: w7-position-effect
+    text: >-
+      Model performance on retrieving information from a long context is highest
+      at the beginning and end and lowest in the middle, across several models
+      and context lengths
+    kind: known
+    sources: [lost-in-the-middle]
+
+  - id: w7-position-setup
+    text: >-
+      The positional finding was measured with a single answer-bearing document
+      among distractors, at controlled positions, in a controlled multi-document
+      QA setup
+    kind: known
+    sources: [lost-in-the-middle]
+
+  - id: w7-answer-spans
+    text: Answer spans as verbatim substrings are a standard ground-truth construction
+    kind: known
+    sources: [squad-2016]
+
+  - id: w7-set-overlap
+    text: Set-overlap similarity is the standard cheap document comparison
+    kind: known
+    sources: [broder-1997]
+
+  - id: w7-bm25-is-derived
+    text: >-
+      BM25 derives from a probabilistic relevance model rather than being
+      assembled from heuristics, which is what a hand-built feature reranker is
+      competing against
+    kind: known
+    sources: [bm25-foundations]
+
+  - id: w7-reranker-must-be-better
+    text: >-
+      A reranker helps only when it encodes more evidence about relevance than
+      the retriever — through a richer view of the query-document pair, or more
+      supervision — and a hand-built feature set has neither
+    kind: inferred
+    sources: [nogueira-2019, bm25-foundations, lin-neural-hype]
+    note: Ours. Week 7 day 1's negative result is the evidence.
+
+  - id: w7-shortlist-depth-from-ceiling
+    text: >-
+      Shortlist depth should be chosen from the ceiling curve rather than by
+      convention, since a deeper shortlist beyond the point the ceiling flattens
+      costs proportionally more for no additional headroom
+    kind: inferred
+    sources: [nogueira-2019]
+
+  - id: w7-density-is-an-upper-bound
+    text: >-
+      Answer density is an upper bound on usefulness rather than a measure of it,
+      because a chunk containing the span is counted whole
+    kind: inferred
+    sources: [squad-2016]
+
+  - id: w7-stipulated-discipline
+    text: >-
+      A model whose parameters cannot be checked may be used to compare options
+      but its values must not be reported, and the comparison must be shown
+      invariant to the free parameter
+    kind: inferred
+    sources: [lost-in-the-middle]
+    note: >-
+      Ours. The same discipline weeks 3 and 4 applied to a k1 plateau and to chunk
+      size, stated generally. Week 7's fence enforces it and the report template
+      forbids quoting a stipulated score.
+
+  - id: w7-position-size-unknown-per-system
+    text: >-
+      The size of the positional effect in a given RAG system is unknown without
+      measuring it there, because prompt, window length, model and answer
+      multiplicity all differ from the published setting
+    kind: inferred
+    sources: [lost-in-the-middle]
+
+  - id: w7-reranking-ceiling
+    text: >-
+      Reranking cannot introduce a chunk the shortlist omitted, so answer recall
+      at the shortlist depth bounds any reranked result at any k
+    kind: derived
+
+  - id: w7-identity-alpha
+    text: >-
+      If a reranker's best blend weight is the identity, its contribution at
+      every other weight is negative
+    kind: derived
+
+  - id: w7-presence-metric-is-composition-blind
+    text: >-
+      A metric defined as "the answer is present in the top k" returns the same
+      value for every arrangement of the non-answer results, so it is invariant
+      to their redundancy
+    kind: derived
+
+  - id: w7-density-falls
+    text: >-
+      Once answered saturates, every additional word of context is
+      non-answer-bearing, so density falls monotonically with budget
+    kind: derived
+
+  - id: w7-k-is-not-a-budget
+    text: >-
+      With chunks ranging from 100 to 300 words, a fixed k corresponds to a word
+      budget varying by a factor of three across queries
+    kind: derived
+
+  - id: w7-skip-reorders-by-size
+    text: >-
+      Skipping a non-fitting chunk and taking a smaller one further down reorders
+      the window by size rather than by rank
+    kind: derived
+
+  - id: w7-unknown-crossencoder-vs-tuned-hybrid
+    text: >-
+      How much of the published cross-encoder gain survives against a tuned hybrid
+      baseline rather than a single-stage one
+    kind: unknown
+
+  - id: w7-unknown-diversity-value
+    text: >-
+      Whether diversity improves generated-answer quality on this corpus. It is
+      measurable from week 8 and is what day 2 should motivate
+    kind: unknown
+
+  - id: w7-unknown-density-quality-link
+    text: >-
+      The relationship between answer density and generated-answer quality. We
+      expect it to be strong and non-linear and have not measured it
+    kind: unknown
+
+  - id: w7-unknown-position-in-practice
+    text: >-
+      The position effect for the models, prompts and window sizes practitioners
+      actually use. Measurable per system in an afternoon from week 8 onward
+    kind: unknown
