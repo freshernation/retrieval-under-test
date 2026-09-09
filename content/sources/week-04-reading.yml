@@ -1,0 +1,290 @@
+# Week 4's reading, recorded properly.
+#
+# Read this file next to week 3's. That one cites a monograph, an authoritative
+# implementation, and fifty years of peer-reviewed work. This one opens with a
+# `no_sources_reason`, because the single most consequential decision in a RAG
+# system has no literature behind it at all.
+#
+# The sources below are real and none of them is about chunking. They support
+# the surrounding arguments — what a long context does, what an answer span is,
+# what the RFC format guarantees — and the chunking claims themselves are marked
+# `derived` from this course's own measurements or `unknown`.
+
+system: Week 4 reading — chunking, answer spans, and the coverage/cost frontier
+
+no_sources_reason: >-
+  There is no primary or foundational source for how to chunk a corpus. Every
+  widely repeated figure — 512 tokens, 1000 characters, 10% overlap — traces to a
+  default in an example notebook or to a tutorial citing another tutorial. This
+  course's SOURCES.md calls that Tier 4. The honest response is to say so, measure
+  it on the corpus at hand, and teach the procedure rather than the number. The
+  sources recorded below support the surrounding material; the chunking claims are
+  derived from measurements in week 4's labs, which are reproducible and are about
+  ten documents.
+
+sources:
+  - id: rag-2020
+    title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    url: https://arxiv.org/abs/2005.11401
+    publisher: arXiv
+    author: Lewis et al.
+    kind: paper
+    tier: 1
+    published: 2020
+    retrieved: 2026-09-09
+    note: >-
+      Retrieves passages rather than whole documents, and does not say how the
+      passages were chosen. The gap is four years old and still open.
+
+  - id: bm25-foundations
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf
+    publisher: Foundations and Trends in Information Retrieval
+    author: Stephen Robertson and Hugo Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-09-09
+    note: >-
+      §3.2 — length normalisation. The retrieval model's own answer to documents of
+      differing size, which chunking is frequently credited with.
+
+  - id: lost-in-the-middle
+    title: "Lost in the Middle: How Language Models Use Long Contexts"
+    url: https://arxiv.org/abs/2307.03172
+    publisher: arXiv
+    author: Liu et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-09
+    note: >-
+      Position within a long context changes how reliably information is used. The
+      reason context cost is not only money. Week 7 uses this properly.
+
+  - id: squad-2016
+    title: "SQuAD: 100,000+ Questions for Machine Comprehension of Text"
+    url: https://arxiv.org/abs/1606.05250
+    publisher: arXiv
+    author: Rajpurkar, Zhang, Lopyrev and Liang
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+    note: >-
+      Answers as verbatim substrings of a passage. The ground-truth construction
+      week 4's answer spans borrow.
+
+  - id: trec-overview
+    title: TREC publications and overview papers
+    url: https://trec.nist.gov/pubs.html
+    publisher: NIST
+    tier: 1
+    undated: true
+    retrieved: 2026-09-09
+    note: Passage-level judgment as an evaluation activity distinct from document-level.
+
+  - id: voorhees-trec8
+    title: Overview of the Eighth Text REtrieval Conference (TREC-8)
+    url: https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf
+    publisher: NIST
+    author: Voorhees and Harman
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-09-09
+
+  - id: beir-2021
+    title: "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models"
+    url: https://arxiv.org/abs/2104.08663
+    publisher: arXiv
+    author: Thakur et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-09
+    note: Retrieval results do not transfer between corpora — one level up from chunk sizes.
+
+  - id: anthropic-contextual
+    title: Introducing Contextual Retrieval
+    url: https://www.anthropic.com/news/contextual-retrieval
+    publisher: Anthropic
+    kind: engineering post
+    tier: 1
+    published: 2024
+    retrieved: 2026-09-09
+    conflict: true
+    conflict_note: >-
+      Published by Anthropic, who sell the model that performs the contextualisation
+      step the post recommends. It is a genuine experiment by the people who ran it,
+      and it is also a party to the question. We have found no independent
+      replication.
+    note: >-
+      Frequently the best available measurement on chunk handling, which is itself
+      the point of week 4's second article.
+
+  - id: rfc7322
+    title: RFC Style Guide
+    url: https://www.rfc-editor.org/rfc/rfc7322.txt
+    publisher: IETF
+    author: Heather Flanagan and Sandy Ginoza
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-09
+    note: §4 — the section numbering the heading regex depends on.
+
+  - id: rfc7994
+    title: Requirements for Plain-Text RFCs
+    url: https://www.rfc-editor.org/rfc/rfc7994.txt
+    publisher: IETF
+    author: Heather Flanagan
+    kind: standard
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-09
+
+  - id: docling-2024
+    title: Docling Technical Report
+    url: https://arxiv.org/abs/2408.09869
+    publisher: arXiv
+    author: Auer et al.
+    kind: paper
+    tier: 1
+    published: 2024
+    retrieved: 2026-09-09
+    conflict: true
+    conflict_note: IBM Research, benchmarking the extractor IBM releases.
+    note: Layout-aware extractors emit structure trees, making chunking a traversal.
+
+claims:
+  - id: w4-no-chunking-source
+    text: >-
+      There is no primary or foundational source establishing a chunk size, an
+      overlap, or a chunking strategy; the widely repeated figures are untraceable
+    kind: unknown
+
+  - id: w4-rag-retrieves-passages
+    text: >-
+      The original RAG architecture retrieves passages rather than whole documents,
+      without specifying how the passages are formed
+    kind: known
+    sources: [rag-2020]
+
+  - id: w4-length-normalisation-already-handles-length
+    text: >-
+      The retrieval model addresses documents of differing length through length
+      normalisation, independently of chunking
+    kind: known
+    sources: [bm25-foundations]
+
+  - id: w4-position-matters-in-long-contexts
+    text: >-
+      A language model's use of information in a long context varies with the
+      position of that information in the window
+    kind: known
+    sources: [lost-in-the-middle]
+
+  - id: w4-answer-spans-are-standard
+    text: >-
+      Recording an answer as a verbatim substring of a passage is an established
+      ground-truth construction
+    kind: known
+    sources: [squad-2016]
+
+  - id: w4-passage-judgment-is-distinct
+    text: >-
+      Passage-level relevance judgment is a distinct evaluation activity from
+      document-level judgment
+    kind: known
+    sources: [trec-overview, voorhees-trec8]
+
+  - id: w4-results-do-not-transfer
+    text: >-
+      Retrieval results measured on one corpus do not transfer to another, so a
+      configuration chosen elsewhere is not evidence about yours
+    kind: known
+    sources: [beir-2021]
+
+  - id: w4-rfc-headings
+    text: >-
+      RFC section numbering and heading conventions are specified by the publisher,
+      and the plain-text rendering preserves them
+    kind: known
+    sources: [rfc7322, rfc7994]
+
+  - id: w4-extractors-emit-trees
+    text: >-
+      Layout-aware extractors emit structure trees rather than flat text, which
+      makes structure-aware chunking a traversal rather than a pattern-matching job
+    kind: inferred
+    sources: [docling-2024]
+    note: >-
+      Downgraded from known: the source is the extractor's own technical report and
+      we have found no independent replication. Same treatment as week 2.
+
+  - id: w4-best-evidence-is-a-vendor-post
+    text: >-
+      The best publicly available measurement on chunk handling is published by a
+      party to the question, with no independent replication
+    kind: inferred
+    sources: [anthropic-contextual]
+    note: >-
+      Ours. It is a statement about the state of the literature rather than about
+      the technique, and it is the argument for measuring chunking yourself.
+
+  - id: w4-chunking-is-cost
+    text: >-
+      On this corpus, chunking never retrieved an answer that whole-document
+      retrieval missed; its entire measured value is a 23x reduction in context
+      words for identical answer coverage
+    kind: derived
+
+  - id: w4-boundaries-destroy-answers
+    text: >-
+      A chunk boundary falling inside an answer span removes that answer from the
+      index at every k, and no downstream stage can recover it
+    kind: derived
+
+  - id: w4-document-metrics-are-blind
+    text: >-
+      Document-level judgments cannot detect span destruction, and on this corpus
+      scored the overlap that repaired a destroyed answer as a regression
+    kind: derived
+
+  - id: w4-overlap-bound
+    text: >-
+      A span of L words survives a fixed chunking of size S whenever the overlap is
+      at least L-1, because every possible starting position then falls inside some
+      window containing the whole span
+    kind: derived
+
+  - id: w4-structure-has-no-size-guarantee
+    text: >-
+      Section structure gives correct boundaries and no size guarantee — in this
+      corpus sections range from 2 to 3,547 words — so packing is required
+    kind: derived
+
+  - id: w4-dominated-points
+    text: >-
+      A point dominated on both axes cannot be selected by any requirement, since
+      something exists that is at least as accurate and no more expensive
+    kind: derived
+
+  - id: w4-unknown-corpus-size-turnover
+    text: >-
+      The corpus size at which whole-document retrieval stops being viable. It
+      exists, it is not ten, and it cannot be located from ten documents
+    kind: unknown
+
+  - id: w4-unknown-span-sensitivity
+    text: >-
+      How sensitive a chunking comparison is to the exact answer spans chosen. We
+      expect substantially, and have not measured it
+    kind: unknown
+
+  - id: w4-unknown-tree-chunking-value
+    text: >-
+      How much better tree-based chunking from a layout-aware extractor is than
+      regex recovery from flat text
+    kind: unknown

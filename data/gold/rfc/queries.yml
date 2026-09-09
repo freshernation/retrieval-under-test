@@ -19,6 +19,8 @@ queries:
     text: what status code should I return when a client sends too many requests
     split: dev
     note: The control. A plain lookup with one obviously correct answer.
+    answer_spans:
+      - "The 429 status code indicates that the user has sent too many requests in a given amount of time"
     judgments:
       rfc-6585: 3
       rfc-9309: 1
@@ -34,6 +36,8 @@ queries:
       "rate limiting" — the latter only once, in parentheses, in RFC 6585 §4.
       A lexical retriever cannot do this query and week 5 is where you find out
       whether embeddings can.
+    answer_spans:
+      - "MAY include a Retry-After header indicating how long to wait before making a new request"
     judgments:
       rfc-6585: 3
       rfc-9309: 1
@@ -47,6 +51,8 @@ queries:
       A bare identifier, and the query where dense retrieval will embarrass
       itself in week 5. "451" appears thirteen times in RFC 7725 and nowhere
       else in the corpus.
+    answer_spans:
+      - "451 Unavailable For Legal Reasons"
     judgments:
       rfc-7725: 3
       rfc-6585: 0
@@ -60,6 +66,8 @@ queries:
       on 1 April 1998 as a joke. The retrieval is right; whether the document
       belongs in the corpus at all is a station 1 question, and it is the most
       productive argument this corpus starts.
+    answer_spans:
+      - "Any attempt to brew coffee with a teapot should result in the error code"
     judgments:
       rfc-2324: 3
       rfc-6585: 0
@@ -79,6 +87,8 @@ queries:
       document. Nothing in 7159 will ever tell your retriever, or your user.
       Graded 1 rather than 0 deliberately: it is squarely about the question and
       it is out of date, which is the most dangerous result a corpus can return.
+    answer_spans:
+      - "MUST be encoded using UTF-8"
     judgments:
       rfc-8259: 3
       rfc-7159: 1
@@ -93,6 +103,8 @@ queries:
       exactly once each, in a reference; five use "ABNF" without expanding it.
       No document is *about* ABNF, so nothing earns a 3 — the corpus answers the
       question in passing and the honest maximum is 2.
+    answer_spans:
+      - "Augmented Backus-Naur Form (ABNF) notation"
     judgments:
       rfc-3986: 2
       rfc-6265: 2
@@ -109,6 +121,8 @@ queries:
       — did not change. So the superseded document is outdated without being
       wrong, which is grade 2, not 1. Compare with r05 and be able to say why
       the grades differ.
+    answer_spans:
+      - "whose path component begins with the characters \"/.well-known/\""
     judgments:
       rfc-8615: 3
       rfc-5785: 2
@@ -123,6 +137,8 @@ queries:
       assume complete disallow". A good query for week 4, because the answer is
       two sentences buried in a section heading structure that chunking will
       either preserve or destroy.
+    answer_spans:
+      - "the crawler MUST assume complete disallow"
     judgments:
       rfc-9309: 3
       rfc-6585: 1
@@ -134,6 +150,8 @@ queries:
     note: >-
       Another vocabulary gap, milder than r02. The user says "expire"; RFC 6265
       says "Expires" and "Max-Age", so the lexical match is partial and lucky.
+    answer_spans:
+      - "The Max-Age attribute indicates the maximum lifetime of the cookie"
     judgments:
       rfc-6265: 3
       rfc-3986: 0
@@ -163,6 +181,12 @@ queries:
   - id: r11
     text: is a URI scheme case sensitive
     split: test
+    answer_spans:
+      - "Although schemes are case- insensitive"
+    span_note: >-
+      The span contains `case- insensitive`, hyphenated across a line break in
+       the original. Week 2's substitution damage, still in the corpus, now lo
+      ad-bearing.
     judgments:
       rfc-3986: 3
       rfc-6265: 1
@@ -175,6 +199,8 @@ queries:
     note: >-
       Negation. Retrieval has no representation for "ignore" — the answer is in
       RFC 9309 §2.3.1.3, and it is phrased as "MAY access any resources".
+    answer_spans:
+      - "then the crawler MAY access any resources on the server"
     judgments:
       rfc-9309: 3
       rfc-7725: 0
@@ -183,6 +209,8 @@ queries:
   - id: r13
     text: which status code indicates the client must authenticate to the network
     split: test
+    answer_spans:
+      - "The 511 status code indicates that the client needs to authenticate to gain network access"
     judgments:
       rfc-6585: 3
       rfc-7725: 1
@@ -197,6 +225,11 @@ queries:
       neither contains the comparison — the answer exists only across the pair.
       A system that returns one and stops produces a confident half-answer, and
       the metric that catches it is recall, not nDCG.
+    answer_spans:
+      - "Obsoletes: 7159"
+      - "JSON text SHALL be encoded in UTF-8, UTF-16, or UTF-32"
+    span_note: >-
+      Two spans, in two documents. Neither alone answers the query.
     judgments:
       rfc-8259: 2
       rfc-7159: 2
@@ -207,6 +240,11 @@ queries:
     text: how long may a crawler cache robots.txt
     split: test
     note: RFC 9309 §2.4 — "SHOULD NOT use the cached version for more than 24 hours".
+    answer_spans:
+      - "SHOULD NOT use the cached version for more than 24 hours"
+    span_note: >-
+      A 200-token chunker with no overlap cuts this span in half. Nothing at d
+      ocument granularity notices.
     judgments:
       rfc-9309: 3
       rfc-6265: 1
@@ -215,6 +253,8 @@ queries:
   - id: r16
     text: brewing coffee over HTTP
     split: test
+    answer_spans:
+      - "using either the BREW or POST method"
     judgments:
       rfc-2324: 3
       rfc-6585: 0
