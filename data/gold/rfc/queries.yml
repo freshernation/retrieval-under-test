@@ -16,6 +16,7 @@ queries:
   # ---------------------------------------------------------------- dev
 
   - id: r01
+    family: plain
     text: what status code should I return when a client sends too many requests
     split: dev
     note: The control. A plain lookup with one obviously correct answer.
@@ -28,6 +29,7 @@ queries:
       rfc-2324: 0
 
   - id: r02
+    family: vocabulary-gap
     text: how do I tell a client to slow down
     split: dev
     note: >-
@@ -45,6 +47,7 @@ queries:
       rfc-6265: 0
 
   - id: r03
+    family: identifier
     text: "451"
     split: dev
     note: >-
@@ -59,6 +62,7 @@ queries:
       rfc-3986: 0
 
   - id: r04
+    family: identifier
     text: what does the 418 status code mean
     split: dev
     note: >-
@@ -74,6 +78,7 @@ queries:
       rfc-7725: 0
 
   - id: r05
+    family: superseded
     text: must JSON be encoded in UTF-8
     split: dev
     note: >-
@@ -96,6 +101,7 @@ queries:
       rfc-9309: 0
 
   - id: r06
+    family: acronym
     text: what does ABNF stand for
     split: dev
     note: >-
@@ -113,6 +119,7 @@ queries:
       rfc-7725: 0
 
   - id: r07
+    family: superseded
     text: where do well-known URIs live
     split: dev
     note: >-
@@ -130,6 +137,7 @@ queries:
       rfc-9309: 0
 
   - id: r08
+    family: plain
     text: what must a crawler do if robots.txt returns a 500 error
     split: dev
     note: >-
@@ -145,6 +153,7 @@ queries:
       rfc-7725: 0
 
   - id: r09
+    family: vocabulary-gap
     text: how do I make a cookie expire
     split: dev
     note: >-
@@ -158,6 +167,7 @@ queries:
       rfc-8615: 0
 
   - id: r10
+    family: out-of-scope
     text: how do I configure OAuth scopes for my API
     split: dev
     unanswerable: true
@@ -179,6 +189,7 @@ queries:
   # ---------------------------------------------------------------- test
 
   - id: r11
+    family: plain
     text: is a URI scheme case sensitive
     split: test
     answer_spans:
@@ -194,6 +205,7 @@ queries:
       rfc-2324: 0
 
   - id: r12
+    family: negation
     text: when may a crawler ignore robots.txt
     split: test
     note: >-
@@ -207,6 +219,7 @@ queries:
       rfc-6585: 0
 
   - id: r13
+    family: plain
     text: which status code indicates the client must authenticate to the network
     split: test
     answer_spans:
@@ -217,6 +230,7 @@ queries:
       rfc-2324: 0
 
   - id: r14
+    family: multi-document
     text: what did RFC 8259 change about JSON
     split: test
     note: >-
@@ -237,6 +251,7 @@ queries:
       rfc-6265: 0
 
   - id: r15
+    family: plain
     text: how long may a crawler cache robots.txt
     split: test
     note: RFC 9309 §2.4 — "SHOULD NOT use the cached version for more than 24 hours".
@@ -251,6 +266,7 @@ queries:
       rfc-6585: 0
 
   - id: r16
+    family: paraphrase
     text: brewing coffee over HTTP
     split: test
     answer_spans:
