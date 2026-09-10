@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 64 |
-| **Weeks covered** | 1–8 |
+| **Articles** | 72 |
+| **Weeks covered** | 1–9 |
 | **Weeks planned** | 12 |
 
 ---
@@ -132,6 +132,18 @@ much.
 
 ---
 
-## Weeks 9–12
+## Week 9 — Evaluation at depth
+
+**Day 1** · [The serving-time gap](week-09/day-1/the-serving-time-gap.md) · [Available is not informative](week-09/day-1/available-is-not-informative.md)
+
+**Day 2** · [LLM-as-judge](week-09/day-2/llm-as-judge.md) · [Two lines before you trust it](week-09/day-2/two-lines-before-you-trust-it.md)
+
+**Day 3** · [The number that goes in the plan](week-09/day-3/the-number-in-the-plan.md) · [Two floors](week-09/day-3/two-floors.md)
+
+**Day 4** · [A gate that gets kept](week-09/day-4/a-gate-that-gets-kept.md) · [Guard few things](week-09/day-4/guard-few-things.md)
+
+---
+
+## Weeks 10–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

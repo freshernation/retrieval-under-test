@@ -1,0 +1,356 @@
+# Week 9's reading, recorded properly.
+#
+# The judge is a stipulated model, like week 8's generator. Its behaviours come
+# from the literature below; its implementation is ours. Every claim about what
+# real judges do cites a source; every number the simulator produces is derived
+# and the fence forbids reporting a judge score without its baseline.
+
+system: Week 9 reading — serving-time proxies, LLM-as-judge, power, and gates
+
+sources:
+  - id: zheng-2023
+    title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+    url: https://arxiv.org/abs/2306.05685
+    publisher: arXiv
+    author: Zheng et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+    note: >-
+      Position bias, verbosity bias, self-enhancement, and judge-human agreement
+      rates. The foundational study for the whole day-2 lab.
+
+  - id: wang-2023
+    title: Large Language Models are not Fair Evaluators
+    url: https://arxiv.org/abs/2305.17926
+    publisher: arXiv
+    author: Wang et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+    note: Position bias measured, and the both-orders mitigation.
+
+  - id: ragas-2023
+    title: "RAGAS: Automated Evaluation of Retrieval Augmented Generation"
+    url: https://arxiv.org/abs/2309.15217
+    publisher: arXiv
+    author: Es, James, Espinosa-Anke and Schockaert
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+    conflict: true
+    conflict_note: The authors release the framework the paper evaluates.
+
+  - id: cohen-1960
+    title: A coefficient of agreement for nominal scales
+    url: https://doi.org/10.1177/001316446002000104
+    publisher: Educational and Psychological Measurement
+    author: Jacob Cohen
+    kind: paper
+    tier: 1
+    published: 1960
+    retrieved: 2026-09-10
+    manual: true
+    note: >-
+      Chance-corrected agreement. The publisher blocks automated retrieval, so
+      this was read by hand. Week 1's `cohens_kappa` implements it.
+
+  - id: cohen-1988
+    title: Statistical Power Analysis for the Behavioral Sciences
+    url: https://doi.org/10.4324/9780203771587
+    publisher: Routledge
+    author: Jacob Cohen
+    kind: book
+    tier: 2
+    published: 1988
+    retrieved: 2026-09-10
+    note: >-
+      Power analysis, and the argument that it belongs before the experiment
+      rather than after it.
+
+  - id: fawcett-2006
+    title: An introduction to ROC analysis
+    url: https://doi.org/10.1016/j.patrec.2005.10.010
+    publisher: Pattern Recognition Letters
+    author: Tom Fawcett
+    kind: paper
+    tier: 1
+    published: 2006
+    retrieved: 2026-09-10
+    note: >-
+      AUC as threshold-free discrimination, equal to the probability that a
+      positive outranks a negative.
+
+  - id: sre-book
+    title: "Site Reliability Engineering, chapter 6: Monitoring Distributed Systems"
+    url: https://sre.google/sre-book/monitoring-distributed-systems/
+    publisher: Google
+    kind: book
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-10
+    note: >-
+      Few signals, chosen for actionability; alerts that fire on noise get
+      ignored. The argument day 4 rests on.
+
+  - id: smucker-2007
+    title: A comparison of statistical significance tests for information retrieval evaluation
+    url: https://dl.acm.org/doi/10.1145/1321440.1321528
+    publisher: ACM CIKM
+    author: Smucker, Allan and Carterette
+    kind: paper
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-10
+    manual: true
+
+  - id: voorhees-trec8
+    title: Overview of the Eighth Text REtrieval Conference (TREC-8)
+    url: https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf
+    publisher: NIST
+    author: Voorhees and Harman
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-09-10
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://sigir.org/wp-content/uploads/2019/01/p040.pdf
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-09-10
+
+  - id: squad-2016
+    title: "SQuAD: 100,000+ Questions for Machine Comprehension of Text"
+    url: https://arxiv.org/abs/1606.05250
+    publisher: arXiv
+    author: Rajpurkar, Zhang, Lopyrev and Liang
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-10
+
+claims:
+  - id: w9-judge-biases
+    text: >-
+      Model judges exhibit position bias, verbosity bias and self-enhancement,
+      and can agree with human raters at rates comparable to human-human
+      agreement on some tasks
+    kind: known
+    sources: [zheng-2023]
+
+  - id: w9-position-bias-mitigation
+    text: >-
+      Position bias in pairwise judging is substantial and is mitigated by
+      running both orders and discarding disagreements
+    kind: known
+    sources: [wang-2023, zheng-2023]
+
+  - id: w9-judge-self-consistency
+    text: >-
+      A model judge's self-consistency across runs is a measured property that
+      varies by judge and prompt
+    kind: known
+    sources: [zheng-2023]
+
+  - id: w9-model-judged-faithfulness-is-shipped
+    text: >-
+      Model-judged faithfulness is shipped in RAG evaluation frameworks
+    kind: inferred
+    sources: [ragas-2023]
+    note: >-
+      Self-description from a source published by the framework's own authors.
+      That RAGAS does this is not in doubt; treating it as evidence about the
+      field is our extrapolation, so the claim is inferred. Same treatment as
+      week 8.
+
+  - id: w9-kappa-corrects-for-chance
+    text: >-
+      Cohen's kappa corrects observed agreement for the agreement expected from
+      the class distribution alone
+    kind: known
+    sources: [cohen-1960]
+
+  - id: w9-raw-agreement-misleads
+    text: >-
+      Raw agreement is misleading when one class dominates, which is why
+      chance-corrected agreement is reported alongside it
+    kind: known
+    sources: [cohen-1960, voorhees-trec8]
+
+  - id: w9-power-before-experiment
+    text: >-
+      Power analysis belongs before an experiment, and required sample size
+      scales with the inverse square of the effect to be detected
+    kind: known
+    sources: [cohen-1988]
+
+  - id: w9-paired-tests-for-ir
+    text: Paired significance testing is appropriate for retrieval comparisons
+    kind: known
+    sources: [smucker-2007]
+
+  - id: w9-auc-definition
+    text: >-
+      AUC equals the probability that a randomly chosen positive scores above a
+      randomly chosen negative, and requires no threshold
+    kind: known
+    sources: [fawcett-2006]
+
+  - id: w9-noisy-alerts-are-ignored
+    text: >-
+      Alerts that fire on noise are ignored, and monitoring guidance recommends
+      few signals chosen for actionability
+    kind: known
+    sources: [sre-book]
+
+  - id: w9-repeated-comparisons-inflate
+    text: Repeated comparisons inflate apparent findings
+    kind: known
+    sources: [lin-neural-hype]
+
+  - id: w9-ground-truth-absent-live
+    text: >-
+      Answer-span ground truth requires annotation, so metrics depending on it
+      cannot be computed for unseen queries at serving time
+    kind: known
+    sources: [squad-2016]
+
+  - id: w9-proxies-alert-not-report
+    text: >-
+      A serving-time proxy is appropriate for alerting and routing and
+      inappropriate for reporting quality, since correlation is not identity
+    kind: inferred
+    sources: [sre-book, fawcett-2006]
+    note: Ours. The AUC of 0.83 measured here is wrong about roughly one pair in six.
+
+  - id: w9-cheap-metrics-are-artefact-metrics
+    text: >-
+      Metrics that are cheap to collect are properties of the artefact, while
+      informative ones are properties of the relationship between the artefact
+      and the question, so collection cost is inversely related to
+      informativeness
+    kind: inferred
+    sources: [sre-book]
+    note: >-
+      Ours. Retrieval confidence is the instructive exception — a relationship
+      metric whose comparison is already inside the request.
+
+  - id: w9-judge-inherits-blindness
+    text: >-
+      A model judge inherits the blindness of the question it is asked, so a
+      faithfulness judge cannot detect an answer that is faithful and wrong
+    kind: inferred
+    sources: [zheng-2023, ragas-2023]
+    note: Ours, following from week 8's keystone.
+
+  - id: w9-scoring-rule-bias
+    text: >-
+      A judge's bias includes the bias of its scoring rule, which is easier to
+      overlook than the model's because it presents as arithmetic
+    kind: inferred
+    sources: [zheng-2023]
+    note: >-
+      Ours. Demonstrated here by a judge with every bias flag at zero scoring a
+      padded answer above an identical short one.
+
+  - id: w9-tolerance-from-mde
+    text: >-
+      A gate's tolerance should be derived from the minimum detectable effect,
+      and revisited whenever the eval set changes
+    kind: inferred
+    sources: [cohen-1988, sre-book]
+
+  - id: w9-no-statistical-correction-in-a-gate
+    text: >-
+      Statistical multiple-comparison correction is the wrong response to
+      compounding in a release gate, because insensitivity to real regressions is
+      the worse error there
+    kind: inferred
+    sources: [sre-book, lin-neural-hype]
+
+  - id: w9-constant-baseline
+    text: >-
+      With 70 percent of cases positive, a constant-positive classifier achieves
+      0.70 accuracy and kappa 0, so a judge matching those numbers has added
+      nothing
+    kind: derived
+
+  - id: w9-inverse-auc
+    text: >-
+      A signal with AUC below 0.5 is predictive when inverted, so the informative
+      quantity is max(auc, 1 - auc)
+    kind: derived
+
+  - id: w9-square-in-sample-size
+    text: >-
+      With sd 0.223 and z 1.96, detecting 0.05 requires 77 queries and detecting
+      0.02 requires 479, so halving the effect quadruples the queries
+    kind: derived
+
+  - id: w9-binary-metrics-cost-queries
+    text: >-
+      A binary per-query metric produces differences of -1, 0 or +1 and therefore
+      a near-maximal standard deviation, so it requires more queries than a graded
+      metric at equal detectable effect
+    kind: derived
+
+  - id: w9-judge-floor-is-not-sampling
+    text: >-
+      A judge that changes its verdict on a fraction f of cases cannot support a
+      claim about a difference smaller than f at any sample size, since the
+      disagreement is not sampling error
+    kind: derived
+
+  - id: w9-compound-alarm
+    text: >-
+      With m independent guarded metrics each firing spuriously with probability
+      p, a gate fires on an unchanged system with probability 1 - (1 - p)^m,
+      giving 40 percent for ten metrics at 5 percent each
+    kind: derived
+
+  - id: w9-tolerance-below-mde
+    text: >-
+      A gate tolerance below the minimum detectable effect fires on sampling
+      variation, producing a substantial false-alarm rate on an unchanged system
+    kind: derived
+
+  - id: w9-both-metrics-needed
+    text: >-
+      A misattributing generator leaves grounded_rate unchanged while collapsing
+      faithfulness, so a gate guarding either metric alone passes a system broken
+      in the other dimension
+    kind: derived
+
+  - id: w9-unknown-judge-baselines
+    text: >-
+      How often deployed LLM-judge metrics are reported alongside a constant
+      baseline. We have not seen one that was
+    kind: unknown
+
+  - id: w9-unknown-gate-false-alarms
+    text: >-
+      The false-alarm rate of any deployed RAG evaluation gate. Measurable in
+      minutes and never, as far as we can find, reported
+    kind: unknown
+
+  - id: w9-unknown-published-deltas-below-mde
+    text: >-
+      What fraction of published RAG improvements fall below the minimum
+      detectable effect of the sets they were measured on. Sample sizes are
+      usually reported; standard deviations are not
+    kind: unknown
+
+  - id: w9-unknown-distribution-floor
+    text: >-
+      The size of the distribution-mismatch floor — whether the eval set's queries
+      resemble real ones. Unmeasurable from inside the eval set and plausibly the
+      largest of the three floors
+    kind: unknown
