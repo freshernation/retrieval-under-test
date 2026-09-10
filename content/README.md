@@ -9,8 +9,8 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 56 |
-| **Weeks covered** | 1–7 |
+| **Articles** | 64 |
+| **Weeks covered** | 1–8 |
 | **Weeks planned** | 12 |
 
 ---
@@ -120,6 +120,18 @@ much.
 
 ---
 
-## Weeks 8–12
+## Week 8 — Generation and grounding
+
+**Day 1** · [A search result rewritten into prose](week-08/day-1/rewritten-into-prose.md) · [The generator is a stipulated model](week-08/day-1/a-stipulated-generator.md)
+
+**Day 2** · [Two ways a citation fails](week-08/day-2/two-ways-a-citation-fails.md) · [Your checker's false positives](week-08/day-2/checker-false-positives.md)
+
+**Day 3** · [Supported by what](week-08/day-3/supported-by-what.md) · [Faithful and wrong](week-08/day-3/faithful-and-wrong.md)
+
+**Day 4** · [Refusal has to be designed](week-08/day-4/refusal-has-to-be-designed.md) · [Whose decision is this](week-08/day-4/whose-decision-is-this.md)
+
+---
+
+## Weeks 9–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.

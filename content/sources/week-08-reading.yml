@@ -1,0 +1,345 @@
+# Week 8's reading, recorded properly.
+#
+# The generator this week is a *stipulated model* — see
+# content/week-08/day-1/a-stipulated-generator.md. Its behaviours are drawn from
+# the hallucination and attribution literature below; its implementation is a
+# hundred lines of rules written for this course. Every claim about what a real
+# model does cites a source; every number produced by the simulator is marked
+# derived and the fence forbids treating it as an estimate of answer quality.
+
+system: Week 8 reading — generation, grounding, citation, faithfulness and refusal
+
+sources:
+  - id: rag-2020
+    title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    url: https://arxiv.org/abs/2005.11401
+    publisher: arXiv
+    author: Lewis et al.
+    kind: paper
+    tier: 1
+    published: 2020
+    retrieved: 2026-09-10
+
+  - id: squad-2016
+    title: "SQuAD: 100,000+ Questions for Machine Comprehension of Text"
+    url: https://arxiv.org/abs/1606.05250
+    publisher: arXiv
+    author: Rajpurkar, Zhang, Lopyrev and Liang
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-10
+
+  - id: squad2-2018
+    title: "Know What You Don't Know: Unanswerable Questions for SQuAD"
+    url: https://arxiv.org/abs/1806.03822
+    publisher: arXiv
+    author: Rajpurkar, Jia and Liang
+    kind: paper
+    tier: 1
+    published: 2018
+    retrieved: 2026-09-10
+    note: >-
+      Unanswerable questions as a first-class evaluation target. The paper that
+      makes abstention a measured behaviour rather than a fallback.
+
+  - id: ji-2022
+    title: Survey of Hallucination in Natural Language Generation
+    url: https://arxiv.org/abs/2202.03629
+    publisher: arXiv
+    author: Ji et al.
+    kind: paper
+    tier: 1
+    published: 2022
+    retrieved: 2026-09-10
+    note: >-
+      The intrinsic/extrinsic taxonomy, and the documented behaviours the
+      simulated generator reproduces.
+
+  - id: rashkin-2021
+    title: "Measuring Attribution in Natural Language Generation Models"
+    url: https://arxiv.org/abs/2112.12870
+    publisher: arXiv
+    author: Rashkin et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-09-10
+    note: >-
+      Attribution defined formally as a relation between a claim and an
+      identified source — not to truth. The distinction week 8 day 3 rests on.
+
+  - id: liu-verifiability-2023
+    title: Evaluating Verifiability in Generative Search Engines
+    url: https://arxiv.org/abs/2304.09848
+    publisher: arXiv
+    author: Liu, Zhang and Liang
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+    note: >-
+      Human evaluation of deployed systems' citations. A substantial fraction of
+      generated sentences are not fully supported by the sources they cite.
+
+  - id: ragas-2023
+    title: "RAGAS: Automated Evaluation of Retrieval Augmented Generation"
+    url: https://arxiv.org/abs/2309.15217
+    publisher: arXiv
+    author: Es, James, Espinosa-Anke and Schockaert
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+    conflict: true
+    conflict_note: >-
+      The authors release the evaluation framework the paper evaluates. Cited for
+      how its faithfulness metric is computed, not for how well it works — that
+      is week 9's question.
+
+  - id: kadavath-2022
+    title: "Language Models (Mostly) Know What They Know"
+    url: https://arxiv.org/abs/2207.05221
+    publisher: arXiv
+    author: Kadavath et al.
+    kind: paper
+    tier: 1
+    published: 2022
+    retrieved: 2026-09-10
+    conflict: true
+    conflict_note: >-
+      Published by Anthropic, evaluating Anthropic's own models' self-assessment.
+      Cited for the existence of the signal, not for its magnitude.
+
+  - id: lost-in-the-middle
+    title: "Lost in the Middle: How Language Models Use Long Contexts"
+    url: https://arxiv.org/abs/2307.03172
+    publisher: arXiv
+    author: Liu et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-09-10
+
+  - id: rfc8259
+    title: "The JavaScript Object Notation (JSON) Data Interchange Format"
+    url: https://www.rfc-editor.org/rfc/rfc8259.txt
+    publisher: IETF
+    author: Tim Bray, Ed.
+    kind: standard
+    tier: 1
+    published: 2017
+    retrieved: 2026-09-10
+
+  - id: rfc7159
+    title: "The JavaScript Object Notation (JSON) Data Interchange Format"
+    url: https://www.rfc-editor.org/rfc/rfc7159.txt
+    publisher: IETF
+    author: Tim Bray, Ed.
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-10
+
+  - id: rfc2026
+    title: "The Internet Standards Process -- Revision 3"
+    url: https://www.rfc-editor.org/rfc/rfc2026.txt
+    publisher: IETF
+    author: Scott Bradner
+    kind: standard
+    tier: 1
+    published: 1996
+    retrieved: 2026-09-10
+
+  - id: rfc7322
+    title: RFC Style Guide
+    url: https://www.rfc-editor.org/rfc/rfc7322.txt
+    publisher: IETF
+    author: Flanagan and Ginoza
+    kind: standard
+    tier: 1
+    published: 2014
+    retrieved: 2026-09-10
+    note: §4.8 — the bracketed reference convention that contaminates a naive citation parser.
+
+claims:
+  - id: w8-rag-conditions-on-passages
+    text: >-
+      The retrieval-augmented architecture conditions generation on retrieved
+      passages
+    kind: known
+    sources: [rag-2020]
+
+  - id: w8-answer-spans
+    text: Answer spans as verbatim substrings are a standard ground-truth construction
+    kind: known
+    sources: [squad-2016]
+
+  - id: w8-unanswerable-is-harder
+    text: >-
+      Unanswerable questions require explicit handling and are substantially
+      harder than answerable ones
+    kind: known
+    sources: [squad2-2018]
+
+  - id: w8-answering-without-support-is-default
+    text: >-
+      Producing fluent output unsupported by the provided context is a documented
+      default behaviour of generation systems
+    kind: known
+    sources: [ji-2022]
+
+  - id: w8-intrinsic-extrinsic
+    text: >-
+      Hallucination is standardly divided into intrinsic — contradicting the
+      provided context — and extrinsic, adding what the context does not contain
+    kind: known
+    sources: [ji-2022]
+
+  - id: w8-attribution-is-to-a-source
+    text: >-
+      Attribution is defined as a relation between a claim and an identified
+      source, not between a claim and the truth
+    kind: known
+    sources: [rashkin-2021]
+
+  - id: w8-deployed-citations-are-unreliable
+    text: >-
+      Human evaluation of deployed generative search engines finds a substantial
+      fraction of generated sentences not fully supported by the sources they cite
+    kind: known
+    sources: [liu-verifiability-2023]
+
+  - id: w8-ragas-uses-a-model
+    text: >-
+      The widely used RAG faithfulness metric decomposes an answer into claims
+      and uses a language model to judge each against the context
+    kind: inferred
+    sources: [ragas-2023]
+    note: >-
+      Caught by tools/check_sources.py, and the checker was right. That RAGAS
+      computes faithfulness this way is self-description from a Tier 1 source and
+      is not in doubt; that it is the *standard* or *widely used* approach is our
+      characterisation of the field, resting on one source published by the
+      framework's own authors. The mechanism is known; the prevalence is inferred.
+
+  - id: w8-models-self-assess
+    text: >-
+      Language models can self-assess the correctness of their own answers with
+      better-than-chance calibration
+    kind: inferred
+    sources: [kadavath-2022]
+    note: >-
+      Downgraded from known: the source evaluates its publisher's own models and
+      we have found no independent replication at comparable scale. The existence
+      of the signal is not in serious dispute; its magnitude is a vendor claim.
+
+  - id: w8-rfc-citation-convention
+    text: RFCs cite one another using bracketed reference tags, by published convention
+    kind: known
+    sources: [rfc7322]
+
+  - id: w8-json-rule-changed
+    text: >-
+      RFC 8259 requires UTF-8 and obsoletes RFC 7159, which permitted UTF-16 and
+      UTF-32; a published RFC is never revised, so 7159 carries no record of its
+      own supersession
+    kind: known
+    sources: [rfc8259, rfc7159, rfc2026]
+
+  - id: w8-no-tell
+    text: >-
+      A confidently wrong RAG answer is not distinguishable from a correct one by
+      reading it
+    kind: inferred
+    sources: [ji-2022, liu-verifiability-2023]
+    note: >-
+      Week 1 asserted it; week 8 demonstrates it on this corpus with this
+      simulator. The generalisation to real models rests on the cited literature
+      rather than on anything measured here.
+
+  - id: w8-faithfulness-is-not-correctness
+    text: >-
+      A perfectly faithful answer to a context that does not contain the answer is
+      wrong, so faithfulness cannot support a claim about correctness
+    kind: inferred
+    sources: [rashkin-2021, ji-2022]
+    note: Ours, and week 8's keystone. Follows from attribution being a relation to a source.
+
+  - id: w8-superseded-undetectable-by-faithfulness
+    text: >-
+      No faithfulness metric can detect an answer faithfully drawn from a
+      superseded source, because the disqualifying fact is absent from both the
+      answer and the cited passage
+    kind: inferred
+    sources: [rfc2026, rashkin-2021]
+
+  - id: w8-checker-false-positives
+    text: >-
+      A citation parser matching any bracketed token counts a corpus's own
+      reference tags as model citations, producing fabrication findings for a
+      generator that fabricated nothing
+    kind: derived
+
+  - id: w8-citation-attaches-to-previous-sentence
+    text: >-
+      A citation marker following sentence-final punctuation is assigned to the
+      next sentence by any naive splitter, misattributing every citation in an
+      answer
+    kind: derived
+
+  - id: w8-denominator
+    text: >-
+      A rate whose denominator is the answered queries rises when a system refuses
+      more, independently of any change in answer quality
+    kind: derived
+
+  - id: w8-overlap-rewards-copying
+    text: >-
+      A word-overlap support metric scores verbatim copying at 1.0 and correct
+      paraphrase lower, so it rewards the behaviour least wanted
+    kind: derived
+
+  - id: w8-refusal-overlap
+    text: >-
+      When the confidence distributions of answer-present and answer-absent
+      queries overlap, no threshold both keeps every correct answer and refuses
+      every wrong one
+    kind: derived
+
+  - id: w8-free-refusal-region
+    text: >-
+      On this corpus, refusal up to a confidence threshold of 0.55 removes two
+      confidently-wrong answers while keeping every correct one
+    kind: derived
+
+  - id: w8-grounded-rate-is-blind-to-generation
+    text: >-
+      Groundedness measures retrieval, so it is unchanged by any generation fault
+      including systematic misattribution
+    kind: derived
+
+  - id: w8-unknown-production-wrong-rate
+    text: >-
+      What fraction of production RAG answers are confident responses to
+      unretrieved questions. Measurable with answer spans; we have not seen it
+      published
+    kind: unknown
+
+  - id: w8-unknown-proxy-vs-judge
+    text: >-
+      How much a word-overlap support proxy disagrees with a model judge on real
+      answers. Week 9's first experiment
+    kind: unknown
+
+  - id: w8-unknown-simulator-transfer
+    text: >-
+      Which of week 8's comparisons survive contact with a real model. Testable
+      from week 10 and worth doing deliberately
+    kind: unknown
+
+  - id: w8-unknown-threshold-practice
+    text: >-
+      How refusal thresholds are set in deployed systems. Every practitioner we
+      have asked says "the default", which is to refuse nothing
+    kind: unknown
