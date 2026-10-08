@@ -1,0 +1,607 @@
+# Week 11's reading, recorded properly.
+#
+# This is the week where the literature is most enthusiastic and the measurement
+# is most negative, so the sourcing has to be careful in a particular way: every
+# technique below is cited for *what it is*, never for whether it works here.
+# The agentic papers are Tier 1 and they report gains on their own benchmarks;
+# this corpus is not their benchmark and the week says so rather than arguing
+# with them.
+#
+# The one thing the course cannot run is a model-written rewrite. Every claim
+# that would need one is recorded as unknown.
+
+system: Week 11 reading — rewriting, routing, multi-hop and loops
+
+sources:
+  - id: rocchio-1971
+    title: "Relevance Feedback in Information Retrieval"
+    url: https://sigir.org/files/museum/pub-08/XXIII-1.pdf
+    publisher: "The SMART Retrieval System: Experiments in Automatic Document Processing"
+    author: J. J. Rocchio
+    kind: paper
+    tier: 1
+    published: 1971
+    retrieved: 2026-10-08
+    manual: true
+    note: >-
+      The original relevance-feedback formulation: move the query towards the
+      centroid of the relevant documents. Scanned, hosted by SIGIR's museum
+      archive, and read by hand.
+
+  - id: lavrenko-croft-2001
+    title: Relevance-Based Language Models
+    url: https://doi.org/10.1145/383952.383972
+    publisher: SIGIR
+    author: Victor Lavrenko and W. Bruce Croft
+    kind: paper
+    tier: 1
+    published: 2001
+    retrieved: 2026-10-08
+    note: >-
+      The modern form of pseudo-relevance feedback, and the place its assumption
+      is stated plainly: the top-ranked documents stand in for judged ones.
+
+  - id: xu-croft-1996
+    title: Query Expansion Using Local and Global Document Analysis
+    url: https://doi.org/10.1145/243199.243202
+    publisher: SIGIR
+    author: Jinxi Xu and W. Bruce Croft
+    kind: paper
+    tier: 1
+    published: 1996
+    retrieved: 2026-10-08
+    note: >-
+      Local feedback helps when the feedback documents are relevant and degrades
+      retrieval when they are not. The primary source for query drift.
+
+  - id: yao-2023
+    title: "ReAct: Synergizing Reasoning and Acting in Language Models"
+    url: https://arxiv.org/abs/2210.03629
+    publisher: arXiv / ICLR
+    author: Yao et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-10-08
+    note: >-
+      The loop everybody draws: reason, act, observe, repeat, with an iteration
+      limit. Cited for the formulation, not for a result on this corpus.
+
+  - id: asai-2023
+    title: "Self-RAG: Learning to Retrieve, Generate and Critique through Self-Reflection"
+    url: https://arxiv.org/abs/2310.11511
+    publisher: arXiv / ICLR
+    author: Asai, Wu, Wang, Sil and Hajishirzi
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-10-08
+    note: >-
+      Retrieval decided and critiqued during generation rather than once up
+      front. The design day 4's stopping condition is a stripped version of.
+
+  - id: cormack-2009
+    title: "Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods"
+    url: https://doi.org/10.1145/1571941.1572114
+    publisher: SIGIR
+    author: Cormack, Clarke and Buettcher
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-10-08
+    note: >-
+      Week 6's fusion, reused over query variants on day 1 — and the oracle
+      framing day 2 borrows for the routing ceiling.
+
+  - id: robertson-zaragoza-2009
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://doi.org/10.1561/1500000019
+    publisher: Foundations and Trends in Information Retrieval
+    author: Stephen Robertson and Hugo Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-10-08
+    note: idf, which decides which terms a rewrite is allowed to discard.
+
+  - id: fawcett-2006
+    title: An introduction to ROC analysis
+    url: https://doi.org/10.1016/j.patrec.2005.10.010
+    publisher: Pattern Recognition Letters
+    author: Tom Fawcett
+    kind: paper
+    tier: 1
+    published: 2006
+    retrieved: 2026-10-08
+    note: >-
+      AUC is defined relative to a specified outcome, which is the whole of day
+      2's second article.
+
+  - id: cohen-1988
+    title: Statistical Power Analysis for the Behavioral Sciences
+    url: https://doi.org/10.4324/9780203771587
+    publisher: Routledge
+    author: Jacob Cohen
+    kind: book
+    tier: 2
+    published: 1988
+    retrieved: 2026-10-08
+    note: >-
+      The MDE Project 3's verdict is compared against, and the reason five
+      decisive queries cannot validate a router.
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://doi.org/10.1145/3308774.3308781
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-10-08
+    note: >-
+      A plausible mechanism and a moving number are not evidence that the
+      mechanism produced the movement. Day 4's framing at field scale.
+
+  - id: sre-book
+    title: "Site Reliability Engineering, chapter 6: Monitoring Distributed Systems"
+    url: https://sre.google/sre-book/monitoring-distributed-systems/
+    publisher: Google
+    author: Beyer, Jones, Petoff and Murphy (eds.)
+    kind: book
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-08
+    note: Signals chosen for the decision they inform; indicator against diagnostic.
+
+  - id: rfc-8259
+    title: The JavaScript Object Notation (JSON) Data Interchange Format
+    url: https://www.rfc-editor.org/rfc/rfc8259.html
+    publisher: IETF
+    author: Tim Bray (ed.)
+    kind: standard
+    tier: 1
+    published: 2017
+    retrieved: 2026-10-08
+    note: >-
+      Obsoletes RFC 7159 and reverses its UTF-8 guidance. The edge day 3 hops
+      along, and the one where the answer changed.
+
+  - id: rfc-8615
+    title: "Well-Known Uniform Resource Identifiers (URIs)"
+    url: https://www.rfc-editor.org/rfc/rfc8615.html
+    publisher: IETF
+    author: Mark Nottingham
+    kind: standard
+    tier: 1
+    published: 2019
+    retrieved: 2026-10-08
+    note: >-
+      Obsoletes RFC 5785 and leaves the `/.well-known/` mechanism unchanged. The
+      other edge, and the reason the fix breaks a query.
+
+  - id: langgraph-docs
+    title: LangGraph documentation
+    url: https://langchain-ai.github.io/langgraph/
+    publisher: LangChain
+    kind: documentation
+    tier: 3
+    published: 2026
+    retrieved: 2026-10-08
+    conflict: true
+    conflict_note: >-
+      The vendor of the framework, documenting the framework. Cited only for how
+      routing and loops are presented as primitives, which is where most people
+      meet them. No claim here rests on it.
+
+claims:
+  - id: w11-relevance-feedback-moves-the-query
+    text: >-
+      Relevance feedback moves a query towards the terms of documents judged
+      relevant, and pseudo-relevance feedback substitutes the top-ranked
+      documents for judged ones
+    kind: known
+    sources: [rocchio-1971, lavrenko-croft-2001]
+
+  - id: w11-local-feedback-degrades-when-wrong
+    text: >-
+      Expansion from local feedback improves retrieval when the feedback
+      documents are relevant and degrades it when they are not
+    kind: known
+    sources: [xu-croft-1996]
+
+  - id: w11-idf-weights-rarity
+    text: idf weights a term by its rarity in the collection
+    kind: known
+    sources: [robertson-zaragoza-2009]
+
+  - id: w11-react-loop
+    text: >-
+      The standard agentic formulation interleaves reasoning, action and
+      observation in a loop bounded by an iteration limit
+    kind: known
+    sources: [yao-2023, langgraph-docs]
+
+  - id: w11-self-rag-critique
+    text: >-
+      Retrieval can be decided and critiqued during generation rather than once
+      before it
+    kind: known
+    sources: [asai-2023]
+
+  - id: w11-auc-is-outcome-relative
+    text: >-
+      AUC is the probability that a randomly chosen positive outranks a randomly
+      chosen negative, and is therefore defined relative to a specified outcome
+    kind: known
+    sources: [fawcett-2006]
+
+  - id: w11-mechanism-is-not-evidence
+    text: >-
+      A plausible mechanism accompanied by a number that moves is not evidence
+      that the mechanism produced the movement
+    kind: known
+    sources: [lin-neural-hype]
+
+  - id: w11-8259-changes-the-answer
+    text: >-
+      RFC 8259 obsoletes RFC 7159 and reverses its UTF-8 guidance, while RFC 8615
+      obsoletes RFC 5785 and leaves the well-known URI mechanism unchanged
+    kind: known
+    sources: [rfc-8259, rfc-8615]
+
+  - id: w11-power-depends-on-decisive-n
+    text: >-
+      A claim's reliability depends on the sample size of the comparison that
+      produced it, not on the size of the set it was drawn from
+    kind: known
+    sources: [cohen-1988]
+
+  - id: w11-no-rule-from-a-failing-query
+    text: >-
+      A rewrite rule derived from the queries that failed cannot be evaluated on
+      the set it was derived from, which makes the practice self-confirming
+    kind: inferred
+    sources: [xu-croft-1996]
+    note: >-
+      Ours, and the week's one disqualifying rule. Every rewrite here comes from
+      the index or the query.
+
+  - id: w11-adding-information-helps-where-it-was-missing
+    text: >-
+      A technique that adds information to a query helps where information was
+      insufficient and hurts where the match was already exact, so no aggregate
+      over a mixed query set can say which it is doing
+    kind: inferred
+    sources: [robertson-zaragoza-2009, xu-croft-1996]
+    note: >-
+      Ours. The same mechanism week 5 measured for dense retrieval losing on
+      identifier queries.
+
+  - id: w11-feedback-is-a-refinement-operator
+    text: >-
+      Pseudo-relevance feedback can sharpen a query pointing in roughly the right
+      direction and cannot redirect one pointing the wrong way, because its
+      entire input is the previous retrieval
+    kind: inferred
+    sources: [xu-croft-1996, lavrenko-croft-2001]
+    note: Ours. Any operator whose input is its previous output has this property.
+
+  - id: w11-ceiling-before-mechanism
+    text: >-
+      An oracle ceiling must be computed before the mechanism it bounds, because
+      without it a null result cannot be distinguished from an absent opportunity
+    kind: inferred
+    sources: [cormack-2009, cohen-1988]
+    note: Ours, introduced in week 7 and generalised here.
+
+  - id: w11-count-the-decisive-queries
+    text: >-
+      Counting the queries whose outcome differs between strategies is the
+      cheapest pre-check before building a router, since those queries are its
+      entire evidence base
+    kind: inferred
+    sources: [cohen-1988]
+    note: Ours.
+
+  - id: w11-proxy-outcome-gets-dropped
+    text: >-
+      A validated proxy's outcome is routinely dropped when the result is
+      repeated, turning a measurement about two populations into a
+      general-purpose virtue, and naming the outcome alongside the number
+      prevents it
+    kind: inferred
+    sources: [fawcett-2006]
+    note: Ours. Write the arrow — confidence to answer-in-context — every time.
+
+  - id: w11-missing-decision-is-worse-than-missing-metric
+    text: >-
+      A decision whose input does not exist at serving time is a harder problem
+      than a metric that cannot be computed there, because the second admits a
+      proxy and the first requires a new field
+    kind: inferred
+    sources: [fawcett-2006, sre-book]
+    note: Ours. Week 9's serving-time gap in its strongest form.
+
+  - id: w11-hop-is-a-query-time-join
+    text: >-
+      Multi-hop retrieval along an edge already present in metadata is a
+      query-time join, and is replaceable by an ingest-time one at lower cost
+    kind: inferred
+    sources: [yao-2023, rfc-8259]
+    note: >-
+      Ours, and measured here as identical outcomes at 1.25 times the
+      retrievals. The question to ask is which edge, and is it already a field.
+
+  - id: w11-correction-is-not-removal
+    text: >-
+      Supplying a correction alongside an error is not equivalent to removing the
+      error, because both sit in the context with equal standing and nothing in
+      the pipeline ranks truth
+    kind: inferred
+    sources: [asai-2023]
+    note: Ours.
+
+  - id: w11-trigger-deserves-measurement
+    text: >-
+      The trigger condition for an expensive stage deserves as much measurement
+      as the stage itself, and usually receives none
+    kind: inferred
+    sources: [sre-book]
+    note: >-
+      Ours. Triggering the hop on the context rather than a deep shortlist is a
+      factor of three in cost for no change in outcome.
+
+  - id: w11-supersession-edge-is-syntactic
+    text: >-
+      No rule over supersession metadata can distinguish an edge that changed an
+      answer from one that did not, because the header records the relationship
+      and not its consequences
+    kind: inferred
+    sources: [rfc-8259, rfc-8615]
+    note: Ours. The edge is syntactic and the distinction is semantic.
+
+  - id: w11-demotion-is-a-budget-coincidence
+    text: >-
+      Demoting a superseded chunk rather than dropping it converts a correctness
+      property into a function of the context budget
+    kind: inferred
+    sources: [rfc-8259]
+    note: Ours, which makes it the least defensible of the three options.
+
+  - id: w11-metadata-rules-are-syntactic
+    text: >-
+      A rule over metadata enforces a syntactic property while the property
+      wanted is usually semantic, so the response is to choose which error is
+      preferred and record it rather than to write a cleverer rule
+    kind: inferred
+    sources: [sre-book]
+    note: >-
+      Ours. Third instance, after week 6's filter recall cost and week 10's
+      staleness overlap.
+
+  - id: w11-loop-grades-its-own-homework
+    text: >-
+      A loop that scores the rewritten query against the retrieval performed for
+      that rewritten query is self-confirming, so the original question must be
+      the bar
+    kind: inferred
+    sources: [asai-2023]
+    note: Ours.
+
+  - id: w11-loop-inherits-its-operator
+    text: >-
+      A loop inherits the limitation of its rewrite operator, so measuring the
+      operator once establishes the loop's ceiling without running the loop
+    kind: inferred
+    sources: [xu-croft-1996, yao-2023]
+    note: Ours, and the iteration histogram is the evidence.
+
+  - id: w11-no-internal-unsatisfiable-signal
+    text: >-
+      No signal internal to a retrieval loop distinguishes not-yet-satisfied from
+      not-satisfiable, so termination on an unanswerable query is a property of
+      the cap alone
+    kind: inferred
+    sources: [yao-2023, langgraph-docs]
+    note: Ours.
+
+  - id: w11-change-is-not-progress
+    text: >-
+      A no-progress guard based on the candidate set changing cannot work when
+      the operator changes the query every iteration, so the guard must be placed
+      on the outcome signal
+    kind: inferred
+    sources: [lin-neural-hype, sre-book]
+    note: Ours, and measured here as zero iterations saved.
+
+  - id: w11-byproduct-outlives-purpose
+    text: >-
+      A mechanism's by-product can be worth more than its purpose and is often
+      obtainable more cheaply once identified
+    kind: inferred
+    sources: [fawcett-2006]
+    note: >-
+      Ours. The loop's iteration count is a usable quality signal, and week 9
+      already had a better one for free.
+
+  - id: w11-dead-dial-is-worse-than-a-harmful-one
+    text: >-
+      A configuration dial with no effect is more dangerous than one that hurts,
+      because it survives review, propagates by copying, and eventually receives
+      credit for a result
+    kind: inferred
+    sources: [lin-neural-hype]
+    note: >-
+      Ours. Query rewriting with the loop already running leaves the report
+      byte-identical.
+
+  - id: w11-three-rewrites-all-lose
+    text: >-
+      Term dropping takes the answered rate from 0.700 to 0.600, expansion by
+      pseudo-relevance feedback to 0.650, and fan-out with fusion to 0.650
+    kind: derived
+
+  - id: w11-expansion-family-split
+    text: >-
+      Expansion gains two queries and loses three, moving plain 4/5 to 5/5 and
+      vocabulary-gap 2/4 to 3/4 against identifier 4/4 to 3/4, acronym 1/1 to 0/1
+      and superseded 2/2 to 1/2, while the paraphrase family stays at 1/3
+    kind: derived
+
+  - id: w11-targeted-queries-untouched
+    text: >-
+      The two station-4 failures week 10 named, which week 6 had flagged as
+      retrieved by nothing, are unchanged by all three rewrites
+    kind: derived
+
+  - id: w11-feedback-terms-are-noise-for-the-targets
+    text: >-
+      The feedback terms for the targeted queries contain a stopword and a word
+      fragment and no term from the answering vocabulary, while the two queries
+      expansion gains receive exactly the terms a person would have added
+    kind: derived
+
+  - id: w11-routing-headroom
+    text: >-
+      Baseline 0.700, rewrite 0.650 and a perfect router 0.800 give ten points of
+      routing headroom
+    kind: derived
+
+  - id: w11-router-captures-nothing
+    text: >-
+      A retrieval-confidence threshold router captures at most 0 percent of the
+      routing headroom across ten thresholds and -50 percent at four of them, and
+      no threshold beats not routing
+    kind: derived
+
+  - id: w11-signal-does-not-transfer
+    text: >-
+      Retrieval confidence scores AUC 0.83 against answer-in-context and 0.333,
+      strength 0.667, against whether a rewrite helps, on the same queries
+    kind: derived
+
+  - id: w11-five-decisive-queries
+    text: >-
+      Five of twenty queries have a different outcome under the two strategies,
+      so a router's entire evidence base is five observations against a minimum
+      detectable effect of 0.1003 at n=19
+    kind: derived
+
+  - id: w11-family-router-captures-everything
+    text: >-
+      Routing by query family reaches 0.800, capturing 100 percent of the
+      headroom, using a label the eval set carries and a request does not
+    kind: derived
+
+  - id: w11-add-hop-changes-nothing
+    text: >-
+      Adding the superseding document's chunk alongside the superseded one leaves
+      citing_superseded at three, while removing the superseded document's chunks
+      takes it to zero
+    kind: derived
+
+  - id: w11-chunk-is-not-document
+    text: >-
+      Dropping only the stale chunks present in the context fixes four queries of
+      five, because the next chunk of the same withdrawn document is promoted into
+      the freed budget
+    kind: derived
+
+  - id: w11-hop-equals-the-filter
+    text: >-
+      The second hop and week 2's is_current filter both take citing_superseded to
+      zero and the answered rate to 0.650, at 25 retrievals against 20
+    kind: derived
+
+  - id: w11-fix-breaks-the-unchanged-supersession
+    text: >-
+      Both supersession fixes lose exactly the query whose superseded document is
+      still graded relevant, because the obsoleting document did not change that
+      answer
+    kind: derived
+
+  - id: w11-trigger-cost-factor
+    text: >-
+      Triggering the hop on the packed context fires it on 5 of 20 queries against
+      15 of 20 when triggered on a deep shortlist, with no change in outcome
+    kind: derived
+
+  - id: w11-loop-costs-and-buys-nothing
+    text: >-
+      The loop's answered rate is 0.700 at cost multiples of 1.50, 2.20 and 2.40,
+      and no query stops on iteration two at any of three stopping thresholds
+    kind: derived
+
+  - id: w11-unanswerable-runs-to-the-cap
+    text: >-
+      With the stopping bar out of reach the out-of-scope query runs the full cap
+      of twelve retrievals while its confidence falls monotonically from 0.44 to
+      0.11
+    kind: derived
+
+  - id: w11-all-churn
+    text: >-
+      Of 24 post-first iterations across 20 queries, churn — the candidate set
+      changed and the confidence did not improve — counts 24
+    kind: derived
+
+  - id: w11-iteration-count-is-a-signal
+    text: >-
+      The loop's iteration count predicts answerability at AUC 0.214, strength
+      0.786, against query cost's 0.417 measured in week 10
+    kind: derived
+
+  - id: w11-rewrite-breaks-citations
+    text: >-
+      Query rewriting alone causes three queries to begin citing superseded
+      documents, a second-order effect in a metric the rewriting day's report did
+      not carry
+    kind: derived
+
+  - id: w11-interaction-beats-either-stage
+    text: >-
+      Loop and hop together reach answered 0.750 with citing_superseded zero,
+      while the hop alone reaches 0.650 and the loop alone 0.700, so the gain is
+      an interaction rather than a feature
+    kind: derived
+
+  - id: w11-best-agent-is-inside-the-floor
+    text: >-
+      The best configuration improves the answered rate by 0.05 against a minimum
+      detectable effect of 0.1003 at 2.45 times the retrievals, so no
+      configuration produces a detectable change
+    kind: derived
+
+  - id: w11-unknown-model-rewrite
+    text: >-
+      Whether a model-written rewrite moves the paraphrase family, or produces a
+      reachable middle state in the loop's iteration histogram. The measurement
+      machinery is written and the course cannot run it
+    kind: unknown
+
+  - id: w11-unknown-family-predictability
+    text: >-
+      Whether query family is predictable from a request. It is the obvious thing
+      to build next and five decisive queries cannot validate it
+    kind: unknown
+
+  - id: w11-unknown-edges-already-fields
+    text: >-
+      How many of the edges production systems build multi-hop retrieval for are
+      already fields in their metadata. Every one we have been shown, which is not
+      a sample
+    kind: unknown
+
+  - id: w11-unknown-annotation-effect
+    text: >-
+      Whether annotating a superseded chunk's text changes what a real generator
+      cites. Measurable in an afternoon with an API key
+    kind: unknown
+
+  - id: w11-unknown-interaction-durability
+    text: >-
+      Whether the loop-and-hop interaction survives a change to either stage. It
+      is the best number in the course and the least durable thing in the
+      repository
+    kind: unknown
