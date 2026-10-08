@@ -156,6 +156,18 @@ much.
 
 ---
 
-## Weeks 11–12
+## Week 11 — Agentic retrieval
+
+**Day 1** · [The technique aimed at the failure](week-11/day-1/aimed-at-the-failure.md) · [Query drift](week-11/day-1/query-drift.md)
+
+**Day 2** · [The ceiling comes first](week-11/day-2/the-ceiling-comes-first.md) · [A proxy is validated for one decision](week-11/day-2/one-decision-at-a-time.md)
+
+**Day 3** · [The fact in the other document](week-11/day-3/the-fact-in-the-other-document.md) · [Superseded is not wrong](week-11/day-3/superseded-is-not-wrong.md)
+
+**Day 4** · [Three things, none of them the model](week-11/day-4/none-of-them-the-model.md) · [Churn is not progress](week-11/day-4/churn-is-not-progress.md)
+
+---
+
+## Week 12
 
 Not yet written. See `instructor/PLAN.md` for the build order.
