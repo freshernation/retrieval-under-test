@@ -1,0 +1,524 @@
+# Week 10's reading, recorded properly.
+#
+# This is the week the course has to measure time, and time is the one quantity
+# it cannot measure honestly — a millisecond is a property of a laptop. So the
+# stipulated-model discipline (week 7, applied to a generator in week 8 and a
+# judge in week 9) is applied here to the clock and the tokeniser: the shape is
+# sourced, the values are ours, and the fence forbids reporting them.
+#
+# Two pricing sources are included and both carry the obvious conflict. They are
+# cited for what a rate is and for nothing else.
+
+system: Week 10 reading — latency, caching, tracing and cost
+
+sources:
+  - id: dean-barroso-2013
+    title: The Tail at Scale
+    url: https://doi.org/10.1145/2408776.2408794
+    publisher: Communications of the ACM
+    author: Jeffrey Dean and Luiz André Barroso
+    kind: paper
+    tier: 1
+    published: 2013
+    retrieved: 2026-10-07
+    note: >-
+      Why tail latency becomes system latency once a request fans out, and why
+      averages are the wrong summary. Day 1's framing.
+
+  - id: sre-book
+    title: "Site Reliability Engineering, chapter 6: Monitoring Distributed Systems"
+    url: https://sre.google/sre-book/monitoring-distributed-systems/
+    publisher: Google
+    author: Beyer, Jones, Petoff and Murphy (eds.)
+    kind: book
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-07
+    note: >-
+      The four golden signals, distributions over averages, the indicator and
+      diagnostic distinction, and the argument for few actionable alerts.
+
+  - id: sigelman-2010
+    title: "Dapper, a Large-Scale Distributed Systems Tracing Infrastructure"
+    url: https://research.google/pubs/pub36356/
+    publisher: Google
+    author: Sigelman et al.
+    kind: paper
+    tier: 1
+    published: 2010
+    retrieved: 2026-10-07
+    note: >-
+      Tracing as built and operated, including the sampling they needed and what
+      it cost them. The honesty about sampling is the useful part.
+
+  - id: otel-spec
+    title: OpenTelemetry trace API specification
+    url: https://opentelemetry.io/docs/specs/otel/trace/api/
+    publisher: Cloud Native Computing Foundation
+    kind: documentation
+    tier: 1
+    published: 2025
+    retrieved: 2026-10-07
+    note: >-
+      Spans and typed attributes, vendor-neutral. Day 3's `Trace` is a stripped
+      model of this and says so.
+
+  - id: breslau-1999
+    title: Web Caching and Zipf-like Distributions — Evidence and Implications
+    url: https://doi.org/10.1109/INFCOM.1999.749260
+    publisher: IEEE INFOCOM
+    author: Breslau, Cao, Fan, Phillips and Shenker
+    kind: paper
+    tier: 1
+    published: 1999
+    retrieved: 2026-10-07
+    note: >-
+      Request popularity is Zipf-like, and hit rate grows roughly
+      logarithmically in cache size under that assumption. The reason skew 1 is
+      a respectable default and not a measurement of your traffic.
+
+  - id: rfc-9111
+    title: "HTTP Caching"
+    url: https://www.rfc-editor.org/rfc/rfc9111.html
+    publisher: IETF
+    author: Fielding, Nottingham and Reschke (eds.)
+    kind: standard
+    tier: 1
+    published: 2022
+    retrieved: 2026-10-07
+    note: >-
+      Freshness lifetime, staleness and revalidation, specified. Not in the gold
+      corpus, and from the same series — which makes the point that caching
+      correctness was solved and written down decades ago.
+
+  - id: rfc-8259
+    title: The JavaScript Object Notation (JSON) Data Interchange Format
+    url: https://www.rfc-editor.org/rfc/rfc8259.html
+    publisher: IETF
+    author: Tim Bray (ed.)
+    kind: standard
+    tier: 1
+    published: 2017
+    retrieved: 2026-10-07
+    note: >-
+      Obsoletes RFC 7159 and reverses its UTF-8 guidance. In the gold corpus,
+      and the document day 2's staleness demonstration removes and restores.
+
+  - id: lucene-scoring
+    title: Apache Lucene documentation — scoring and query internals
+    url: https://lucene.apache.org/core/documentation.html
+    publisher: Apache Software Foundation
+    kind: documentation
+    tier: 1
+    published: 2025
+    retrieved: 2026-10-07
+    note: >-
+      What an index does per query term, and the block-skipping and early
+      termination that make a postings count an upper bound.
+
+  - id: robertson-zaragoza-2009
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    url: https://doi.org/10.1561/1500000019
+    publisher: Foundations and Trends in Information Retrieval
+    author: Stephen Robertson and Hugo Zaragoza
+    kind: paper
+    tier: 1
+    published: 2009
+    retrieved: 2026-10-07
+    note: Document frequency is the length of a term's postings list.
+
+  - id: liu-2024
+    title: "Lost in the Middle: How Language Models Use Long Contexts"
+    url: https://doi.org/10.1162/tacl_a_00638
+    publisher: Transactions of the ACL
+    author: Liu et al.
+    kind: paper
+    tier: 1
+    published: 2024
+    retrieved: 2026-10-07
+    note: >-
+      Longer context is not monotonically better. Week 7 used this for ordering;
+      day 4 uses it to say that the 4,000-word budget's retrieval-side gain may
+      not survive generation.
+
+  - id: squad-2016
+    title: "SQuAD: 100,000+ Questions for Machine Comprehension of Text"
+    url: https://arxiv.org/abs/1606.05250
+    publisher: arXiv
+    author: Rajpurkar, Zhang, Lopyrev and Liang
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-07
+    note: Answer spans as ground truth. Each branch of the attribution walk tests against them.
+
+  - id: anthropic-pricing
+    title: Anthropic model pricing
+    url: https://www.anthropic.com/pricing
+    publisher: Anthropic
+    kind: documentation
+    tier: 1
+    published: 2026
+    retrieved: 2026-10-07
+    conflict: true
+    conflict_note: >-
+      The vendor publishing its own rates, and it sells the tokens. Cited for
+      what a rate is and for nothing else.
+
+  - id: openai-pricing
+    title: OpenAI API pricing
+    url: https://openai.com/api/pricing/
+    publisher: OpenAI
+    kind: documentation
+    tier: 1
+    published: 2026
+    retrieved: 2026-10-07
+    conflict: true
+    conflict_note: As above, and included so that neither vendor stands alone.
+
+claims:
+  - id: w10-tail-dominates
+    text: >-
+      In a system where a request fans out, the slowest component response
+      determines the request's latency, so tail latency becomes the system's
+      latency and worsens with fan-out
+    kind: known
+    sources: [dean-barroso-2013]
+
+  - id: w10-distributions-not-averages
+    text: >-
+      Latency should be summarised as a distribution rather than an average, and
+      monitoring signals chosen for what they indicate rather than for
+      availability
+    kind: known
+    sources: [sre-book, dean-barroso-2013]
+
+  - id: w10-indicator-vs-diagnostic
+    text: >-
+      An indicator says whether the system is doing its job and triggers work; a
+      diagnostic explains what happened once an indicator fired
+    kind: known
+    sources: [sre-book]
+
+  - id: w10-postings-cost-model
+    text: >-
+      An inverted index consults one postings list per distinct query term, and a
+      term's document frequency is the length of that list
+    kind: known
+    sources: [robertson-zaragoza-2009, lucene-scoring]
+
+  - id: w10-engines-skip
+    text: >-
+      Production search engines skip blocks and terminate early rather than
+      reading each postings list in full, so a postings count is an upper bound
+    kind: known
+    sources: [lucene-scoring]
+
+  - id: w10-spans-carry-attributes
+    text: >-
+      A trace is a tree of spans per request, each carrying typed attributes, and
+      production deployments sample rather than retain every trace
+    kind: known
+    sources: [otel-spec, sigelman-2010]
+
+  - id: w10-zipf-traffic
+    text: >-
+      Web request popularity is Zipf-like, and under that assumption cache hit
+      rate grows roughly logarithmically with cache size
+    kind: known
+    sources: [breslau-1999]
+
+  - id: w10-http-specifies-staleness
+    text: >-
+      HTTP specifies freshness lifetime, staleness and revalidation as required
+      mechanisms rather than leaving them to convention
+    kind: known
+    sources: [rfc-9111]
+
+  - id: w10-8259-reverses-7159
+    text: RFC 8259 obsoletes RFC 7159 and changes its guidance on UTF-8 encoding
+    kind: known
+    sources: [rfc-8259]
+
+  - id: w10-long-context-not-monotonic
+    text: >-
+      Model performance over long contexts is not monotonic in context length,
+      with material degradation for information placed mid-context
+    kind: known
+    sources: [liu-2024]
+
+  - id: w10-answer-spans-are-the-ground-truth
+    text: >-
+      Answer-span annotation is the ground truth against which availability of an
+      answer in a retrieved context is decided
+    kind: known
+    sources: [squad-2016]
+
+  - id: w10-published-rates-exist
+    text: Vendors publish dated per-token rates for model inference
+    kind: known
+    sources: [anthropic-pricing, openai-pricing]
+
+  - id: w10-report-work-not-clock
+    text: >-
+      A reported performance figure should be a work count rather than a
+      wall-clock reading, because a count is a property of the design and a
+      reading is a property of the machine it ran on
+    kind: inferred
+    sources: [sre-book, lucene-scoring]
+    note: >-
+      Ours. The same stipulated-model discipline week 7 introduced, applied to
+      the clock.
+
+  - id: w10-budget-per-stage
+    text: >-
+      A latency budget should be stated per stage rather than per request,
+      because a passing total cannot say which stage is nearly failing, and an
+      unbudgeted stage should count as over budget
+    kind: inferred
+    sources: [sre-book, dean-barroso-2013]
+    note: Ours.
+
+  - id: w10-pruning-widens-the-spread
+    text: >-
+      Early termination reduces the cost of queries with rare discriminating
+      terms more than broad ones, so a postings count over-estimates expensive
+      queries more than cheap ones and the true cost spread is wider than
+      measured
+    kind: inferred
+    sources: [lucene-scoring]
+    note: Ours, and unmeasured on this corpus.
+
+  - id: w10-eval-set-cannot-measure-a-cache
+    text: >-
+      An eval set cannot measure a cache, because a judgment set is built without
+      duplicates while a cache's value is a property of repetition over time
+    kind: inferred
+    sources: [breslau-1999]
+    note: >-
+      Ours. Demonstrated here: 26 queries, 26 distinct normalised keys, hit rate
+      zero.
+
+  - id: w10-hit-rate-overstates-work-saved
+    text: >-
+      Popular queries are systematically shorter and therefore cheaper, so a hit
+      rate over-states the work a cache removes in real traffic
+    kind: inferred
+    sources: [breslau-1999]
+    note: >-
+      Ours. The direction follows from this corpus's cost spread rather than from
+      any measurement of real traffic.
+
+  - id: w10-cache-changes-what-the-system-says
+    text: >-
+      A cache over a mutable corpus changes what the system says rather than only
+      how fast it says it, so it belongs in the configuration and the run id, and
+      a cached run may not be compared against an uncached one
+    kind: inferred
+    sources: [rfc-9111]
+    note: Ours, following week 7's default-off rule for optional stages.
+
+  - id: w10-ids-are-the-bridge
+    text: >-
+      The ids each stage chose are the highest-value field in a retrieval trace,
+      because they permit post-hoc failure attribution against an eval set
+      without reproducing a request that can no longer be reproduced
+    kind: inferred
+    sources: [otel-spec, sigelman-2010, squad-2016]
+    note: Ours.
+
+  - id: w10-attributes-are-cut-first
+    text: >-
+      Span attributes are the first field dropped when trace volume is trimmed,
+      because they are the largest and the least watched
+    kind: inferred
+    sources: [sigelman-2010]
+    note: Ours, from practice rather than from a study.
+
+  - id: w10-aggregate-cannot-see-the-member
+    text: >-
+      An aggregate over a retrieved context cannot identify which member of it
+      was load-bearing, which is the same limitation as answer recall in week 7
+      and faithfulness in week 9
+    kind: inferred
+    sources: [sre-book]
+    note: Ours. The third instance is what makes it a pattern rather than a quirk.
+
+  - id: w10-no-station-three-branch
+    text: >-
+      An index failure is not separable from a retrieval failure in a trace of
+      spans and ids, so an attribution walk should have no station 3 branch
+      rather than a test that pretends otherwise
+    kind: inferred
+    sources: [otel-spec]
+    note: Ours.
+
+  - id: w10-over-provisioned-is-the-normal-state
+    text: >-
+      Over-provisioned context budgets are the expected state of a production
+      retrieval system, because every observable signal either stays flat or
+      improves when the budget is raised
+    kind: inferred
+    sources: [sre-book, liu-2024]
+    note: Ours. Demonstrated by the 800-to-1200-word step.
+
+  - id: w10-price-is-an-argument
+    text: >-
+      A per-token price is the fastest-ageing figure in a technical report about
+      this technology and should be an argument rather than a constant, with any
+      absolute cost reported alongside the rate that produced it
+    kind: inferred
+    sources: [anthropic-pricing, openai-pricing]
+    note: >-
+      Ours. A figure reported with its rate is correctable; one reported alone
+      becomes silently wrong.
+
+  - id: w10-identifier-text-tokenises-worse
+    text: >-
+      Identifier-heavy text fragments into more tokens per word than prose, and
+      unevenly across query families, so per-query cost figures are wrong by a
+      query-dependent amount
+    kind: inferred
+    sources: [anthropic-pricing]
+    note: Ours, and unmeasured here because the lab has no real tokeniser.
+
+  - id: w10-cost-spread
+    text: >-
+      Lexical work on this query set ranges from 4 postings to 1,075 — a factor
+      of 269 — while exhaustive dense search costs 266 comparisons for every
+      query
+    kind: derived
+
+  - id: w10-mean-under-provisions
+    text: >-
+      With mean work 423 and p95 829, capacity sized on the mean is 96 percent
+      short of the 95th percentile
+    kind: derived
+
+  - id: w10-p95-is-one-request
+    text: >-
+      On twenty observations the p95 is the nineteenth value and the p99 the
+      twentieth, so they are adjacent in the sorted data and the 30 percent gap
+      between 829 and 1,075 rests on no observation at all
+    kind: derived
+
+  - id: w10-cost-is-not-a-quality-signal
+    text: >-
+      Query cost predicts whether the answer reached the context at AUC 0.417,
+      strength 0.583, under this course's 0.7 floor, and a median split gives
+      0.67 against 0.73 with an MDE of 0.10
+    kind: derived
+
+  - id: w10-unbounded-hit-rate-is-distinct-over-requests
+    text: >-
+      An unbounded cache's hit rate equals one minus distinct over requests and is
+      therefore independent of the popularity distribution, which is why uniform
+      and Zipf streams both give 0.800 here
+    kind: derived
+
+  - id: w10-same-cache-four-fold
+    text: >-
+      One LRU at capacity five scores hit rates of 0.19, 0.30 and 0.79 under
+      assumed skews of 0, 1 and 2 over the same twenty queries — a four-fold
+      range decided by one parameter
+    kind: derived
+
+  - id: w10-work-saved-diverges-from-hit-rate
+    text: >-
+      Caching the dearest ten of twenty queries removes 82 percent of the work
+      against 18 percent for the cheapest ten, at an identical hit rate of 0.50
+    kind: derived
+
+  - id: w10-stale-context-overlap
+    text: >-
+      A cached pre-8259 context for the UTF-8 query contains no chunk from the
+      correcting document while a fresh build ranks it second, and an overlap
+      check over the two contexts scores 0.833
+    kind: derived
+
+  - id: w10-attribution-finds-week-eights-six
+    text: >-
+      The attribution walk names a station for exactly the six queries week 8
+      measured as confidently wrong and clears the other fourteen, without being
+      given that list
+    kind: derived
+
+  - id: w10-nothing-at-station-six
+    text: >-
+      Of six attributed failures, one is the corpus, two the shortlist and three
+      the word budget; stations 2 and 6 — the chunker and the prompt — have none
+    kind: derived
+
+  - id: w10-clean-trace-is-not-a-correct-answer
+    text: >-
+      A query whose answer spans reach the context and whose answer is perfectly
+      faithful is attributed no failing station even when the answer is grounded
+      in a withdrawn specification, so station 7 rather than any pipeline stage is
+      where that failure belongs
+    kind: derived
+
+  - id: w10-wasteful-step
+    text: >-
+      Raising the word budget from 800 to 1,200 raises tokens per query from 885
+      to 1,403, a 58 percent increase, while the answered rate stays at 0.70, so
+      the marginal cost per additional answered query is infinite
+    kind: derived
+
+  - id: w10-average-cannot-find-the-cliff
+    text: >-
+      Average cost per answered query rises monotonically from 372 to 5,791 across
+      the whole budget curve and therefore cannot locate the step that buys
+      nothing, while marginal cost ranges from 1,411 to 24,768 tokens and does
+    kind: derived
+
+  - id: w10-price-invariant-ranking
+    text: >-
+      A design comparison expressed in tokens is invariant to the price level,
+      since both alternatives scale by the same rate, whereas an absolute forecast
+      is not
+    kind: derived
+
+  - id: w10-span-total-is-not-latency
+    text: >-
+      A sum of spans excludes inter-span time, so a span total below the measured
+      request latency indicates queueing or acquisition the trace does not
+      instrument
+    kind: derived
+
+  - id: w10-unknown-real-postings-to-time-ratio
+    text: >-
+      The real ratio between postings touched and wall-clock time in any
+      production engine. It depends on cache residency, which depends on traffic
+    kind: unknown
+
+  - id: w10-unknown-traffic-skew
+    text: >-
+      The query-popularity skew of any real retrieval product. Measurable with one
+      counter over hashed query keys and, as far as we can find, not reported
+    kind: unknown
+
+  - id: w10-unknown-traced-ids
+    text: >-
+      What fraction of production retrieval traces record the retrieved ids. Every
+      vendor example we have read traces durations and token counts
+    kind: unknown
+
+  - id: w10-unknown-context-budget
+    text: >-
+      The right retrieved-context budget for a corpus. There is no primary source,
+      as there was none for chunk size in week 4, and the gap sits in the same
+      place in the stack
+    kind: unknown
+
+  - id: w10-unknown-future-token-price
+    text: >-
+      What a token will cost when this is read, and therefore every absolute
+      figure published about the cost of serving retrieval-augmented generation
+    kind: unknown
+
+  - id: w10-unknown-empty-station-six-generality
+    text: >-
+      Whether an empty station 6 generalises past this corpus and this simulated
+      generator. It will not in general; what generalises is running the walk
+      before choosing the work
+    kind: unknown

@@ -119,3 +119,51 @@ said.
 
 It takes ten seconds. It is the entire difference between knowing something and having
 read something, and by week 4 you will not be able to read a RAG blog post any other way.
+
+---
+
+## `--live`: real services and a real model
+
+**Weeks 1 to 9 need nothing.** No API key, no network, no GPU, no Docker. That is
+deliberate: a course whose labs need a paid account is a course some people cannot take,
+and every number in those weeks is exact on every machine because of it.
+
+Week 10 is where the course admits what it has been standing in for.
+
+### What was simulated, and what replaces it
+
+| Weeks | Stood in for a model with | Replaced by |
+|---|---|---|
+| 5+ | latent semantic analysis over the corpus | a real embedding model |
+| 8+ | `raglab.generator.SimulatedGenerator` | a real generator |
+| 9+ | `raglab.judge.SimulatedJudge` | a real judge |
+| 10 | postings and comparisons counted | a real engine, timed |
+
+Each of those is declared where it is used, and the articles say exactly what transfers
+(the machinery, the comparisons, the direction) and what does not (any value).
+
+### The rule, and it is the whole point of this section
+
+**A live run and an offline run are two different systems.**
+
+They do not go in the same table. A live number may not be compared against an offline one,
+a live run gets its own run id, and `--live` goes in the config exactly like the cache does.
+If you want to know whether a week-8 comparison survives a real model, **re-run both sides
+live** — that is the experiment, and it is worth doing.
+
+Some comparisons will not survive. That is a result, not a disappointment, and it is the
+most interesting thing you can do with your first API key.
+
+### What you will need
+
+- a model API key, for generation and judging
+- an embedding model, hosted or local
+- optionally a real search engine and a cache, if you want week 10's timings to mean
+  anything about a real engine
+- a budget, because week 10 day 4 is about what this costs and the answer is not zero
+
+### What stays true without any of it
+
+Every lab, every test, every metric and every finding in weeks 1 to 9. You can take and
+finish this entire course with no account anywhere, and the only thing you will be missing
+is the confirmation of which comparisons move.

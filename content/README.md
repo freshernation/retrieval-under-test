@@ -144,6 +144,18 @@ much.
 
 ---
 
-## Weeks 10–12
+## Week 10 — Production
+
+**Day 1** · [The mean is not the number](week-10/day-1/the-mean-is-not-the-number.md) · [Count the work, not the seconds](week-10/day-1/count-the-work-not-the-seconds.md)
+
+**Day 2** · [A hit rate is a claim about traffic](week-10/day-2/a-hit-rate-is-a-claim-about-traffic.md) · [The cached answer that outlives its correction](week-10/day-2/the-cached-answer-that-outlives-its-correction.md)
+
+**Day 3** · [The field that costs nothing](week-10/day-3/the-field-that-costs-nothing.md) · [Attribution by machine](week-10/day-3/attribution-by-machine.md)
+
+**Day 4** · [The step that buys nothing](week-10/day-4/the-step-that-buys-nothing.md) · [The fastest-ageing number](week-10/day-4/the-fastest-ageing-number.md)
+
+---
+
+## Weeks 11–12
 
 Not yet written. See `instructor/PLAN.md` for the build order.
