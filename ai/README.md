@@ -2,9 +2,10 @@
 
 One AI, seven characters. Which one you open matters more than what you type into it.
 
-Five come from the ALTER framework (`instructor/alter-framework-prompts.md`) — Advisor,
-Librarian, Tutor, Editor, Roommate — plus two this course needs: an **Annotator** and an
-**Adversary**.
+Five of them are general — Librarian, Tutor, Editor, Roommate and Defend — and two are
+what this course specifically needs: an **Annotator**, because writing relevance judgments
+is week 1's work and a second opinion is worth more than a first one, and an **Adversary**,
+because rule 3 says a system nobody has attacked is a demo.
 
 The **Advisor** role is missing on purpose. This repo *is* the advisor's output: the
 destination, the sequence, the cut list and the milestones were decided before you
