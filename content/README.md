@@ -9,9 +9,9 @@ publishable as standalone pages, and every relative link resolves within this tr
 
 | | |
 |---|---|
-| **Articles** | 72 |
-| **Weeks covered** | 1–9 |
-| **Weeks planned** | 12 |
+| **Articles** | 96 |
+| **Weeks covered** | 1–12 |
+| **Recorded claims** | 361 |
 
 ---
 
@@ -168,6 +168,19 @@ much.
 
 ---
 
-## Week 12
+## Week 12 — The report and the review
 
-Not yet written. See `instructor/PLAN.md` for the build order.
+**Day 1** · [Ranked, not sorted](week-12/day-1/ranked-not-sorted.md) · [The number and its floor](week-12/day-1/the-number-and-its-floor.md)
+
+**Day 2** · [What makes a card transfer](week-12/day-2/what-makes-a-card-transfer.md) · [Thirty cards, and the twelve that matter](week-12/day-2/the-twelve-that-matter.md)
+
+**Day 3** · [Under a minute](week-12/day-3/under-a-minute.md) · [What you would not do](week-12/day-3/what-you-would-not-do.md)
+
+**Day 4** · [What expires and what does not](week-12/day-4/what-expires.md) · [The handover](week-12/day-4/the-handover.md)
+
+---
+
+## All twelve weeks are written.
+
+96 articles, 54 labs, 682 lab tests. Week 12 has no labs, by design — everything in it is
+work a machine cannot check, which is why it is last.
