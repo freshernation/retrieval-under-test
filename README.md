@@ -68,8 +68,8 @@ measuring.
 | 8 | **Generation and grounding** | **Project 2** — the full pipeline, cited answers |
 | 9 | Evaluation at depth | An eval harness, and a gate that blocks a regression |
 | 10 | Production: latency, cache, tracing, cost | The pipeline on real services, traced and priced |
-| 11 | **Agentic retrieval** | **Project 3** — an agent that beats week 8, measured |
-| 12 | The report and the review | Ten scored failure clinics |
+| 11 | **Agentic retrieval** | **Project 3** — an agent, measured against week 8, with its cost |
+| 12 | The report and the review | The report, the failure library, and ten scored clinics |
 
 Week 1 is where most people's assumptions break — they arrive wanting to build and spend
 five days labelling. Week 8 is the keystone. Week 5 is the one you will want to argue

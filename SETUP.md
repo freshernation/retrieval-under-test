@@ -67,15 +67,17 @@ on your laptop:
 - the corpus is in the repo, and `tools/build_corpus.py --check` proves it has not moved
 - the embeddings for week 5 onwards are **precomputed and frozen** into `.npy` files, so
   you build the index and the search without ever calling a model
-- the language-model responses for weeks 8 and 9 are **recorded cassettes**, so
-  generation tests are deterministic and free
+- generation and judging in weeks 8 and 9 run on **stipulated models** —
+  `raglab.generator` and `raglab.judge` — declared openly where they are used, with
+  switchable failure modes and no network
 
-You may run against live models at any point — `raglab.cassette` has a `--live` mode —
-and by week 8 you should. But nothing is *graded* on a live call, because a test whose
-result depends on a model's sampling is not a test.
+You may run against live models at any point and by week 8 you should. But nothing is
+*graded* on a live call, because a test whose result depends on a model's sampling is not
+a test — and a live run is a **different system** from an offline one, so the two do not go
+in the same table.
 
-Docker, real services and real API keys arrive in **week 10**, and `SETUP-week-10.md`
-covers them then.
+Real services and real API keys arrive in **week 10**. See the `--live` section
+at the end of this file.
 
 ## 5. A writing tool you will actually open
 

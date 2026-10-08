@@ -1,0 +1,504 @@
+# Week 12's reading, recorded properly.
+#
+# The last file, and the thinnest sourcing in the course — deliberately. Week 12
+# teaches writing, editing and diagnosis, and almost none of that has a primary
+# literature. What exists is documentation practice (model cards, datasheets,
+# postmortem culture) and the IR-evaluation tradition, and those are cited for
+# the practices they established rather than for any result.
+#
+# The seven-station walk, the failure-card format and the clinic drill are this
+# course's own teaching devices and have no sources at all. Every claim about
+# them is marked inferred and says so.
+
+system: Week 12 reading — the report, the library, the clinics and what expires
+
+sources:
+  - id: sre-book-postmortem
+    title: "Site Reliability Engineering, chapter 15: Postmortem Culture"
+    url: https://sre.google/sre-book/postmortem-culture/
+    publisher: Google
+    author: Beyer, Jones, Petoff and Murphy (eds.)
+    kind: book
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-08
+    note: >-
+      Postmortems written to be acted on, kept as a durable searchable corpus,
+      and outliving their authors. The model for both the report and the failure
+      library.
+
+  - id: sre-book
+    title: "Site Reliability Engineering, chapter 6: Monitoring Distributed Systems"
+    url: https://sre.google/sre-book/monitoring-distributed-systems/
+    publisher: Google
+    author: Beyer, Jones, Petoff and Murphy (eds.)
+    kind: book
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-08
+    note: Indicator against diagnostic, which clinic 10 turns on.
+
+  - id: mitchell-2019
+    title: Model Cards for Model Reporting
+    url: https://doi.org/10.1145/3287560.3287596
+    publisher: "ACM FAccT"
+    author: Mitchell et al.
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-10-08
+    note: >-
+      Intended use and limitations as required front-matter sections rather than
+      appendices, and claims scoped to a model version. The convention day 1's
+      section order borrows.
+
+  - id: gebru-2021
+    title: Datasheets for Datasets
+    url: https://arxiv.org/abs/1803.09010
+    publisher: Communications of the ACM
+    author: Gebru et al.
+    kind: paper
+    tier: 1
+    published: 2021
+    retrieved: 2026-10-08
+    note: >-
+      Fixed fields, provenance, and the uses a dataset is *not* for. The
+      argument for the failure card's six fields and for the uncardable list
+      sitting at the front.
+
+  - id: sculley-2015
+    title: Hidden Technical Debt in Machine Learning Systems
+    url: https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
+    publisher: NeurIPS
+    author: Sculley et al.
+    kind: paper
+    tier: 1
+    published: 2015
+    retrieved: 2026-10-08
+    note: >-
+      Failure modes that are properties of a system's shape rather than of its
+      code, configuration debt, decaying dependencies, and undeclared consumers.
+      Days 2 and 4 both rest on it.
+
+  - id: voorhees-2002
+    title: The Philosophy of Information Retrieval Evaluation
+    url: https://doi.org/10.1007/3-540-45691-0_34
+    publisher: "CLEF (Springer LNCS)"
+    author: Ellen M. Voorhees
+    kind: paper
+    tier: 1
+    published: 2002
+    retrieved: 2026-10-08
+    note: >-
+      A test collection supports relative comparisons under stated conditions
+      and does not establish absolute quality. The honest caveat on all twelve
+      cards.
+
+  - id: cohen-1988
+    title: Statistical Power Analysis for the Behavioral Sciences
+    url: https://doi.org/10.4324/9780203771587
+    publisher: Routledge
+    author: Jacob Cohen
+    kind: book
+    tier: 2
+    published: 1988
+    retrieved: 2026-10-08
+    note: Power before the experiment. The MDE audit's arithmetic.
+
+  - id: lin-neural-hype
+    title: "The Neural Hype and Comparisons Against Weak Baselines"
+    url: https://doi.org/10.1145/3308774.3308781
+    publisher: SIGIR Forum
+    author: Jimmy Lin
+    kind: paper
+    tier: 1
+    published: 2019
+    retrieved: 2026-10-08
+    note: >-
+      Published improvements that turn out to be about a baseline rather than a
+      method. The field-scale version of the MDE audit.
+
+  - id: zheng-2023
+    title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+    url: https://arxiv.org/abs/2306.05685
+    publisher: arXiv
+    author: Zheng et al.
+    kind: paper
+    tier: 1
+    published: 2023
+    retrieved: 2026-10-08
+    note: Judge agreement rates reported against a baseline. Clinic 6.
+
+  - id: rfc-8259
+    title: The JavaScript Object Notation (JSON) Data Interchange Format
+    url: https://www.rfc-editor.org/rfc/rfc8259.html
+    publisher: IETF
+    author: Tim Bray (ed.)
+    kind: standard
+    tier: 1
+    published: 2017
+    retrieved: 2026-10-08
+    note: Obsoletes RFC 7159 and reverses its UTF-8 guidance. Clinic 2.
+
+claims:
+  - id: w12-postmortems-are-acted-on
+    text: >-
+      Postmortems are written to be acted on, with specific remediation rather
+      than narrative, and are kept as a durable searchable corpus that outlives
+      their authors
+    kind: known
+    sources: [sre-book-postmortem]
+
+  - id: w12-limitations-are-front-matter
+    text: >-
+      Model documentation places intended use and limitations as required
+      front-matter sections rather than appendices, and scopes claims to a model
+      version
+    kind: known
+    sources: [mitchell-2019]
+
+  - id: w12-datasheets-record-what-it-is-not-for
+    text: >-
+      Dataset documentation uses fixed fields and records provenance and the uses
+      a dataset is not appropriate for
+    kind: known
+    sources: [gebru-2021]
+
+  - id: w12-shape-level-failures
+    text: >-
+      The expensive failure modes in machine-learning systems are properties of
+      the system's shape — configuration debt, decaying dependencies, undeclared
+      consumers — rather than of any line of code
+    kind: known
+    sources: [sculley-2015]
+
+  - id: w12-collection-supports-relative-comparison
+    text: >-
+      A test collection supports relative comparisons under stated conditions
+      and does not establish absolute quality
+    kind: known
+    sources: [voorhees-2002]
+
+  - id: w12-power-before-the-experiment
+    text: Power analysis belongs before an experiment rather than after it
+    kind: known
+    sources: [cohen-1988]
+
+  - id: w12-published-gains-vanish
+    text: >-
+      A substantial fraction of published retrieval improvements do not survive
+      comparison against properly tuned baselines
+    kind: known
+    sources: [lin-neural-hype]
+
+  - id: w12-judge-needs-a-baseline
+    text: >-
+      Model-judge agreement with human raters must be reported against a baseline
+      to be interpretable
+    kind: known
+    sources: [zheng-2023]
+
+  - id: w12-8259-reverses-7159
+    text: RFC 8259 obsoletes RFC 7159 and reverses its UTF-8 guidance
+    kind: known
+    sources: [rfc-8259]
+
+  - id: w12-indicator-vs-diagnostic
+    text: >-
+      An indicator says whether the system is doing its job and triggers work; a
+      diagnostic explains what happened once an indicator fired
+    kind: known
+    sources: [sre-book]
+
+  - id: w12-ranked-not-sorted
+    text: >-
+      A report should be ordered by the action it requires of the reader rather
+      than by chronology or by effort, and the test of a first line is what
+      somebody would do about it
+    kind: inferred
+    sources: [sre-book-postmortem, mitchell-2019]
+    note: Ours.
+
+  - id: w12-limitations-before-numbers
+    text: >-
+      Limitations placed before results read as scope and placed after read as
+      hedging, so the same information in two orders produces two different
+      beliefs in the reader
+    kind: inferred
+    sources: [mitchell-2019, gebru-2021]
+    note: >-
+      Ours, and the structural reason the model-card convention works: a required
+      section survives deadline pressure in a way an appendix does not.
+
+  - id: w12-blocker-needs-a-magnitude
+    text: >-
+      A blocker without a magnitude for the cost of inaction cannot be argued
+      with and is therefore ignorable, so an approximate magnitude is
+      load-bearing
+    kind: inferred
+    sources: [sre-book-postmortem]
+    note: Ours.
+
+  - id: w12-number-with-its-floor-is-auditable
+    text: >-
+      A number reported with its sample size and detectable floor can be audited
+      later, while one reported alone can only be withdrawn
+    kind: inferred
+    sources: [cohen-1988, lin-neural-hype]
+    note: >-
+      Ours, and the entire case for the discipline. The course's own MDE audit is
+      possible only because every interval was reported at the time.
+
+  - id: w12-mde-is-a-planning-tool
+    text: >-
+      The minimum detectable effect is a planning tool rather than a scoring
+      rule, and computed before the work it says whether the work can produce a
+      readable answer
+    kind: inferred
+    sources: [cohen-1988]
+    note: >-
+      Ours. Week 11 spent four days on effects half the size of the floor, and a
+      Monday calculation would have said so.
+
+  - id: w12-stop-working-field-makes-a-card
+    text: >-
+      The conditions under which a fix stops working is the field that makes a
+      failure card transferable and falsifiable, and is the field most often left
+      blank
+    kind: inferred
+    sources: [gebru-2021]
+    note: Ours. The failure-card format is this course's own and has no source.
+
+  - id: w12-a-bug-is-not-a-failure-mode
+    text: >-
+      A code defect is not a failure mode, because shape-level failures recur
+      across systems and code defects do not, so a library of the second kind is
+      a changelog
+    kind: inferred
+    sources: [sculley-2015]
+    note: Ours, by analogy.
+
+  - id: w12-generalise-without-losing-falsifiability
+    text: >-
+      A corpus-specific card is worth keeping only if its failure can be restated
+      as a class that remains falsifiable, and generalising by removing detail
+      produces something worse than the specific version
+    kind: inferred
+    sources: [voorhees-2002]
+    note: Ours.
+
+  - id: w12-mechanism-not-number
+    text: >-
+      The transferable part of a finding is the mechanism rather than the number,
+      and the instinct is to keep the number because it is the part the work went
+      into
+    kind: inferred
+    sources: [voorhees-2002, lin-neural-hype]
+    note: Ours. Four worked cuts in day 2's second article are the evidence.
+
+  - id: w12-uncardable-list-goes-first
+    text: >-
+      A library whose uncardable failures are listed last will be read as
+      complete, by the same ordering mechanism that makes a report's trailing
+      limitations go unread
+    kind: inferred
+    sources: [gebru-2021, mitchell-2019]
+    note: Ours.
+
+  - id: w12-fast-diagnosis-decides-the-work
+    text: >-
+      The two-minute diagnosis decides what gets worked on and therefore carries
+      the cost, while the careful version with the eval set confirms it afterwards
+    kind: inferred
+    sources: [sre-book-postmortem]
+    note: Ours.
+
+  - id: w12-wrong-work-after-right-diagnosis
+    text: >-
+      The characteristic failure of applied retrieval work is correct diagnosis
+      followed by downstream work — rewriting the prompt, changing the chunker,
+      buying a better model, adding dashboards — and declining it has to be
+      practised rather than merely understood
+    kind: inferred
+    sources: [sre-book-postmortem, sre-book]
+    note: Ours. The clinics exist for this and the third answer is scored hardest.
+
+  - id: w12-station-four-is-over-used
+    text: >-
+      Station 4 is systematically over-attributed because retrieval is tunable
+      and a retrieval failure is nobody's fault in particular, and it steals
+      attributions from stations 1 and 7
+    kind: inferred
+    sources: [sre-book-postmortem]
+    note: >-
+      Ours, from running these clinics, and the weakest-supported claim in the
+      file. The source bears only on diagnosis being a practised skill with
+      recorded patterns; the attribution bias itself rests on our own observation
+      and nothing else. The companion `unknown` claim says so.
+
+  - id: w12-misspecified-metrics-look-fine
+    text: >-
+      A mis-specified metric presents as confidently fine while a broken one
+      presents as noisy, so internal consistency alongside user disagreement is
+      the signature of a measurement failure rather than a pipeline failure
+    kind: inferred
+    sources: [sre-book]
+    note: Ours.
+
+  - id: w12-measured-nothing-is-not-nothing
+    text: >-
+      "We measured nothing" and "there is nothing" are different conclusions, and
+      conflating them is how a usable technique is abandoned on an under-powered
+      set
+    kind: inferred
+    sources: [cohen-1988, lin-neural-hype]
+    note: Ours.
+
+  - id: w12-durable-claims-are-mechanisms
+    text: >-
+      Durable claims are mechanisms and arithmetic while expiring ones are values,
+      which is the argument for asserting direction and omitting any value that
+      cannot be checked
+    kind: inferred
+    sources: [mitchell-2019, sculley-2015]
+    note: >-
+      Ours, and the payoff for four weeks of the stipulated-model discipline —
+      weeks 7, 8, 9 and 10.
+
+  - id: w12-mde-is-the-dangerous-entry
+    text: >-
+      The minimum detectable effect is the most dangerous re-measure-annually
+      claim, because it is embedded in gate tolerances and default arguments and
+      is never updated when the eval set changes
+    kind: inferred
+    sources: [cohen-1988, sculley-2015]
+    note: Ours.
+
+  - id: w12-unmarkable-claim-is-not-understood
+    text: >-
+      A claim that cannot be marked durable, re-measure or expired is a claim not
+      understood well enough to have been written
+    kind: inferred
+    sources: [mitchell-2019]
+    note: Ours.
+
+  - id: w12-handover-describes-what-goes-wrong
+    text: >-
+      A handover note describes what the next person will get wrong rather than
+      what exists, because the code already describes the latter
+    kind: inferred
+    sources: [sre-book-postmortem, gebru-2021]
+    note: Ours.
+
+  - id: w12-empty-stations-are-the-handover
+    text: >-
+      Naming the stations with no attributed failures is the highest-value entry
+      in a retrieval handover, because they are simultaneously where the failures
+      are not and where a new person will start
+    kind: inferred
+    sources: [sculley-2015]
+    note: Ours.
+
+  - id: w12-narrowed-metric-is-the-undeclared-consumer
+    text: >-
+      A narrowed metric still circulating in an older document is the most likely
+      undeclared consumer of a retrieval system, and naming it specifically is
+      more effective than a general caution
+    kind: inferred
+    sources: [sculley-2015]
+    note: Ours.
+
+  - id: w12-two-of-four-headlines-below-the-floor
+    text: >-
+      Of four headline deltas across the course, two sit inside the minimum
+      detectable effect of their sets — week 6's fusion at 0.053 and week 11's
+      agent at 0.050 against a floor of 0.1003
+    kind: derived
+
+  - id: w12-binary-metrics-need-more-queries
+    text: >-
+      A binary per-query metric produces differences of -1, 0 or +1 and therefore
+      a near-maximal standard deviation, so it requires more queries than a graded
+      metric at equal detectable effect
+    kind: derived
+
+  - id: w12-clinic-five-arithmetic
+    text: >-
+      An nDCG gain of 0.04 against a minimum detectable effect of 0.1003 at n=19
+      is not distinguishable from zero, and detecting it would require roughly 120
+      queries
+    kind: derived
+
+  - id: w12-verbose-system-moves-three-metrics
+    text: >-
+      A system producing longer answers moves answer length, citation count and
+      word-overlap faithfulness favourably while answering no more questions, and
+      week 10 found a budget setting that does exactly that for 58 percent more
+      money
+    kind: derived
+
+  - id: w12-three-metrics-not-ten
+    text: >-
+      Guarding three metrics rather than ten reduces the probability of a spurious
+      gate failure from about 40 percent to about 14 percent at 5 percent each
+    kind: derived
+
+  - id: w12-every-finding-rests-on-ten-documents
+    text: >-
+      Every finding in the course rests on ten documents, twenty-six queries, a
+      latent-semantic dense representation and two stipulated models, so each is a
+      hypothesis with one demonstrated instance rather than a result
+    kind: derived
+
+  - id: w12-stipulated-values-expire-by-construction
+    text: >-
+      Every value produced by the simulated generator and judge is expired by
+      construction, since the fences forbade reporting those values when they were
+      produced
+    kind: derived
+
+  - id: w12-unknown-report-order-effect
+    text: >-
+      Whether reports written blockers-first are acted on more often. We believe it
+      and have measured nothing, which is precisely the kind of claim this week
+      asks you to mark
+    kind: unknown
+
+  - id: w12-unknown-library-size
+    text: >-
+      How large a useful failure library is. Thirty cards is this course's output
+      and nothing establishes it as the right number
+    kind: unknown
+
+  - id: w12-unknown-station-four-generality
+    text: >-
+      Whether the over-attribution of station 4 is general or an artefact of how
+      this course teaches. It is consistent across the clinics we have run, which
+      is not a sample
+    kind: unknown
+
+  - id: w12-unknown-station-seven-proportion
+    text: >-
+      The real proportion of production retrieval complaints that are measurement
+      failures rather than pipeline failures. Higher than three in ten on
+      everything we have seen, and that is not a sample
+    kind: unknown
+
+  - id: w12-unknown-which-cards-survive-scale
+    text: >-
+      Which of the twelve cards survive on a corpus of a hundred thousand documents
+      with a real embedding model and a real generator. Five are arithmetic or
+      definitional and should; the rest are empirical and might not
+    kind: unknown
+
+  - id: w12-unknown-remeasure-interval
+    text: >-
+      How long a re-measure-annually claim actually survives. Annual is a guess and
+      nothing in this course derives it
+    kind: unknown
+
+  - id: w12-unknown-handovers-are-read
+    text: >-
+      Whether handover notes are read. We have no evidence either way, and the
+      argument for writing one does not depend on it
+    kind: unknown
