@@ -14,8 +14,8 @@
 
 ## Not yet
 
-Nothing. This is the last week with new mechanism in it — week 12 is the report and the
-clinics.
+Changing the corpus, permissions, and planted documents — all next week, and week 12
+fences this week's mechanisms out in return, so that each of its findings has one cause.
 
 ---
 

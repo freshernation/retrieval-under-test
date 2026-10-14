@@ -92,17 +92,18 @@ edge is not.
 
 ---
 
-## Instructor: what week 12 rests on
+## Instructor: what weeks 12 and 13 rests on
 
-Week 12 is the report and the clinics. No new mechanism.
+Week 12 changes the corpus, the readers and who can write a document, with this
+week's mechanisms fenced out. Week 13 is the report and the clinics.
 
 - **Project 3's refusal is the model for the final report.** A document that recommends
-  against the thing it describes, with numbers, is what week 12 asks them to write about
+  against the thing it describes, with numbers, is what week 13 asks them to write about
   the whole course
 - **The MDE audit grows one more row.** Week 9 killed week 6's fusion headline; this week
   adds Project 3's own
 - **The failure library is now about thirty cards** and it is the portfolio artefact. Week
-  12 is where it gets edited rather than extended
+  13 is where it gets edited rather than extended
 
 Signal sheet: **did they volunteer the MDE comparison**, and **did they recommend against
 their own agent**. The first predicts whether they will ever report a null result; the

@@ -1,6 +1,6 @@
 # Thirty cards, and the twelve that matter
 
-*Week 12 · Day 2 · about 20 minutes*
+*Week 13 · Day 2 · about 20 minutes*
 
 > By the end of this you can see which of the course's findings are mechanisms and which
 > are facts about ten RFCs.

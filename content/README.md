@@ -168,19 +168,31 @@ much.
 
 ---
 
-## Week 12 — The report and the review
+## Week 12 — A corpus that changes
 
-**Day 1** · [Ranked, not sorted](week-12/day-1/ranked-not-sorted.md) · [The number and its floor](week-12/day-1/the-number-and-its-floor.md)
+**Day 1** · [The dead still vote](week-12/day-1/the-dead-still-vote.md)
 
-**Day 2** · [What makes a card transfer](week-12/day-2/what-makes-a-card-transfer.md) · [Thirty cards, and the twelve that matter](week-12/day-2/the-twelve-that-matter.md)
+**Day 2** · [Embedded by which model](week-12/day-2/embedded-by-which-model.md)
 
-**Day 3** · [Under a minute](week-12/day-3/under-a-minute.md) · [What you would not do](week-12/day-3/what-you-would-not-do.md)
+**Day 3** · [The leak is in front of the filter](week-12/day-3/the-leak-is-in-front-of-the-filter.md)
 
-**Day 4** · [What expires and what does not](week-12/day-4/what-expires.md) · [The handover](week-12/day-4/the-handover.md)
+**Day 4** · [Perfectly grounded in a lie](week-12/day-4/perfectly-grounded-in-a-lie.md)
 
 ---
 
-## All twelve weeks are written.
+## Week 13 — The report and the review
 
-96 articles, 54 labs, 682 lab tests. Week 12 has no labs, by design — everything in it is
+**Day 1** · [Ranked, not sorted](week-13/day-1/ranked-not-sorted.md) · [The number and its floor](week-13/day-1/the-number-and-its-floor.md)
+
+**Day 2** · [What makes a card transfer](week-13/day-2/what-makes-a-card-transfer.md) · [Thirty cards, and the twelve that matter](week-13/day-2/the-twelve-that-matter.md)
+
+**Day 3** · [Under a minute](week-13/day-3/under-a-minute.md) · [What you would not do](week-13/day-3/what-you-would-not-do.md)
+
+**Day 4** · [What expires and what does not](week-13/day-4/what-expires.md) · [The handover](week-13/day-4/the-handover.md)
+
+---
+
+## All thirteen weeks are written.
+
+100 articles, 59 labs, 740 lab tests. Week 13 has no labs, by design — everything in it is
 work a machine cannot check, which is why it is last.

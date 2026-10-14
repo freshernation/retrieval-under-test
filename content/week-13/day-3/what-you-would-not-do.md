@@ -1,6 +1,6 @@
 # What you would not do
 
-*Week 12 · Day 3 · about 20 minutes*
+*Week 13 · Day 3 · about 20 minutes*
 
 > By the end of this you can read three of the ten clinics properly, and you will see why
 > the station is not the hard part.

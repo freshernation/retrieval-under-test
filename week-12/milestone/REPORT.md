@@ -1,106 +1,83 @@
-# Final report — [your name]
+# Milestone 12 report — [your name]
 
-> The last one. `tools/check_evals.py` enforces the run ids; the rest is on you.
->
-> **First line is a blocker.** Section 2 comes before section 3. Every number carries its n.
+> Fill this in. Every number cites a run id. `tools/check_evals.py` enforces it.
 
 ---
 
-## 1 · What you must act on
+## 1 · The system, as the week left it
 
-Ranked. Blockers first, each with the evidence, the station, and the cost of doing nothing.
+Three sentences. What changed in the corpus, who reads it, and who can write to it.
 
-| # | Blocker | Station | Evidence | Cost of inaction |
-|---|---|---|---|---|
-| 1 | | | `run:<id>` | |
+## 2 · The release check
 
-If the first row is not something a reader would do something about this week, it is not a
-blocker.
+`change_report` output, verbatim.
 
-## 2 · What this evaluation cannot see
-
-Before the numbers. Deliberately.
-
-- **correctness** — unmeasurable since week 1, and still. Say what you measured instead and
-  what the gap is
-- what else:
-
-For each one, a sentence on what it would cost to see it.
-
-## 3 · The numbers
-
-| Metric | Value | n | MDE of the set | Above the floor | Run |
-|---|---|---|---|---|---|
-| | | | | | |
-
-No bare numbers. If a number has no n, it does not go in the table.
-
-### 3a · The MDE audit
-
-Every claimed delta, weeks 2 to 11.
-
-| Week | Claim | Delta | n | MDE | Above the floor |
-|---|---|---|---|---|---|
-| 2 | | | | | |
-| … | | | | | |
-| 11 | your own agent | | | | |
-
-Count the rows below the floor. State the count in a sentence.
-
-### 3b · The attribution report
-
-| Station | Failures |
-|---|---|
-| 1 corpus | |
-| 2 chunk | |
-| 4 retrieve | |
-| 5 rank | |
-| 6 generate | |
-| 7 none | |
-
-One sentence on the empty rows, and what they mean for the backlog.
-
-## 4 · What expires
-
-| Claim | Mark | Why | Re-measure how |
+| Metric | Measured | Limit | Where the limit came from |
 |---|---|---|---|
+| leaks | | none | |
+| debt | | | |
+| drift | | | |
+| poison_answered | | | |
+| stale_entries | | | |
 
-Counts: **durable** · **re-measure annually** · **expired**
+**Run:** `run:<id>`
 
-If `expired` is zero, read your fences again.
+## 3 · Debt and drift
 
----
+Debt, and drift at depths 1, 5 and 10, on the same line. One sentence on why the first row
+is why nobody notices.
 
-## 5 · The failure library
+Your compaction rule: the trigger, and its cost.
 
-**Failures I cannot card**, first, with the evidence each would need:
+## 4 · Fold-in against refit
 
-Then the cards. Roughly thirty, each with all six fields:
+Agreement at depth five. Which of the two your week-9 numbers describe, and your rule for
+when an eval must be re-run.
+
+## 5 · Readers
+
+| | Short of five | Empty | Leaks |
+|---|---|---|---|
+| post-filter the top 5 | | | |
+| over-fetch, then filter | | | |
+| pre-filter | | | |
+
+The cache: leaks with a query-text key, and with a scoped key. What scoping did to the hit
+rate, and the traffic assumption that answer rests on.
+
+**Everything else that sits in front of the filter.** A list.
+
+## 6 · The planted document
+
+| | Rate |
+|---|---|
+| reached the context | |
+| reached the answer | |
+
+The three week-8 checks on the poisoned answer, and the question none of them asks.
+
+## 7 · What you fixed, and re-measured
+
+| Metric | Before | After | What you changed |
+|---|---|---|---|
+| | | | |
+
+`change_report` output after the fixes, verbatim.
+
+## 8 · What you could not fix
+
+At least one. The obvious candidate is a planted document from a source you trust.
+
+## 9 · The failure library
+
+One card minimum.
 
 > the failure · the station · the diagnostic that finds it · the fix · the measured delta ·
 > the conditions under which the fix stops working
 
-Deleted this week, with one line each:
+## 10 · What I could not measure
 
-## 6 · Clinics
-
-Average: \_\_\_ / 5 across ten, scored by \_\_\_.
-
-Lowest three, and what you reached for instead:
-
-| # | Score | What you reached for | What it was |
-|---|---|---|---|
-
-## 7 · The handover
-
-One page, for the person who inherits this. The eval set and what it cannot see; the three
-numbers to watch; the gate; **the two empty stations**; the failures with no card; what you
-would do with one more week.
-
-## 8 · What I would do with one more week
-
-Ranked, cheapest first. If one of them is *write more queries*, price it.
-
-## 9 · What I got wrong in this course
-
-At least two. One from the first month, one from the last.
+- whether a real model obeys an instruction in a retrieved chunk
+- how far drift grows with debt on a corpus of realistic size
+- how long a revoked permission survives in a real deployment's caches
+- whether the fold-in gap exists at all for a frozen neural embedding model

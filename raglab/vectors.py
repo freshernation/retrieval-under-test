@@ -2,7 +2,7 @@
 
 The vectors shipped in `data/gold/<set>/vectors/` were computed once, with the
 model and the date recorded next to them, and they never change. That is what
-makes a dense-retrieval lab gradable: your HNSW index and mine, built from the
+makes a dense-retrieval lab gradable: your approximate index and mine, built from the
 same vectors, must return the same neighbours.
 
 It is also a teaching point rather than only a convenience. Embeddings are a

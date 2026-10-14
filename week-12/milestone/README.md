@@ -1,65 +1,45 @@
-# Milestone 12 — The report, the library, and ten clinics
+# Milestone 12 — The release check for a system that changes
 
-> **Ship:** one report a stakeholder can act on, a failure library edited down to what
-> transfers, ten scored clinics, and an expiry date on every claim.
-
-This is the last thing you make in this course and it is the only one of the three
-portfolio artefacts that leaves with you intact. The pipeline is a teaching exercise on a
-ten-document corpus. The library and the method are not.
+> **Ship:** one function that decides whether the system is still the one you measured,
+> and a report in which it says no.
 
 ---
 
 ## The brief
 
-### 1. The report
+### 1. Write the check
 
-Four sections, in this order:
+`changes.py`: `release_check(measured, limits)` and `change_report(measured, limits)`.
 
-```
-1  what you must act on
-2  what this evaluation cannot see
-3  the numbers
-4  what expires
-```
+Five numbers, all produced this week:
 
-First line is a blocker. Section 2 before section 3. Every number carries its n and the MDE
-of the set it was measured on.
+| Metric | From | Rule |
+|---|---|---|
+| `leaks` | day 3 | **must be 0. Takes no limit** |
+| `debt` | day 1 | at or below your limit |
+| `drift` | day 1 | at or below your limit |
+| `poison_answered` | day 4 | at or below your limit |
+| `stale_entries` | day 3 | at or below your limit |
 
-### 2. The MDE audit, complete
+A metric that was not measured fails. A limit that was not given is an error. And a limit
+*given* for `leaks` is an error too.
 
-Every claimed delta from weeks 2 to 11, marked above or below the floor of its set.
-Including week 11's, which is your own work rather than the course's.
+### 2. Measure this week's system
 
-It will be uncomfortable. Week 6's fusion headline (0.053 at n=19, MDE 0.1003) and Project
-3's agent (+0.05, same floor) are the course's two, and you will have more.
+As the week left it: the two obsoleted RFCs tombstoned, a filter in front of every result,
+and anybody able to add a document.
 
-### 3. The failure library, edited
+### 3. Read what it says
 
-Roughly thirty cards, down from more. Every card has all six fields, **including the
-conditions under which the fix stops working**.
+`leaks` 0. `debt` 0.105, inside any sensible limit. And it does not ship: `drift` is 0.40
+and a planted sentence reaches the answer every time.
 
-And, at the front, the list of failures you could not card. Correctness is on it.
+### 4. Fix what you can, and re-measure
 
-### 4. Ten clinics, scored
+Compact the index. Put `trusted` in front of the generator. Then measure again and say
+which numbers moved, which did not, and which you could not move at all.
 
-`week-12/day-3/README.md`, run in pairs and scored by your partner. Report the average and
-your lowest three, and for each of the lowest three what you reached for instead.
-
-### 5. Every claim marked
-
-Durable, re-measure annually, or expired. With a count of each — if nothing is expired you
-have not looked, because week 5 onwards stood in for a model and `--live` is already a
-different system.
-
-### 6. The handover note
-
-One page, for whoever inherits this when you do not work here. The two empty stations are
-on it, so they do not spend a month on the prompt.
-
-### 7. No new mechanism
-
-If you find a defect this week it goes in the report as a defect. The report is the
-deliverable; the system was due last week.
+### 5. Write `REPORT.md`
 
 ---
 
@@ -67,52 +47,42 @@ deliverable; the system was due last week.
 
 | Station | This week |
 |---|---|
-| 1 Corpus | What the corpus cannot answer, and how you would know it had drifted |
-| 2 Chunk | The decision, and that it has no literature behind it |
-| 3 Index | What you would re-measure annually, and what you never would |
-| 4 Retrieve | The station you over-use in clinics. Most people over-use this one |
-| 5 Rank | The budget, and what it costs per answer |
-| 6 Generate | Zero failures in week 10's attribution, and what that means for the backlog |
-| 7 Measure | **The week.** The report, the audit, the library, and the expiry list |
+| 1 Corpus | **The week's loud one.** Who can write to it, and how would you know a document was planted? |
+| 2 Chunk | Two of twenty-one chunks reusable after a revision. What does that do to your update cost? |
+| 3 Index | Debt, drift, and your compaction rule |
+| 4 Retrieve | Fold-in against refit: which one your eval numbers describe |
+| 5 Rank | The planted chunk went to the front. What would have had to be true for it not to? |
+| 6 Generate | Faithfulness 1.0 on a poisoned answer, in one sentence |
+| 7 Measure | The release check, and the metric with no limit |
 
 ---
 
 ## The bar
 
-- `tools/check_evals.py` green, `tools/check_sources.py` green, `tools/check_links.py` green
-- First line of the report is a blocker
-- Section 2 before section 3
-- No bare numbers anywhere
-- The MDE audit, complete, including your own week-11 result
-- Every library card has all six fields
-- The list of failures you cannot card, at the front
-- Clinic average of 3 or better, with no 1 on clinics 1, 5 or 9
-- Every claim marked, with counts, and at least one marked expired
-- A handover note
-- Nothing in the report was built this week
+- `pytest week-12 -v` green, `tools/check_evals.py` green
+- `release_check` refuses this week's system, and the report says which two metrics and why
+- No limit for `leaks`, anywhere, including in prose
+- Drift reported at a stated depth, next to the debt that produced it
+- The poison result reported as two rates: reached the context, reached the answer
+- What `trusted` fixed and what it left
+- One finding you could not act on, named as such
 - You survive Friday
 
 ---
 
 ## What you will want to do and should not
 
-**Lead with what you built.** Twelve weeks of work and the reader needs one blocker. The
-work is section 3.
+**Set a small leak budget "to be realistic".** There is no realistic number of people who
+may read what they should not. If the measurement is noisy, fix the measurement.
 
-**Keep every card.** A thirty-card library you edited is worth more than a sixty-card one
-you accumulated, and the deleted cards are evidence that you can tell a bug from a failure
-mode.
+**Report debt and call the index healthy.** Debt was 0.105 and forty percent of the
+top-tens had moved.
 
-**Leave the stop-working line blank.** It is the field that makes a card a method. Without
-it the card says *"this worked for me"*.
+**Call the poisoned answer a generation failure.** The generator quoted the best-matching
+sentence in its context, which is its job. Station 1.
 
-**Mark everything durable.** Prices, model behaviour, library APIs, the simulated
-generator's numbers, every value from week 5 onward. If your expired count is zero, read
-your own fences again.
+**Add a keyword filter for the planted text.** You wrote the planted text. The next one
+will not contain your keywords.
 
-**Fix the thing you found on Monday.** This is the week's main failure mode and it produces
-a better system and no report. The report is what somebody acts on.
-
-**Claim the course solved correctness.** It did not. Twelve weeks and it is still out of
-reach, and the single most valuable sentence you can write is the one that says so and then
-says what you measured instead.
+**Report this week as an improvement.** It moved no quality number. It found four ways the
+numbers you had could stop being true, and that is the result.

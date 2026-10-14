@@ -2,45 +2,40 @@
 
 ## Allowed
 
-Everything. There is nothing left to withhold.
+- Everything from weeks 1 to 10
+- **Index maintenance**: adding, removing and tombstoning documents; statistics that count
+  the dead; debt; compaction; drift against a rebuilt index
+- **Change detection**: content fingerprints, diffing two chunk sets by id and by content
+- **Folding in**: projecting new chunks into a fitted basis; unseen vocabulary; agreement
+  between two retrievers
+- **Permissions**: groups, an access control list, a reader as a predicate, failing closed,
+  a cache key that includes the reader, revocation
+- **Poisoning**: a planted chunk, retrieval rate, answer rate, displacement, provenance
+- **A release check** with limits, and one metric that takes none
 
-## Not allowed
+## Not yet
 
-**New mechanism.** No new retriever, no new metric, no new stage. If something is broken
-this week, it goes in the report as broken.
-
-The temptation is real and it is the week's main failure mode: a student finds a defect on
-Monday while writing the report and spends until Thursday fixing it, and arrives on Friday
-with a better system and no report. The report is the deliverable. The system was due last
-week.
+Agentic retrieval, query rewriting, routing and loops — week 11's mechanisms are not used
+this week, so that a change in a result has one cause · distributed indexes: shards,
+replicas, consistency between them · a real permissions service · encryption, tenancy
+and network isolation · detecting poisoned text by reading it · anything that requires a
+model to *obey* a retrieved instruction — that is behind `--live`, in Thursday's deep track
 
 ---
 
-## The rule that matters most this week
+## The permissions are stipulated
 
-**Ranked, not sorted.**
+Three RFCs are declared staff-only. There is nothing confidential about them. This is the
+same move as week 7's positional model and week 8's generator: the *mechanism* is real and
+the *values* are ours, so no number this week is a claim about anybody's access-control
+deployment.
 
-A report is ordered by what the reader must act on, not by the order you measured things in
-and not by what is most impressive.
+## Why week 11 is fenced out
 
-Blockers. Then what the evaluation **cannot** see. Then the numbers. A report that opens
-with a metric is a report nobody finishes, and a report that puts its limitations last is a
-report whose limitations were not read.
+An agent that rewrites its query and retrieves three times would make every finding this
+week harder to attribute: did the planted chunk get in on the first retrieval or the
+third? The four findings are about the corpus, the index, the reader and the cache. Hold
+the retriever still and they have one cause each.
 
-## The second rule
-
-**Every number carries its n and its floor.**
-
-`0.750 (n=20, MDE 0.1003)` is a number. `0.750` is a decoration. Eleven weeks of this
-course exist to make the first form feel natural, and it is the single habit most likely to
-survive contact with a job.
-
-## The third rule
-
-**Every claim gets an expiry.**
-
-Some of what you measured is about information retrieval and will be true in ten years.
-Some is about a model version and is already stale. A report that does not distinguish them
-will be quoted, in full, in eighteen months, by somebody who has not checked.
-
-Mark each finding: **durable**, **re-measure annually**, or **already expired**.
+When you are done, run Thursday's attack against week 11's loop. That is the deep track,
+and the loop makes it worse.

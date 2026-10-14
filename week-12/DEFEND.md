@@ -1,102 +1,88 @@
-# Week 12 — The final review
+# Week 12 — Friday clinic
 
-Two hours. Ten clinics at five minutes each, then the report defence, then the retro.
+Twenty minutes, three phases, then a retro.
 
-This is the exam, and it is the same exam as every other Friday: **can you find the failure
-under attack.** The difference is that nobody tells you which week it came from.
+Week 10 asked whether they can tell packaging from improvement. **This week asks whether
+they can tell a number that is true from a number that is still true** — after the corpus
+moved, the reader changed, and somebody else wrote a document.
 
 ---
 
 ## Before they arrive
 
-1. **Does the report open with a blocker?** Not a metric, not a summary of the work.
-2. **Does every number carry its n?** Spot-check three.
-3. **Is the MDE audit present**, and does it include their own work from week 11?
-4. **How many cards in the library?** Thirty-ish, edited down from more.
-5. **Does every card have a *conditions under which the fix stops working* line?** The
-   field most often left blank, and the one that makes a card transferable.
-6. **Is every claim marked durable / re-measure / expired?**
-7. **Is there anything in the report that was built this week?** There should not be.
+1. **Is drift reported next to debt, with a depth?** Debt alone is the reassuring number.
+2. **Does the report say which retriever its recall describes?** Fold-in or refit.
+3. **Is there a limit for `leaks` anywhere?** In code or in prose. There must not be.
+4. **Is the cache key scoped?** And is the cost to the hit rate stated?
+5. **Are the poison results two rates?** Reached the context, reached the answer.
+6. **Does the poisoned answer's faithfulness appear, as 1.0?** If it is missing, they
+   did not run the check.
+7. **Does `release_check` still refuse?** After their fixes it may not — ask what moved.
 
 ---
 
-## The ten clinics
+## Phase 1 — Explain (6 min)
 
-Five minutes each. Read the scenario, and the student has to answer three things:
-
-> **which station · what diagnostic finds it · what you would not do**
-
-The third is scored hardest, because it is where eleven weeks either took or did not.
-
-The scenarios are in `week-12/day-3/README.md`. They are drawn from the course's own
-measurements, they are not in order, and the station is not always the obvious one.
+1. *"No dead document was ever returned. So what changed?"* **The question of the week.**
+   The scores of the live ones, because idf and average length still count the dead.
+2. *"No top result changed. Why does that make it worse?"* Because every spot check passes.
+3. *"Your recall is the same after folding in. Is it the same retriever?"* No: five of
+   twenty lists agree. And twenty queries cannot rank the two.
+4. *"Neither filter leaked. Where was the leak?"* In front of the filter. Press until they
+   list a second place besides the cache.
+5. *"Faithfulness 1.0 on a planted answer. Is the check broken?"* No. Make them say what
+   it measures and what it does not.
 
 | 5 | 3 | 1 |
 |---|---|---|
-| Names the station, the diagnostic and the thing not to do, in under a minute | Gets the station with prompting | Reaches for the prompt, the chunker, or a better model |
+| Says what each trusted number was measuring, and what moved underneath it | Gets there with prompting | Reports debt, recall and faithfulness as evidence the system is fine |
 
-**Pass is an average of 3 across ten, with no score of 1 on clinics 1, 5 or 9** — those three
-are the ones where a wrong answer costs somebody else money.
+## Phase 2 — Change something (7 min)
 
----
+### A — *"Compaction takes an hour and blocks writes. How often do you run it?"*
 
-## The report defence (20 min)
+Looking for: a trigger on debt, an admission that debt does not predict drift, and a
+proposal to measure drift on a sample of real queries before deciding. A weak answer picks
+a percentage.
 
-1. *"Give me your first line."* It should be a blocker.
-2. *"Which of your own results did not survive the MDE audit?"* Everybody has at least
-   two. Week 6's fusion headline and Project 3's +0.05 are the course's.
-3. *"What can your evaluation not see?"* Correctness. Still. Since week 1.
-4. *"Which of your findings expires first?"* And: *"what would you re-measure to find out?"*
-5. *"Show me the card you are least sure transfers."* The honest answer is one of the
-   corpus-specific ones.
-6. *"If I gave you one more week, what would you do?"* Write more queries. Week 9 priced
-   it: 77 for five points.
+### B — *"The planted document comes from a source you trust."*
 
-| 5 | 3 | 1 |
+`trusted` passes it. Looking for: provenance narrows who can attack, it does not remove
+the attack; the remaining controls are review at ingest and limiting what an answer can
+do. A student who reaches for a content filter has not absorbed Thursday.
+
+## Phase 3 — Break it (7 min)
+
+Seed one before they arrive.
+
+| Seed | Break | Probes |
 |---|---|---|
-| Leads with a blocker; names correctness unprompted; concedes two of their own results | Gets there with prompting | Presents the system's best numbers |
+| Easy | `doc_ids` returns tombstoned ids too | Dead documents in results. Do they go to the filter or the index? |
+| Medium | `remove` leaves empty posting lists behind | Vocabulary size is wrong; results are not. What would notice? |
+| Medium | `can_read` treats `None` as public | Every test with a full ACL passes |
+| Hard | `scoped_key` joins groups unsorted | Two readers with the same groups get different keys. Nothing leaks; the cache quietly stops working |
+| Nasty | `release_check` accepts `limits["leaks"] = 0` | Behaves identically today. The door is open for the day someone sets it to 1 |
+
+The **Nasty** one is the week: a change with no effect on any current result, whose whole
+cost is in what it permits later.
 
 ---
 
-## The attack (15 min)
+## Retro (5 min)
 
-Not scenarios this time. Their own report.
-
-| Attack | What you are watching for |
-|---|---|
-| *"Quote me your best number without its n."* They should refuse |
-| *"This card has no stop-working condition. Defend it."* It is not a card, it is an anecdote |
-| *"You recommended against your own agent. Were you just hedging?"* The numbers, in sentences |
-| *"Which rule did you break at least once?"* Rule 1, usually, and in week 1 |
-| *"What is in this report that you would be embarrassed by in two years?"* The expired claims, and they should already be marked |
+1. *"Which number did you trust on Monday that you trust less now?"*
+2. *"What sits in front of the filter in a system you have worked on?"*
+3. *"What did I explain badly?"*
 
 ---
 
-## Retro (20 min) — and this one is the course's
+## Instructor: what week 13 rests on
 
-1. *"Which week changed how you work?"* Week 1 and week 9 split it, roughly.
-2. *"Which week did you disagree with, and do you still?"* Week 5 is the designed answer —
-   dense retrieval arriving late and arriving losing.
-3. *"What did you stop doing?"* The target answer is *rewriting the prompt first*.
-4. *"What will you do on Monday at your job?"* Ask for the eval set. Every time.
-5. *"What did I explain badly, across twelve weeks?"* Write the answers down. This is the
-   course's own eval set and it is the only one it has.
+Week 13 is the report and the clinics. No new mechanism.
 
----
-
-## Instructor: what comes after
-
-Nothing. This is the last week, so the honest close is about what the course did not do.
-
-- **It never gave them a running production system.** The reference course does that in
-  week 1. Say so again on Friday, as you said it in week 1 — what they have instead is the
-  ability to tell whether one is any good
-- **It never measured a real model.** Everything from week 5 on stood in for one, declared
-  openly, with the stipulated-model rule. `--live` is their first week-13
-- **It never solved correctness.** Twelve weeks and it is still out of reach. That is not a
-  gap in the course; it is the state of the field, and the course's contribution is that
-  they will not mistake faithfulness for it
-
-Signal sheet: **clinic average**, and **did they lead with a blocker**. The first is the
-only grade in the course that cannot be faked. The second predicts whether anybody will
-read their next report.
+- **The failure library gains its four most transferable cards this week.** None of them
+  depends on this corpus: statistics that count the dead, an eval that describes a
+  retriever you no longer run, a check that protects only its own path, and grounding
+  that is not trust.
+- **Station 1 finally has entries.** Every earlier rubric had it nearly empty. The report
+  should say so, and say why it took twelve weeks.

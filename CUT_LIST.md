@@ -7,8 +7,8 @@ engineers use, and every one is out.
   appears in week 11, after you have built the pattern by hand and can say what the
   framework is doing
 - **Vector database vendor comparison.** No Pinecone-versus-Weaviate-versus-Qdrant. You
-  build an HNSW index in week 5; after that they are all the same idea with different
-  billing
+  build an approximate index in week 5 and read how the graph-based ones work; after
+  that they are all the same idea with different billing
 - **Model training of any kind** — no fine-tuning embeddings, no adapters, no distilling
   a reranker. It is a real technique and it is the last thing you should reach for
 - **Prompt engineering as a subject.** Prompts appear in week 8 as station 6 and are
@@ -20,7 +20,9 @@ engineers use, and every one is out.
   as far as "what did the extractor lose"
 - **Serving and infrastructure at scale** — sharding a vector index, replication, GPU
   serving. Week 10 gets it running and priced on one machine, and stops
-- **Security and access control on retrieval.** Real, hard, and a different course
+- **A real permissions service, tenancy, encryption and network isolation.** Week 12
+  puts a permission in front of the retriever and plants a document; running access
+  control for an organisation is a different course
 - **Agent frameworks as an organising idea.** Week 11 is one week, and it is partly about
   when agentic retrieval is a worse answer than a better retriever
 - Everything with a vendor's name on it that will be renamed within two years

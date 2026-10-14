@@ -1,7 +1,7 @@
 # The gold corpus — ten RFCs
 
 **10 documents, 389,335 characters, 16 queries, 57 judged pairs.** Fetched from
-`rfc-editor.org`, checked in, and used by weeks 2 to 12.
+`rfc-editor.org`, checked in, and used by weeks 2 to 13.
 
 ```bash
 python3 tools/build_corpus.py --check     # confirm your copy still matches
