@@ -1,90 +1,49 @@
-# Day 3 — The clinics
+# Day 3 — The gate runs itself
 
-> **By the end of today** you can attribute a failure to one station in under a minute,
-> name the diagnostic, and say what you would not do.
-
-**No lab.** Ten scenarios, five minutes each, in pairs. Then swap and run them again.
+> **By the end of today** the gate runs on every pull request, the baseline is a file
+> only a person can change, and you can defend letting a change through that lost a query.
 
 ---
 
 ## Read first
 
-- [ ] [**Under a minute**](../../content/week-13/day-3/under-a-minute.md) — 25 min
-- [ ] [**What you would not do**](../../content/week-13/day-3/what-you-would-not-do.md) — 20 min
+- [ ] [**The gate nobody has to remember**](../../content/week-13/day-3/the-gate-nobody-has-to-remember.md) — 20 min
 
 ---
 
-## How to run it
+## Predict first
 
-In pairs. One reads the scenario aloud, the other answers three things and is timed:
+`k1 = 2.0` against the baseline, on the nineteen answerable dev queries.
 
-> **which station · what diagnostic finds it · what you would not do**
-
-Then swap. Then do it again with the pairs rotated, because the second pass is where the
-reasoning gets fast enough to be useful.
-
-**Score the third answer hardest.** Naming the station is the mechanical part. Declining to
-reach for the prompt, the chunker or a better model is where eleven weeks either took or did
-not.
+**Does a gate with zero tolerance pass it? Does one with week 9's tolerance?**
 
 ---
 
-## The ten
+## The lab
 
-They are not in order of difficulty and the station is not always the obvious one. Three of
-them are station 7, which is the point.
+`cigate.py`, and `retrieval-gate.yml`. `run_gate.py` is given.
 
-**1.** *"Faithfulness is 1.00 across the board and users keep telling us the answers are
-wrong."*
+```python
+RULES
+measure(rank, queries)     read_baseline(path)     write_baseline(path, metrics, reason)
+decide(baseline, candidate, rules)
+run(rank, queries, baseline_path, rules, accept=None, say=print)
+```
 
-**2.** *"The system answered a policy question by citing a document that says the opposite
-of our current policy. The citation is correct — the document really does say that."*
+```bash
+pytest week-13/day-3 -v
+python3 week-13/day-3/run_gate.py --accept "first baseline"
+```
 
-**3.** *"Recall@10 is 0.98. The answers are bad."*
-
-**4.** *"We raised the retrieved-context budget last quarter. The bill went up 58% and
-nothing on the dashboard moved."*
-
-**5.** *"The new reranker improved nDCG@5 by 0.04 on our 19-query evaluation set. Ship
-it?"*
-
-**6.** *"Our LLM judge agrees with human raters 70% of the time. That seems good enough to
-gate releases on."*
-
-**7.** *"A query that worked last Tuesday now returns nothing relevant. Nobody deployed
-anything."*
-
-**8.** *"A user reported a bad answer four hours ago. We cannot reproduce it — the same query
-gives a good answer now. Cache hit rate is 30%."*
-
-**9.** *"Our agent scores higher than the single-shot pipeline on our benchmark and users say
-it is worse."*
-
-**10.** *"Dashboard says answers are 40% longer and carry twice as many citations as last
-quarter. Quality is clearly up."*
+Then copy the workflow to `.github/workflows/retrieval-gate.yml` and open a pull request.
 
 ---
 
 ## The written exercise
 
-`week-13/day-3/clinics.md`.
+`week-13/day-3/cigate.md`, one page.
 
-1. Your ten answers, three lines each, written **before** you discuss them
-2. The ones you got wrong, and what you reached for instead
-3. **Which station did you over-use?** Everybody has one. Most people over-use 4
-4. The scenario you would add as an eleventh, drawn from your own corpus, with its answer
-
----
-
-## Deep track
-
-> Write five more scenarios from your own system, exchange them with somebody else's five,
-> and score each other blind. A scenario whose station the author and the reader disagree
-> about is either badly written or a genuinely ambiguous failure — and telling those two
-> apart is the most advanced thing in this course.
-
----
-
-## Log
-
-`logs/stuck-log.md` and `logs/signal-log.md`.
+1. Your prediction, and the answers
+2. Where your tolerance came from, with the week 9 number
+3. Why CI must never pass `--accept`. Describe the first week of a team where it does
+4. The gate passed `k1 = 2.0`. Would you merge it? Say what else you would want to know

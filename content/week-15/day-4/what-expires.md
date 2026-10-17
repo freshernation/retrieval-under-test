@@ -1,6 +1,6 @@
 # What expires and what does not
 
-*Week 13 · Day 4 · about 25 minutes*
+*Week 15 · Day 4 · about 25 minutes*
 
 > By the end of this you can mark every claim you have made durable, re-measure or expired,
 > and defend each mark.

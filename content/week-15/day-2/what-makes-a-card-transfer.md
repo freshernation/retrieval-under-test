@@ -1,6 +1,6 @@
 # What makes a card transfer
 
-*Week 13 · Day 2 · about 25 minutes*
+*Week 15 · Day 2 · about 25 minutes*
 
 > By the end of this you can tell a failure mode from a bug, and you will know which field
 > of the card does the work.
@@ -102,7 +102,7 @@ bugs do not. A library of the first kind is an asset; a library of the second is
 
 The library opens with the failures you **cannot** card.
 
-Correctness is on it: thirteen weeks and no diagnostic. So is the distribution-mismatch
+Correctness is on it: fifteen weeks and no diagnostic. So is the distribution-mismatch
 floor — whether your eval queries resemble real ones, which is unmeasurable from inside the
 eval set. So is *"a document that should have been superseded and was not"*, which has no
 mechanism anywhere in the repository.

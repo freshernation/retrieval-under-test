@@ -1,0 +1,6 @@
+# Your compose file.
+#   - "api": build context ../.., dockerfile week-13/milestone/Dockerfile, port 8000,
+#     KEYS_FILE from a mounted secret file, a named volume "data" at /data
+#   - "worker": the same image, command ["python3", "run_worker.py"], the same volume
+#   Two processes, one SQLite queue and one snapshot on one disk. Say in REPORT.md
+#   what breaks the day there are two machines.

@@ -7,8 +7,8 @@ engineers use, and every one is out.
   appears in week 11, after you have built the pattern by hand and can say what the
   framework is doing
 - **Vector database vendor comparison.** No Pinecone-versus-Weaviate-versus-Qdrant. You
-  build an approximate index in week 5 and read how the graph-based ones work; after
-  that they are all the same idea with different billing
+  build an approximate index in week 5 and a graph index in week 14; after that they are
+  all the same idea with different billing
 - **Model training of any kind** — no fine-tuning embeddings, no adapters, no distilling
   a reranker. It is a real technique and it is the last thing you should reach for
 - **Prompt engineering as a subject.** Prompts appear in week 8 as station 6 and are
@@ -18,8 +18,10 @@ engineers use, and every one is out.
 - **GraphRAG, knowledge graphs, and entity extraction pipelines**
 - **Multimodal retrieval** — images, audio, video. Week 2 handles figures and tables only
   as far as "what did the extractor lose"
-- **Serving and infrastructure at scale** — sharding a vector index, replication, GPU
-  serving. Week 10 gets it running and priced on one machine, and stops
+- **Infrastructure beyond one machine** — replication, consistency between replicas, GPU
+  serving, a real embedding model in the graded path. Week 13 runs the service on one
+  machine with a queue and a snapshot; week 14 shards the index and keeps its statistics
+  whole, and stops there
 - **A real permissions service, tenancy, encryption and network isolation.** Week 12
   puts a permission in front of the retriever and plants a document; running access
   control for an organisation is a different course

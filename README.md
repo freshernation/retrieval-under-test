@@ -1,6 +1,6 @@
 # Retrieval Under Test
 
-Thirteen weeks building retrieval over a corpus nobody has written about, proving with
+Fifteen weeks building retrieval over a corpus nobody has written about, proving with
 numbers that it works, and finding out where it fails before someone else does.
 
 This is not a tour of the stack. A student who has wired a vector database to a language
@@ -54,7 +54,7 @@ measuring.
 
 ---
 
-## The thirteen weeks
+## The fifteen weeks
 
 | Week | | Milestone |
 |---|---|---|
@@ -70,7 +70,9 @@ measuring.
 | 10 | Production: latency, cache, tracing, cost | The pipeline on real services, traced and priced |
 | 11 | **Agentic retrieval** | **Project 3** — an agent, measured against week 8, with its cost |
 | 12 | A corpus that changes | A release check for a system whose corpus, readers and writers change |
-| 13 | The report and the review | The report, the failure library, and ten scored clinics |
+| 13 | Retrieval as a service | Changes through a queue, an index that survives a restart, the gate in CI, a door with keys |
+| 14 | Guarded, cached, scaled | Guardrails, a semantic cache, a graph index and shards — each with its condition measured |
+| 15 | The report and the review | The report, the failure library, and ten scored clinics |
 
 Week 1 is where most people's assumptions break — they arrive wanting to build and spend
 five days labelling. Week 8 is the keystone. Week 5 is the one you will want to argue
@@ -147,7 +149,7 @@ without noticing.
 | [`SETUP.md`](SETUP.md) | Day zero. Do this before week 1, not during it |
 | [`EVALS.md`](EVALS.md) | The measurement doctrine. Rule 1, in detail |
 | [`SOURCES.md`](SOURCES.md) | The evidence doctrine — what counts as knowing something |
-| `week-01/` … `week-13/` | Four days, a milestone, a fence, a clinic |
+| `week-01/` … `week-15/` | Four days, a milestone, a fence, a clinic |
 | [`content/`](content/README.md) | The reading for every day, each opening with its primary sources |
 | `content/sources/` | The claims ledgers — known, inferred, derived, unknown |
 | [`ai/`](ai/README.md) | Your seven AI roles |

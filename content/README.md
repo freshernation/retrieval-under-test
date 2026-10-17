@@ -180,19 +180,43 @@ much.
 
 ---
 
-## Week 13 — The report and the review
+## Week 13 — Retrieval as a service
 
-**Day 1** · [Ranked, not sorted](week-13/day-1/ranked-not-sorted.md) · [The number and its floor](week-13/day-1/the-number-and-its-floor.md)
+**Day 1** · [At least once, in any order](week-13/day-1/at-least-once-in-any-order.md)
 
-**Day 2** · [What makes a card transfer](week-13/day-2/what-makes-a-card-transfer.md) · [Thirty cards, and the twelve that matter](week-13/day-2/the-twelve-that-matter.md)
+**Day 2** · [The snapshot and its analyzer](week-13/day-2/the-snapshot-and-its-analyzer.md)
 
-**Day 3** · [Under a minute](week-13/day-3/under-a-minute.md) · [What you would not do](week-13/day-3/what-you-would-not-do.md)
+**Day 3** · [The gate nobody has to remember](week-13/day-3/the-gate-nobody-has-to-remember.md)
 
-**Day 4** · [What expires and what does not](week-13/day-4/what-expires.md) · [The handover](week-13/day-4/the-handover.md)
+**Day 4** · [Accepted is not done](week-13/day-4/accepted-is-not-done.md)
 
 ---
 
-## All thirteen weeks are written.
+## Week 14 — Guarded, cached, scaled
 
-100 articles, 59 labs, 740 lab tests. Week 13 has no labs, by design — everything in it is
+**Day 1** · [Card-shaped is not a card](week-14/day-1/card-shaped-is-not-a-card.md)
+
+**Day 2** · [Similar is not the same question](week-14/day-2/similar-is-not-the-same-question.md)
+
+**Day 3** · [The graph and the scan](week-14/day-3/the-graph-and-the-scan.md)
+
+**Day 4** · [Every shard thinks it is the corpus](week-14/day-4/every-shard-thinks-it-is-the-corpus.md)
+
+---
+
+## Week 15 — The report and the review
+
+**Day 1** · [Ranked, not sorted](week-15/day-1/ranked-not-sorted.md) · [The number and its floor](week-15/day-1/the-number-and-its-floor.md)
+
+**Day 2** · [What makes a card transfer](week-15/day-2/what-makes-a-card-transfer.md) · [Thirty cards, and the twelve that matter](week-15/day-2/the-twelve-that-matter.md)
+
+**Day 3** · [Under a minute](week-15/day-3/under-a-minute.md) · [What you would not do](week-15/day-3/what-you-would-not-do.md)
+
+**Day 4** · [What expires and what does not](week-15/day-4/what-expires.md) · [The handover](week-15/day-4/the-handover.md)
+
+---
+
+## All fifteen weeks are written.
+
+108 articles, 69 labs, 817 lab tests. Week 15 has no labs, by design — everything in it is
 work a machine cannot check, which is why it is last.

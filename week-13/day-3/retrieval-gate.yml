@@ -1,0 +1,6 @@
+# Your workflow. Copy it to .github/workflows/retrieval-gate.yml when it passes.
+#
+#   - runs on every pull_request (and on push to main)
+#   - one job: checkout (actions/checkout@v7), Python 3.12 (actions/setup-python@v7),
+#     pip install -r requirements.txt, then python3 week-13/day-3/run_gate.py
+#   - it must NEVER pass --accept: CI checks the baseline, people change it

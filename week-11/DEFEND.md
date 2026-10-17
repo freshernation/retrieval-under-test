@@ -92,13 +92,14 @@ edge is not.
 
 ---
 
-## Instructor: what weeks 12 and 13 rests on
+## Instructor: what weeks 12 to 15 rest on
 
 Week 12 changes the corpus, the readers and who can write a document, with this
-week's mechanisms fenced out. Week 13 is the report and the clinics.
+week's mechanisms fenced out. Weeks 13 and 14 put it into production. Week 15 is the
+report and the clinics.
 
 - **Project 3's refusal is the model for the final report.** A document that recommends
-  against the thing it describes, with numbers, is what week 13 asks them to write about
+  against the thing it describes, with numbers, is what week 15 asks them to write about
   the whole course
 - **The MDE audit grows one more row.** Week 9 killed week 6's fusion headline; this week
   adds Project 3's own

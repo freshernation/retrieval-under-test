@@ -1,102 +1,69 @@
-# Week 13 — The final review
+# Week 13 — Friday clinic
 
-Two hours. Ten clinics at five minutes each, then the report defence, then the retro.
+Twenty minutes, three phases, then a retro.
 
-This is the exam, and it is the same exam as every other Friday: **can you find the failure
-under attack.** The difference is that nobody tells you which week it came from.
+Week 12 asked whether they can tell a number that is true from one that is still true.
+**This week asks whether they can say which moment a number is true about.**
 
 ---
 
 ## Before they arrive
 
-1. **Does the report open with a blocker?** Not a metric, not a summary of the work.
-2. **Does every number carry its n?** Spot-check three.
-3. **Is the MDE audit present**, and does it include their own work from week 11?
-4. **How many cards in the library?** Thirty-ish, edited down from more.
-5. **Does every card have a *conditions under which the fix stops working* line?** The
-   field most often left blank, and the one that makes a card transferable.
-6. **Is every claim marked durable / re-measure / expired?**
-7. **Is there anything in the report that was built this week?** There should not be.
+1. **Does the queue remember a withdrawal's version?** Read `apply`. Without it, a late
+   copy brings the document back.
+2. **Is the snapshot written to a temporary file first?**
+3. **Does `load` refuse other analyzer options?** Try it.
+4. **Does the workflow ever pass `--accept`?** It must not.
+5. **Is the tolerance written down with where it came from?**
+6. **Does `/search` filter before taking k?** Filtering after can return fewer than k, or
+   worse, the wrong k.
 
 ---
 
-## The ten clinics
+## Phase 1 — Explain (6 min)
 
-Five minutes each. Read the scenario, and the student has to answer three things:
-
-> **which station · what diagnostic finds it · what you would not do**
-
-The third is scored hardest, because it is where eleven weeks either took or did not.
-
-The scenarios are in `week-13/day-3/README.md`. They are drawn from the course's own
-measurements, they are not in order, and the station is not always the obvious one.
+1. *"Every change was applied. Why was the index wrong?"* **The question of the week.**
+   Order: a newer change was overwritten by an older one delivered later.
+2. *"Why does a withdrawal need a version at all?"*
+3. *"The snapshot loaded without error. Why is that not enough?"*
+4. *"Your gate passed a change that lost a query. Defend that."* The noise floor.
+5. *"The service said 202. Is the document searchable?"*
 
 | 5 | 3 | 1 |
 |---|---|---|
-| Names the station, the diagnostic and the thing not to do, in under a minute | Gets the station with prompting | Reaches for the prompt, the chunker, or a better model |
+| Names the moment each number is true about | Gets there with prompting | Treats "applied", "loaded", "passed" and "accepted" as "done" |
 
-**Pass is an average of 3 across ten, with no score of 1 on clinics 1, 5 or 9** — those three
-are the ones where a wrong answer costs somebody else money.
+## Phase 2 — Change something (7 min)
 
----
+### A — *"Two workers drain the same queue."*
 
-## The report defence (20 min)
+Looking for: claiming must be atomic (week 3 of Agent In Production, `BEGIN IMMEDIATE`),
+versions still decide, and the snapshot now has two writers. A weak answer says "add a lock".
 
-1. *"Give me your first line."* It should be a blocker.
-2. *"Which of your own results did not survive the MDE audit?"* Everybody has at least
-   two. Week 6's fusion headline and Project 3's +0.05 are the course's.
-3. *"What can your evaluation not see?"* Correctness. Still. Since week 1.
-4. *"Which of your findings expires first?"* And: *"what would you re-measure to find out?"*
-5. *"Show me the card you are least sure transfers."* The honest answer is one of the
-   corpus-specific ones.
-6. *"If I gave you one more week, what would you do?"* Write more queries. Week 9 priced
-   it: 77 for five points.
+### B — *"A reviewer wants the gate to fail on any drop at all."*
 
-| 5 | 3 | 1 |
+Looking for: the false-alarm rate from week 9, on nineteen queries, and what the team will
+do the third time it fires on noise.
+
+## Phase 3 — Debug (7 min)
+
+| Seed | Break | What it does |
 |---|---|---|
-| Leads with a blocker; names correctness unprompted; concedes two of their own results | Gets there with prompting | Presents the system's best numbers |
+| Easy | `apply` records versions for upserts only | A withdrawn RFC comes back after a redelivery |
+| Medium | `save` writes straight to the path | A crash leaves a snapshot that will not load — or worse, one that does |
+| Medium | the workflow runs `run_gate.py --accept "ci"` | Every regression becomes the new baseline |
+| Nasty | `boot` loads the snapshot but rebuilds versions as all 1 | Every redelivered change after a restart looks new |
 
 ---
 
-## The attack (15 min)
+## Retro (5 min)
 
-Not scenarios this time. Their own report.
-
-| Attack | What you are watching for |
-|---|---|
-| *"Quote me your best number without its n."* They should refuse |
-| *"This card has no stop-working condition. Defend it."* It is not a card, it is an anecdote |
-| *"You recommended against your own agent. Were you just hedging?"* The numbers, in sentences |
-| *"Which rule did you break at least once?"* Rule 1, usually, and in week 1 |
-| *"What is in this report that you would be embarrassed by in two years?"* The expired claims, and they should already be marked |
+1. *"Which of the four would you have shipped without noticing?"*
+2. *"What did I explain badly?"*
 
 ---
 
-## Retro (20 min) — and this one is the course's
+## Instructor: what week 14 rests on
 
-1. *"Which week changed how you work?"* Week 1 and week 9 split it, roughly.
-2. *"Which week did you disagree with, and do you still?"* Week 5 is the designed answer —
-   dense retrieval arriving late and arriving losing.
-3. *"What did you stop doing?"* The target answer is *rewriting the prompt first*.
-4. *"What will you do on Monday at your job?"* Ask for the eval set. Every time.
-5. *"What did I explain badly, across thirteen weeks?"* Write the answers down. This is the
-   course's own eval set and it is the only one it has.
-
----
-
-## Instructor: what comes after
-
-Nothing. This is the last week, so the honest close is about what the course did not do.
-
-- **It never gave them a running production system.** The reference course does that in
-  week 1. Say so again on Friday, as you said it in week 1 — what they have instead is the
-  ability to tell whether one is any good
-- **It never measured a real model.** Everything from week 5 on stood in for one, declared
-  openly, with the stipulated-model rule. `--live` is their first week-13
-- **It never solved correctness.** Thirteen weeks and it is still out of reach. That is not a
-  gap in the course; it is the state of the field, and the course's contribution is that
-  they will not mistake faithfulness for it
-
-Signal sheet: **clinic average**, and **did they lead with a blocker**. The first is the
-only grade in the course that cannot be faked. The second predicts whether anybody will
-read their next report.
+Week 14 guards, caches and scales the service. It needs the service to be exactly what it
+says it is — so if a student's queue or snapshot is wrong, fix that first.

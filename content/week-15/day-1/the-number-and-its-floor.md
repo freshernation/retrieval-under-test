@@ -1,6 +1,6 @@
 # The number and its floor
 
-*Week 13 · Day 1 · about 20 minutes*
+*Week 15 · Day 1 · about 20 minutes*
 
 > By the end of this you can write a number the way this course has been writing them for
 > eleven weeks, and you will know what the audit costs.

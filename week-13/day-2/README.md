@@ -1,81 +1,47 @@
-# Day 2 — The failure library
+# Day 2 — An index that survives a restart
 
-> **By the end of today** your library is smaller than it was this morning, and every card
-> left in it would help somebody on a corpus you have never seen.
-
-**No lab.**
+> **By the end of today** the index is written to disk so that a crash cannot leave half
+> of it, and read back only by an analyzer that matches the one that built it.
 
 ---
 
 ## Read first
 
-- [ ] [**What makes a card transfer**](../../content/week-13/day-2/what-makes-a-card-transfer.md) — 25 min
-- [ ] [**Thirty cards, and the twelve that matter**](../../content/week-13/day-2/the-twelve-that-matter.md) — 20 min
+- [ ] [**The snapshot and its analyzer**](../../content/week-13/day-2/the-snapshot-and-its-analyzer.md) — 25 min
 
 ---
 
 ## Predict first
 
-**How many of your cards would help on a corpus you have never seen?** A number, out of
-however many you have.
+You load a snapshot built with `stopwords=None` into a service whose analyzer removes
+stopwords from queries.
 
-Most people guess two thirds. It is usually under half.
+**For how many of the 26 queries does the top ten change?** And at rank one?
 
 ---
 
-## The work
+## The lab
 
-### 1 · The card, and its six fields
+`snapshot.py`.
 
-> the failure · the station it belongs to · the diagnostic that finds it · the fix ·
-> the measured delta · **the conditions under which the fix stops working**
+```python
+fingerprint(index)      manifest(index)
+save(index, path, writer=None)
+load(path, **options)   SnapshotMismatch
+```
 
-The sixth field is the one left blank, and it is the one that makes a card transferable. A
-card without it says *"this worked for me"*. A card with it says *"this works when, and here
-is how you check"*, which is the difference between a note and a method.
-
-### 2 · The edit
-
-For each card, apply the test:
-
-**Would this help somebody on a corpus they have never read?**
-
-- **Yes** → keep it. It is about a mechanism
-- **No, it is about this corpus** → keep it *only* if you can rewrite the failure as a class.
-  *"RFC 7159 does not know it is obsolete"* is about this corpus. *"The fact that disqualifies
-  an answer can live in a document the answer did not come from"* is about every corpus
-- **No, it is about a bug I fixed** → delete it. A bug is not a failure mode
-
-Expect to delete a third and to rewrite a third.
-
-### 3 · The ones you cannot write
-
-Make a short list of failures you **know** exist and have no card for, because you could not
-diagnose them. Correctness is on it. That list is the honest boundary of the library and it
-belongs in the front of it, not the back.
+```bash
+pytest week-13/day-2 -v
+```
 
 ---
 
 ## The written exercise
 
-`week-13/day-2/library.md`.
+`week-13/day-2/snapshot.md`, one page.
 
-1. Your predicted transferable count and the actual one
-2. The cards you deleted, with one line each on why
-3. **Two cards rewritten from corpus-specific to general**, before and after
-4. The list of failures you cannot card, and for each one the evidence you would need
-
----
-
-## Deep track
-
-> Take the three cards you are most confident in and write the **falsifying condition** for
-> each: the measurement that would show the card wrong. If you cannot write one, the card is
-> an opinion with a number attached. This is the hardest hour in week 13 and it is the one
-> that determines whether the library is a portfolio or a method.
-
----
-
-## Log
-
-`logs/stuck-log.md` and `logs/signal-log.md`.
+1. Your prediction, and the answer
+2. What `os.replace` guarantees, and what it does not (a different disk; a power cut)
+3. The snapshot is 750 kB for 266 chunks. Estimate it for a million, and say what you
+   would change first
+4. Name one more thing that should be in the manifest, and the failure it would catch

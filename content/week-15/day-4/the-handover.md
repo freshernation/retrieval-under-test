@@ -1,6 +1,6 @@
 # The handover
 
-*Week 13 · Day 4 · about 20 minutes*
+*Week 15 · Day 4 · about 20 minutes*
 
 > By the end of this you can write the one page that saves the next person a month, and you
 > will know which month.
@@ -94,7 +94,7 @@ circulating and the number is still 1.00.
 Say so, in the handover, by name. *"Faithfulness appears in the Q3 review deck. It does not
 mean what that deck implies. Here is the one-sentence correction."*
 
-That is the least glamorous paragraph you will write in thirteen weeks and it is the one most
+That is the least glamorous paragraph you will write in fifteen weeks and it is the one most
 likely to prevent a specific wrong decision.
 
 ---

@@ -187,7 +187,7 @@ own, and week 2 is when you find out how long that takes.
 
 It cannot tell you whether the queries in your eval set are the queries people will
 actually ask. That is the largest source of error in every retrieval system in
-production, it is not fixable with statistics, and it is why week 13 is about the
+production, it is not fixable with statistics, and it is why week 15 is about the
 report and the review rather than about a number.
 
 An eval set is a model of your users. Say what it is a model *of*, and where you know it

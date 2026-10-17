@@ -1,0 +1,127 @@
+# Week 14's reading, recorded properly.
+#
+# Guardrails, semantic caching, graph indexes and shards. Every number is ours,
+# measured on the gold corpus or a seeded stream, and recorded as `derived`. The
+# card numbers are published test numbers that cannot be charged.
+
+system: Week 14 reading — guarded, cached, scaled
+
+sources:
+  - id: luhn-wikipedia
+    title: Luhn algorithm
+    url: https://en.wikipedia.org/wiki/Luhn_algorithm
+    publisher: Wikipedia
+    kind: encyclopedia
+    tier: 3
+    undated: true
+    retrieved: 2026-10-15
+
+  - id: stripe-testing
+    title: "Stripe — Testing"
+    url: https://docs.stripe.com/testing
+    publisher: Stripe
+    kind: documentation
+    tier: 1
+    undated: true
+    retrieved: 2026-10-15
+    conflict: true
+    conflict_note: >-
+      A payments company. Cited only for its published test card numbers, which
+      cannot be charged.
+
+  - id: owasp-llm02
+    title: "OWASP Top 10 for LLM Applications — LLM02: Sensitive information disclosure"
+    url: https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/
+    publisher: OWASP
+    kind: guidance
+    tier: 2
+    published: 2025
+    retrieved: 2026-10-15
+
+  - id: gpt-semantic-cache
+    title: "GPT Semantic Cache: reducing LLM costs and latency via semantic embedding caching"
+    url: https://arxiv.org/abs/2411.05276
+    publisher: arXiv
+    kind: preprint
+    tier: 3
+    published: 2024
+    retrieved: 2026-10-15
+
+  - id: hnsw-paper
+    title: "Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs"
+    url: https://arxiv.org/abs/1603.09320
+    publisher: arXiv
+    kind: paper
+    tier: 1
+    published: 2016
+    retrieved: 2026-10-15
+
+  - id: faiss-1m
+    title: "FAISS wiki — Indexing 1M vectors"
+    url: https://github.com/facebookresearch/faiss/wiki/Indexing-1M-vectors
+    publisher: Meta AI Research
+    kind: documentation
+    tier: 1
+    undated: true
+    retrieved: 2026-10-15
+    conflict: true
+    conflict_note: Published by the team that builds FAISS. Cited for what the indexes are for.
+
+  - id: es-search-type
+    title: "Elasticsearch reference — Search API, search_type"
+    url: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html
+    publisher: Elastic
+    kind: documentation
+    tier: 1
+    undated: true
+    retrieved: 2026-10-15
+    conflict: true
+    conflict_note: Published by the vendor. Cited only for how its own engine scores across shards.
+
+  - id: es-bm25-shards
+    title: "Practical BM25 — Part 1: How shards affect relevance scoring in Elasticsearch"
+    url: https://www.elastic.co/blog/practical-bm25-part-1-how-shards-affect-relevance-scoring-in-elasticsearch
+    publisher: Elastic
+    kind: blog
+    tier: 2
+    published: 2018
+    retrieved: 2026-10-15
+    conflict: true
+    conflict_note: Published by the vendor, about its own product.
+
+claims:
+  - id: w14-guard-false-positives
+    text: >-
+      On 1,000 random sixteen-digit order references a card pattern flags 1,000, the
+      Luhn check 80, and Luhn with an issuer prefix 18; all 12 published test cards
+      are caught by all three
+    kind: derived
+  - id: w14-luhn-one-in-ten
+    text: A random number passes the Luhn check about one time in ten
+    kind: inferred
+    sources: [luhn-wikipedia]
+  - id: w14-semantic-near-miss
+    text: >-
+      "section 3.2" and "section 3.4" of RFC 3986 score 0.981 by week 5's embedding,
+      above nine of ten paraphrases; requiring identical identifiers removes every
+      near miss at 0.8 and keeps all five paraphrase hits
+    kind: derived
+  - id: w14-graph-cost
+    text: >-
+      On 266 chunks, HNSW with M = 8 computes 241 distances per query for recall@10
+      0.992 and 274 for 1.0; at 2,000 random vectors, M = 16, it reaches 0.978 with
+      about a third of a scan
+    kind: derived
+  - id: w14-hnsw-algorithm
+    text: HNSW searches greedily through layers of navigable small-world graphs controlled by M and ef
+    kind: known
+    sources: [hnsw-paper]
+  - id: w14-shard-drift
+    text: >-
+      Four shards scoring with local statistics change 25 of 26 top tens and 5 top
+      results; with shared statistics, none
+    kind: derived
+  - id: w14-dfs
+    text: Gathering term statistics from every shard before scoring makes sharded BM25 match a single index
+    kind: known
+    sources: [es-search-type, es-bm25-shards]

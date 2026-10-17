@@ -1,6 +1,6 @@
 # Under a minute
 
-*Week 13 · Day 3 · about 25 minutes*
+*Week 15 · Day 3 · about 25 minutes*
 
 > By the end of this you can attribute a failure to one station fast enough to be useful in
 > a conversation, which is the only speed that matters.

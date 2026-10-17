@@ -78,7 +78,8 @@ cost is in what it permits later.
 
 ## Instructor: what week 13 rests on
 
-Week 13 is the report and the clinics. No new mechanism.
+Week 13 runs the system as a service and week 14 guards, caches and scales it. Week 15
+is the report and the clinics.
 
 - **The failure library gains its four most transferable cards this week.** None of them
   depends on this corpus: statistics that count the dead, an eval that describes a
